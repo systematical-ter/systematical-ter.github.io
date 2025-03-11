@@ -14,6 +14,15 @@
 @import url("typogrify.css");
 @import url("fonts.css");
 
+:root {
+    /* .. these all looked identical originally anyways... 
+    --accent-color-1: #C74350;
+    --accent-color-2: #C74451;
+    --accent-color-3: #C64350; */
+    --accent-color-1: #83c743;
+    --accent-color-2: #83c743;
+    --accent-color-3: #83c743;
+}
 /***** Global *****/
 /* Body */
 body {
@@ -50,12 +59,12 @@ hr { border: 2px solid #EEEEEE; }
 a {outline: 0;}
 a img {border: 0px; text-decoration: none;}
 a:link, a:visited {
-    color: #C74350;
+    color: var(--accent-color-1);
     padding: 0 1px;
     text-decoration: underline;
 }
 a:hover, a:active {
-    background-color: #C74350;
+    background-color: var(--accent-color-1);
     color: #fff;
     text-decoration: none;
     text-shadow: 1px 1px 1px #333;
@@ -191,7 +200,7 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
 }
 #banner h1 a:hover, #banner h1 a:active {
     background: none;
-    color: #C74350;
+    color: var(--accent-color-1);
     text-shadow: none;
 }
 
@@ -225,7 +234,7 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
 }
 #banner nav a:hover, #banner nav a:active,
 #banner nav .active a:link, #banner nav .active a:visited {
-    background: #C74451;
+    background: var(--accent-color-2);
     color: #fff;
     text-shadow: none !important;
 }
@@ -263,7 +272,7 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
 }
 #featured figure img {display: block; float: right;}
 
-#featured h2 {color: #C74451; font-size: 1.714em; margin-bottom: 0.333em;}
+#featured h2 {color: var(--accent-color-2); font-size: 1.714em; margin-bottom: 0.333em;}
 #featured h3 {font-size: 1.429em; margin-bottom: .5em;}
 
 #featured h3 a:link, #featured h3 a:visited {color: #000305; text-decoration: none;}
@@ -284,6 +293,13 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
     -webkit-border-radius: 10px;
 }
 
+#flavorimg {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 200px;
+}
+
 /*
 	Extras
 *****************/
@@ -292,7 +308,7 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
 #extras ul {list-style: none; margin: 0;}
 #extras li {border-bottom: 1px solid #fff;}
 #extras h2 {
-    color: #C74350;
+    color: var(--accent-color-1);
     font-size: 1.429em;
     margin-bottom: .25em;
     padding: 0 3px;
@@ -340,7 +356,7 @@ div.figure p.caption, figure p.caption { /* margin provided by figure */
 }
 
 #about .primary {float: left; max-width: 165px;}
-#about .primary strong {color: #C64350; display: block; font-size: 1.286em;}
+#about .primary strong {color: var(--accent-color-1); display: block; font-size: 1.286em;}
 #about .photo {float: left; margin: 5px 20px;}
 
 #about .url:link, #about .url:visited {text-decoration: none;}
@@ -400,7 +416,7 @@ li:first-child .hentry, #content > .hentry {border: 0; margin: 0;}
 }
 
 #about-author strong {
-    color: #C64350;
+    color: var(--accent-color-3);
     clear: both;
     display: block;
     font-size: 1.429em;
