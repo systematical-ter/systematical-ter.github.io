@@ -17,6 +17,52 @@
                 </header><!-- /#banner -->
                     <aside id="featured" class="body">
                         <article>
+                            <h1 class="entry-title"><a href="/the-rambles-continue.html">The Rambles Continue</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-12T00:00:00-04:00">
+                Published: Wed 12 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal-rambling-tech-rtoi.html">personal rambling tech rtoi</a> </p>        
+</footer><!-- /.post-info --><p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done while distracted by pain, as I just had to read an error message that <em>I</em> wrote that said: "sprited requeste". I think my arthritis might be visible today, because when I went to a local coffee shop they brought my sandwich to me, which is a first. Either way, it was extremely nice of them and I appreciate it.</p>
+<h3>UPDATE (from later in the day) :</h3>
+<p>Got new pain meds from my rheumatologist. They still have increased bleeding risk, but since my hematologist recommended it and my rheumatologist approved it, I figure it should be safe enough. I just need to make sure to listen to the "take with food" and "no alcohol" warnings. Here's hoping it works, because today has been... a day. I'm sure I'll make a long-winded post to provide context some day.</p>
+<h2>Tech Talk</h2>
+<p>So I reached an interesting conundrum with my pixel manipulation code.</p>
+<p>This entire time I've been operating off the assumption that the <code>.png</code> files were sort of -- how to put this -- main attraction? As in, I make <code>Sprite</code> objects based off the <code>.png</code> files and then augment the <code>Sprite</code> objects with collision metadata after the fact.</p>
+<p>But that's not really how it works. Obviously, there isn't really a straight-forward way for them to link <code>.png</code>s to collision metadata in the image's <code>.png</code> (or if there is, it was lost in decompilation). Rather, the collision metadata is aware of the images, so really the collision metadata should be the main attraction.</p>
+<p>From just the collision metadata, I can get all of the information needed for a complete sprite. I can't do that from an image, so theoretically, if I ever plan to read in collision metadata, I should start there.</p>
+<p>I think I'll refactor my code logic (again). Instead of allowing someone to create a <code>Sprite</code> object and then augment it with metadata, which requires deconvoluting which metadata associates with which existing created <code>Sprite</code> object, I'll make it so if you ever plan to contain collision metadata, you start there and that gives the script the knowledge of where to get the image.</p>
+<p>This helps too with some of the weirder collision metadatas. Like, there's one called something about a knife? That one broke a lot of my sorting code, but I'm certain that if I want to implement move export based on character script logic, I'll have to handle cases like that one sooner than later.</p>
+<p>I'm also currently working under the assumption that metadata files only ever have 1 image file associated with them, which I need to check. My guess is I'll find exceptions with characters like Relius or Celica.</p>
+<h3>UPDATE (from later in the day):</h3>
+<p>I've refactored everything so that now you can either create <code>Sprite</code> objects from just images and add the metadata later, or you start with the collision metadata and it loads the image too when creating the <code>Sprite</code> object. Overall I'm happy with how the code works now, since I think it's fairly straightforward to run it from the command line, from another python script to simply combine gifs, and from another python script to both recolor and turn into a gif in a single go.</p>
+<p>You can see the scripts on my github, <a href="https://github.com/systematical-ter/sprite-mgmt">here</a>. If you feel like trying it out, be my guest!</p>
+<p>I still have 2 major features to add:</p>
+<ol>
+<li>
+<p>Add support for spawned entities. (For example, the sneks in Terumi's j.D). It's going to be a little bit annoying because I have to figure out when to start <em>their</em> animation. This information is stored in the character's script file, but that means I need to work on parsing the script files to figure out when that is. I'll add a post about why that's complicated soon-ish.</p>
+</li>
+<li>
+<p>Add the capability to generate a gif from a move, and a UI to do so. The UI is kind of necessary because of the complexity of parsing a character's script file, which like I said in part 1, I'll talk about some other time.</p>
+</li>
+</ol>
+<p>I also want to go back and adjust <code>spriterecolor.py</code> to use these <code>Sprite</code> objects. Right now it's kind of janky to do the whole shebang of recolor -&gt; gif, and I don't like it. It'll be a lot neater if I can put the sprite name next to the <code>Image</code>, and putting it into a <code>Sprite</code> will take care of that.</p>
+<p>I also still eventually need to support base palettes, so if someone shows up who wants to use one it won't be a huge pain in the ass.</p>
+<h2>Random Things of Interest</h2>
+<p>Someone in the US is selling the Hazama figure at JP (minus shipping) prices <a href="https://myfigurecollection.net/classified/395824">here</a>, so that's kind of neat. If I had $350-ish to spend, I probably would have reached out to them and seen if I can barter them down a tiny bit, but as it stands now I'm a grad candidate so I need to save that money for possibly having to relocate and buy a car. (Plus also, it's not Terumi /complain complain)</p>
+<p>Along that vein, someone's selling a bag back from the bbcf x supergroupies collab <a href="https://zenmarket.jp/en/othershopproduct.aspx?u=https%3a%2f%2fwww.suruga-ya.jp%2fproduct%2fdetail%2f608698984">here</a>. It's Hazama themed and honestly kind of neat, but again, I can't really excuse buying it right now, especially since shipping will probably be another $40. Maybe if I could bring it down to $110 USD but I don't think it's common to barter in japanese culture, nor do I have any means to since I don't speak japanese and no proxy service offers bartering.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                    <aside id="featured" class="body">
+                        <article>
                             <h1 class="entry-title"><a href="/311-bbcf-notes.html">3/11 BBCF Notes</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2025-03-11T00:00:00-04:00">
