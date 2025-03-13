@@ -16,9 +16,69 @@
                         </ul></nav>
                 </header><!-- /#banner -->
 
-                    <aside id="featured" class="body">
-                        <article>
-                            <h1 class="entry-title"><a href="/the-rambles-continue.html">The Rambles Continue</a></h1>
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="/picture-day.html">Picture Day?</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-13T00:00:00-04:00">
+                Published: Thu 13 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/rtoi.html">rtoi</a> <a href="/tag/tech.html">tech</a> </p>        
+</footer><!-- /.post-info --><p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
+<p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD person to the point I had to include it in today's post.</p>
+<p><span align="center" style="margin:auto; display:table;" >
+<img alt="a tiny kitten on a thumb with angry eyebrows, labelled &quot;very briefly experiencing the white-hot anger of a dying star&quot;." src="/imgs/smol_angy.jpg"></br>
+<em>Pictured: Systematical violently shaking with rage at themselves for natural human feelings.</em>
+</span></p>
+<p>I'm looking forward to TRO tonight, and I'll see if I can't fit some time to ping the matchmaking discord for games so I stop worrying about pinging specific people. Or I'll just put another lobby up.</p>
+<h2 id="tech-talk">Tech Talk</h2>
+<h3 id="code-review">Code Review</h3>
+<p>I attended a <a href="https://us-rse.org/">US-RSE</a> community call today about code review. It was fun to hear the discussion around code review as part of a community that comes from varied backgrounds. I personally think that code review can be extremely critical -- <em>if done right</em>. Hell, I even asked a friend to review my sprite code, since at this point I'm writing all of that just for the sake of practicing writing good code.</p>
+<p>Interestingly, a lot of people brought up CI and linting as part of code review. At first I didn't get it, but it makes sense -- we have all of these tools for automated testing and automated linting, so unlike the early days, there's less reason to spend time nitpicking about code style.</p>
+<p>Another attendee brought up how code review allows silo'd developers to communicate and feel like they're part of a team, and as a Ph.D candidate, I <em>really</em> agree with that. I wish that my research team had some code review, because not only would that give me an excuse to talk to my fellow classmates, I could learn a little bit about how they're doing the things they do.</p>
+<h3 id="pelican">Pelican</h3>
+<h4 id="images">Images</h4>
+<p>I've figured out how to add images to my website, which is neat! The one frustrating thing is that it doesn't show the embed in the markdown preview, but I'll either deal with that or make a little script that automatically pelican-ifies image links. It's also mildly annoying to center the images on the page, so I need to figure out a better way to do that other than using <code>&lt;span&gt;</code> tags.</p>
+<h4 id="toc">TOC</h4>
+<p>I've also figured out how to make a table of contents for markdown files in pelican, so I'm going to see if I can't add it as part of my theme customizations cus I think it'd be neat.</p>
+<h4 id="sub-headers">Sub-Headers</h4>
+<p>I've also just noticed that sub-headers are highlighted green on the index page but not in article pages and that bugs the everliving shit out of me, so I'm going to fix that soon.</p>
+<h4 id="skipped-categories">Skipped Categories</h4>
+<p>Sure enough my little hack to make BBCF posts not show up outside of their containment zone broke the "Other Articles" doo-dad, so I had to figure out what actually went wrong: turns out that variables in jinja templates are <em>very</em> restricted in their scope. Since I was potentially skipping the first article, I had to set a variable <code>first_done</code> which told the logic whether or not I've actually printed the first article. However, since I was using <code>{% set first_done=True %}</code> inside of a for loop, it was never actually persisting past the first loop! </p>
+<p>It looks like newer versions of jinja allow you to use something called a <code>namespace</code>. At the top of the template, I wrote:</p>
+<div class="highlight"><pre><span></span><code>{% set ns = namespace(first_done=False) %}
+</code></pre></div>
+
+<p>When I check the status, I would refer to it by the name <code>ns.first_done</code>, and I would assign to it using:</p>
+<div class="highlight"><pre><span></span><code>{% set ns.first_done = True %}
+</code></pre></div>
+
+<p>As you can see by the fact that below this article are correctly-abbreviated articles, it now works! I also had to fix a small off-by-one error. Previously, the theme just checked if <code>loop.length &gt; 1</code> to see if it needed to print an "Other Articles" section, but since I'm skipping entries, I had to check if the loop goes beyond my current iteration. Stupidly, I did <code>loop.length - loop.index &gt; 1</code>, which breaks on the edge case that there is 1 additional article. It wasn't a problem before because I had the other bug making it look intentional.</p>
+<p>Theoretically, if I was trying to be slick and make this a production-ready theme, I'd have to update the logic to check if there is at least 1 article beyond this article <em>that is not a skipped article</em>. I don't think I care about that case for now because there will always be at least 1 article that is not a skipped article on my <code>index.html</code> (which is the only place this rule is applied), although I'll need to see if it breaks once pagination kicks in.</p>
+<p>I also gotta say, this whole jinja template thing is pretty neat. I can more or less guess how to write something by writing it how it'd be written in python.</p>
+<h2 id="random-things-of-interest">Random Things of Interest</h2>
+<p>This podcast was linked in the community call, and I want to take a listen at some point: <a href="https://play.pocketcasts.com/podcasts/7eedc800-37ef-0139-3323-0acc26574db2/d2238833-2777-4693-a958-dbddabac0c7e?t=1973">Planning your research software - A workshop in Paris</a></p>
+<p>Kiki struck a cute pose this morning, so enjoy my cat tax payment:</p>
+<p><span align="center" style="margin:auto; display:table;" >
+<img alt="A domestic shorthair cat, laying in the sun. She looks like she was just awoken from a nap and is looking grouchily at the cameraperson." src="/imgs/kiki_posing.webp">
+</span></p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/the-rambles-continue.html" rel="bookmark"
+                                title="Permalink to The Rambles Continue">The Rambles Continue</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-12T00:00:00-04:00">
                 Published: Wed 12 March 2025
@@ -29,38 +89,17 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal-rambling-tech-rtoi.html">personal rambling tech rtoi</a> </p>        
-</footer><!-- /.post-info --><p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done while distracted by pain, as I just had to read an error message that <em>I</em> wrote that said: "sprited requeste". I think my arthritis might be visible today, because when I went to a local coffee shop they brought my sandwich to me, which is a first. Either way, it was extremely nice of them and I appreciate it.</p>
-<h3>UPDATE (from later in the day) :</h3>
-<p>Got new pain meds from my rheumatologist. They still have increased bleeding risk, but since my hematologist recommended it and my rheumatologist approved it, I figure it should be safe enough. I just need to make sure to listen to the "take with food" and "no alcohol" warnings. Here's hoping it works, because today has been... a day. I'm sure I'll make a long-winded post to provide context some day.</p>
-<h2>Tech Talk</h2>
-<p>So I reached an interesting conundrum with my pixel manipulation code.</p>
-<p>This entire time I've been operating off the assumption that the <code>.png</code> files were sort of -- how to put this -- main attraction? As in, I make <code>Sprite</code> objects based off the <code>.png</code> files and then augment the <code>Sprite</code> objects with collision metadata after the fact.</p>
-<p>But that's not really how it works. Obviously, there isn't really a straight-forward way for them to link <code>.png</code>s to collision metadata in the image's <code>.png</code> (or if there is, it was lost in decompilation). Rather, the collision metadata is aware of the images, so really the collision metadata should be the main attraction.</p>
-<p>From just the collision metadata, I can get all of the information needed for a complete sprite. I can't do that from an image, so theoretically, if I ever plan to read in collision metadata, I should start there.</p>
-<p>I think I'll refactor my code logic (again). Instead of allowing someone to create a <code>Sprite</code> object and then augment it with metadata, which requires deconvoluting which metadata associates with which existing created <code>Sprite</code> object, I'll make it so if you ever plan to contain collision metadata, you start there and that gives the script the knowledge of where to get the image.</p>
-<p>This helps too with some of the weirder collision metadatas. Like, there's one called something about a knife? That one broke a lot of my sorting code, but I'm certain that if I want to implement move export based on character script logic, I'll have to handle cases like that one sooner than later.</p>
-<p>I'm also currently working under the assumption that metadata files only ever have 1 image file associated with them, which I need to check. My guess is I'll find exceptions with characters like Relius or Celica.</p>
-<h3>UPDATE (from later in the day):</h3>
-<p>I've refactored everything so that now you can either create <code>Sprite</code> objects from just images and add the metadata later, or you start with the collision metadata and it loads the image too when creating the <code>Sprite</code> object. Overall I'm happy with how the code works now, since I think it's fairly straightforward to run it from the command line, from another python script to simply combine gifs, and from another python script to both recolor and turn into a gif in a single go.</p>
-<p>You can see the scripts on my github, <a href="https://github.com/systematical-ter/sprite-mgmt">here</a>. If you feel like trying it out, be my guest!</p>
-<p>I still have 2 major features to add:</p>
-<ol>
-<li>
-<p>Add support for spawned entities. (For example, the sneks in Terumi's j.D). It's going to be a little bit annoying because I have to figure out when to start <em>their</em> animation. This information is stored in the character's script file, but that means I need to work on parsing the script files to figure out when that is. I'll add a post about why that's complicated soon-ish.</p>
-</li>
-<li>
-<p>Add the capability to generate a gif from a move, and a UI to do so. The UI is kind of necessary because of the complexity of parsing a character's script file, which like I said in part 1, I'll talk about some other time.</p>
-</li>
-</ol>
-<p>I also want to go back and adjust <code>spriterecolor.py</code> to use these <code>Sprite</code> objects. Right now it's kind of janky to do the whole shebang of recolor -&gt; gif, and I don't like it. It'll be a lot neater if I can put the sprite name next to the <code>Image</code>, and putting it into a <code>Sprite</code> will take care of that.</p>
-<p>I also still eventually need to support base palettes, so if someone shows up who wants to use one it won't be a huge pain in the ass.</p>
-<h2>Random Things of Interest</h2>
-<p>Someone in the US is selling the Hazama figure at JP (minus shipping) prices <a href="https://myfigurecollection.net/classified/395824">here</a>, so that's kind of neat. If I had $350-ish to spend, I probably would have reached out to them and seen if I can barter them down a tiny bit, but as it stands now I'm a grad candidate so I need to save that money for possibly having to relocate and buy a car. (Plus also, it's not Terumi /complain complain)</p>
-<p>Along that vein, someone's selling a bag back from the bbcf x supergroupies collab <a href="https://zenmarket.jp/en/othershopproduct.aspx?u=https%3a%2f%2fwww.suruga-ya.jp%2fproduct%2fdetail%2f608698984">here</a>. It's Hazama themed and honestly kind of neat, but again, I can't really excuse buying it right now, especially since shipping will probably be another $40. Maybe if I could bring it down to $110 USD but I don't think it's common to barter in japanese culture, nor do I have any means to since I don't speak japanese and no proxy service offers bartering.</p>                        </article>
-                    </aside><!-- /#featured -->
-                    <aside id="featured" class="body">
-                        <article>
-                            <h1 class="entry-title"><a href="/init-commit-i-mean-post.html">Init Commit -- I Mean Post</a></h1>
+</footer><!-- /.post-info -->                            <p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done …</p>
+                            <a class="readmore" href="/the-rambles-continue.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/init-commit-i-mean-post.html" rel="bookmark"
+                                title="Permalink to Init Commit -- I Mean Post">Init Commit -- I Mean Post</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-11T00:00:00-04:00">
                 Published: Tue 11 March 2025
@@ -71,38 +110,15 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> </p>        
-</footer><!-- /.post-info --><p>So....</p>
-<p>I have a blog now, and that's pretty neat! It's made using <a href="https://getpelican.com/">Pelican</a>, and I have a script that takes my (private) source repository, compiles it, and pushes the output to the (public) repository that actually gets automatically made into a github pages website. That part was all fine and dandy!</p>
-<h2>Using Visual Editors</h2>
-<p>I decided to make life difficult for myself, though, and wanted to be able to edit the content using <a href="https://obsidian.md/">Obsidian</a>, a little application I use when I need to write a lot of markdown files for notes or a guide or something. That was a little bit annoying, because I do my python coding in WSL, so the repository containing my blog <code>.md</code> is on the WSL file system. Trying to just point the windows Obsidian install to that folder caused a bunch of file read errors, so I went ahead and installed Obsidian on WSL itself.</p>
-<p>I downloaded the <code>.deb</code> file, installed it, and then futzed around making it so my WSL2 install could actually run visual applications (because what's the point of all of this if I can't run linux visual apps, right?) Turns out I had to run a quick:</p>
-<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">DISPLAY</span><span class="o">=</span><span class="p">:</span><span class="mi">0</span>
-</code></pre></div>
-
-<p>... and it magically started working. Neat! (I probably have to do this every time I start a new terminal until I figure out where it's setting <code>$DISPLAY</code> to anything else.)</p>
-<p>... And it was at this point I realized... I could probably just use VSCode instead. Oh well! I'll probably just use that next time and nuke Obsidian off my WSL, since it keeps trying to make folders in my root directory and I don't want it to do that.</p>
-<h2>Life Updates</h2>
-<p>Arthritis is a solid 4/10 today. Better than yesterday's 6/10, but not great. I got a thumbs up from my hematologist to use Aleve at most once or twice a week with my low dose of blood thinners, but I don't really want to fuck with it too much so I'll just grit and deal with it for today until my rheumatologist gets back to me about other options. I'm glad I found a heatpack.</p>
-<p>One of my classmates came to the office today with Mono, so that was... annoying. (Context: I am immune compromised, and I get sick at the slightest provocation and stay sick for weeks.) I have an interview scheduled in a week, a semi-monthly to go to, and two thesis chapters to write, so I don't need that shit in my life right now. I put on a mask but then quickly peaced out after saying hi to a collaborator that was visiting.</p>
-<p>(Still blows my mind that people think that's just... okay. Even if I wasn't immune compromised, why make other people sick? Anyways, I'm too close to getting myself into a tizzy, so I'm leaving the rant there for now.)</p>
-<h2>Fun things</h2>
-<p>I have a few things in mind to make creatively:</p>
-<p><strong>"I do not control the rate at which lobsters die", but with a twist: "I do not control the rate at which <em>I lock in</em>", especially accurate after I completely locked myself out yesterday.</strong></p>
-<p>I was too hype? excited? confused? about the fact there was finally a Terumi (and it was Zander, nonetheless!) in a bracket I watched... only for it to be a mirror match I was playing in on stream... to lock in. I played real bad, dropped a really easy combo to take my possibly only round, but thankfully none of the existential self-doubt set in. Plus, I had some fun casuals with him after so that was a positive note to end on.</p>
-<p><strong>A proper Terumi keychain.</strong></p>
-<p>I made my silly little emote one, but I still have one that's 90% finished I should actually finish, and I want to make a not-chibi version at some point because believe it or not, I actually really don't like chibi art. It's just what is fast enough to do so I actually finish it.</p>
-<p><strong>My next match compilation video.</strong></p>
-<p>I accidentally put off making my next one for a WHOLE MONTH, so now I have 60 matches to watch to cherry pick into only the best 30 mins of footage. Even at only 3 minutes per match, that's <em>three hours</em> of watch time... I might have to watch them at 2x speed. Plus I always feel bad about picking only wins, so I have some weird standard of "interesting-ness" I'm basing my choice of matches on instead that really slows the whole process down.</p>
-<p><strong>More emotes.</strong></p>
-<p>I don't have specific plans yet, but I'm happy that I finally have some twitch emotes. Now I gotta make a few more so I can start using them in random places. (That reminds me that I need to add that Pelican module that lets you use custom emoji so I can throw them in here too.)</p>
-<h2>Bye-bye now!</h2>
-<p>(Insert Gin Ichimaru clip here.)</p>
-<p>You can find me on bluesky <a href="https://bsky.app/profile/systematical.bsky.social">here</a> and on youtube <a href="https://www.youtube.com/channel/UCNJoOANdZSmxZA2m-D5aTBQ">here</a> and on twitch <a href="https://www.twitch.tv/systematical">here</a>. Some day I'll finish branding all of these various places. 'Til I get comments or whatever set up on this blog -- if I do so at all -- feel free to send me a message on bluesky or Discord if you have me there, whether to just say hi or let me know what you think of this train-of-thought nonsense.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-                        </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
+</footer><!-- /.post-info -->                            <p>So....</p>
+<p>I have a blog now, and that's pretty neat! It's made using <a href="https://getpelican.com/">Pelican</a>, and I have a script that takes my (private) source repository, compiles it, and pushes the output to the (public) repository that actually gets automatically made into a github pages website. That part was all fine …</p>
+                            <a class="readmore" href="/init-commit-i-mean-post.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
         
 
                 <div id="flavorimg" class="body">
