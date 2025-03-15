@@ -17,7 +17,33 @@
                 </header><!-- /#banner -->
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="/picture-day.html">Picture Day?</a></h1>
+                        <h1 class="entry-title"><a href="/eh.html">Eh</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-14T00:00:00-04:00">
+                Published: Fri 14 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>Not much to report today. The week of arthritis finally caught up to my mental so I have to write today off.</p>
+<p>I played some UNI2 challenge mode, got up to Expert 17, I think? Looking forward to actually playing that game at some point. Gordeau's fun but I get the feeling I'm going to get hit in the mouth for depending on his C moves too much in neutral.</p>
+<p>I need to pick up a secondary on BBCF at some point; I feel bad showing up to chill streams or lobbies with Terumi and my nearly 4k games because I look like a tryhard spoiling the fun (even though my tryhard is still way below many people's casual play.) I did get a good 40 games in on Hazama today and I think I'm <em>starting</em> to properly understand him. Definitely not even close to being playable, but I've started being faster about my stance mix and started to actually move around with my chains. Need to remember that regular, non-stance pressure is a thing and to remember the post-launcher part of my combos.</p>
+<p>There'll probably be something more technical tomorrow. Brain no work good today.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/picture-day.html" rel="bookmark"
+                                title="Permalink to Picture Day?">Picture Day?</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-13T00:00:00-04:00">
                 Published: Thu 13 March 2025
@@ -28,49 +54,11 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/rtoi.html">rtoi</a> <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info --><p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
-<p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD person to the point I had to include it in today's post.</p>
-<p><span align="center" style="margin:auto; display:table;" >
-<img alt="a tiny kitten on a thumb with angry eyebrows, labelled &quot;very briefly experiencing the white-hot anger of a dying star&quot;." src="/imgs/smol_angy.jpg"></br>
-<em>Pictured: Systematical violently shaking with rage at themselves for natural human feelings.</em>
-</span></p>
-<p>I'm looking forward to TRO tonight, and I'll see if I can't fit some time to ping the matchmaking discord for games so I stop worrying about pinging specific people. Or I'll just put another lobby up.</p>
-<h2 id="tech-talk">Tech Talk</h2>
-<h3 id="code-review">Code Review</h3>
-<p>I attended a <a href="https://us-rse.org/">US-RSE</a> community call today about code review. It was fun to hear the discussion around code review as part of a community that comes from varied backgrounds. I personally think that code review can be extremely critical -- <em>if done right</em>. Hell, I even asked a friend to review my sprite code, since at this point I'm writing all of that just for the sake of practicing writing good code.</p>
-<p>Interestingly, a lot of people brought up CI and linting as part of code review. At first I didn't get it, but it makes sense -- we have all of these tools for automated testing and automated linting, so unlike the early days, there's less reason to spend time nitpicking about code style.</p>
-<p>Another attendee brought up how code review allows silo'd developers to communicate and feel like they're part of a team, and as a Ph.D candidate, I <em>really</em> agree with that. I wish that my research team had some code review, because not only would that give me an excuse to talk to my fellow classmates, I could learn a little bit about how they're doing the things they do.</p>
-<h3 id="pelican">Pelican</h3>
-<h4 id="images">Images</h4>
-<p>I've figured out how to add images to my website, which is neat! The one frustrating thing is that it doesn't show the embed in the markdown preview, but I'll either deal with that or make a little script that automatically pelican-ifies image links. It's also mildly annoying to center the images on the page, so I need to figure out a better way to do that other than using <code>&lt;span&gt;</code> tags.</p>
-<h4 id="toc">TOC</h4>
-<p>I've also figured out how to make a table of contents for markdown files in pelican, so I'm going to see if I can't add it as part of my theme customizations cus I think it'd be neat.</p>
-<h4 id="sub-headers">Sub-Headers</h4>
-<p>I've also just noticed that sub-headers are highlighted green on the index page but not in article pages and that bugs the everliving shit out of me, so I'm going to fix that soon.</p>
-<h4 id="skipped-categories">Skipped Categories</h4>
-<p>Sure enough my little hack to make BBCF posts not show up outside of their containment zone broke the "Other Articles" doo-dad, so I had to figure out what actually went wrong: turns out that variables in jinja templates are <em>very</em> restricted in their scope. Since I was potentially skipping the first article, I had to set a variable <code>first_done</code> which told the logic whether or not I've actually printed the first article. However, since I was using <code>{% set first_done=True %}</code> inside of a for loop, it was never actually persisting past the first loop! </p>
-<p>It looks like newer versions of jinja allow you to use something called a <code>namespace</code>. At the top of the template, I wrote:</p>
-<div class="highlight"><pre><span></span><code>{% set ns = namespace(first_done=False) %}
-</code></pre></div>
-
-<p>When I check the status, I would refer to it by the name <code>ns.first_done</code>, and I would assign to it using:</p>
-<div class="highlight"><pre><span></span><code>{% set ns.first_done = True %}
-</code></pre></div>
-
-<p>As you can see by the fact that below this article are correctly-abbreviated articles, it now works! I also had to fix a small off-by-one error. Previously, the theme just checked if <code>loop.length &gt; 1</code> to see if it needed to print an "Other Articles" section, but since I'm skipping entries, I had to check if the loop goes beyond my current iteration. Stupidly, I did <code>loop.length - loop.index &gt; 1</code>, which breaks on the edge case that there is 1 additional article. It wasn't a problem before because I had the other bug making it look intentional.</p>
-<p>Theoretically, if I was trying to be slick and make this a production-ready theme, I'd have to update the logic to check if there is at least 1 article beyond this article <em>that is not a skipped article</em>. I don't think I care about that case for now because there will always be at least 1 article that is not a skipped article on my <code>index.html</code> (which is the only place this rule is applied), although I'll need to see if it breaks once pagination kicks in.</p>
-<p>I also gotta say, this whole jinja template thing is pretty neat. I can more or less guess how to write something by writing it how it'd be written in python.</p>
-<h2 id="random-things-of-interest">Random Things of Interest</h2>
-<p>This podcast was linked in the community call, and I want to take a listen at some point: <a href="https://play.pocketcasts.com/podcasts/7eedc800-37ef-0139-3323-0acc26574db2/d2238833-2777-4693-a958-dbddabac0c7e?t=1973">Planning your research software - A workshop in Paris</a></p>
-<p>Kiki struck a cute pose this morning, so enjoy my cat tax payment:</p>
-<p><span align="center" style="margin:auto; display:table;" >
-<img alt="A domestic shorthair cat, laying in the sun. She looks like she was just awoken from a nap and is looking grouchily at the cameraperson." src="/imgs/kiki_posing.webp">
-</span></p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
+<p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD …</p>
+                            <a class="readmore" href="/picture-day.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/init-commit-i-mean-post.html" rel="bookmark"
