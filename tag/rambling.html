@@ -17,7 +17,79 @@
                 </header><!-- /#banner -->
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="/picture-day.html">Picture Day?</a></h1>
+                        <h1 class="entry-title"><a href="/whoops.html">Whoops</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-16T00:00:00-04:00">
+                Published: Sun 16 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/rtoi.html">rtoi</a> </p>        
+</footer><!-- /.post-info --><p>So I'm apparently a big Liar with a capital L because there was not, in fact, anything more technical yesterday. That's because I spent 2 hours writing my thesis and then approximately 12 hours at locals. (I'm more than OK skipping a blog post for that tbh.)</p>
+<h2 id="personal-rambling">Personal Rambling</h2>
+<p>I wasn't locked in <em>whatsoever</em> at locals. I genuinely actually kind of didn't want to play blazblue? Which is a new feeling when I'm not having my 17th ego death, but I think it's work + thesis catching up to me. I couldn't work for basically the entire past week so now I have many hours of work to make up for over the weekend, and it sucks because I didn't really get to rest the past week because I was too busy being in pain.</p>
+<p>I played anyways of course, did awfully. Not much to say besides that. I <em>really</em> want to be on stream one day (and like, deserve it, not just happen to be placed there for first match) and it was a huge let-down that I didn't make it yesterday, since literally the winner of the set I played got to be on stream next. Is what it is, it was a close set. I had a lot of really cool discussions with people about the mechanics of T.O.'ing and stream directing, so that distracted me. Apparently I'll be T.O.'ing the next semi-monthly (in preparation to T.O. a regional????) so I hope nothing horrific health-wise happens so that doesn't work out.</p>
+<p>Played some +R at the end and had a good time not knowing a single thing I was doing. I'm sure I'll figure Axl out though, I just gotta slowly get used to what all of his moves do; otherwise I think I have a basic enough grasp of the core game mechanics.</p>
+<p>Played some matches today, still didn't really want to play blazblue, but I pinged my usual sparring buddy and those matches reminded me that I do have fun with this game. I hit him with an astral for the first time ever, and he locked the fuck in after that, which was simultaneously hilarious and cool since I think he's been going easy on me recently (and that rubs me the wrong way sometimes). Still frustrated that I can put up a fight against him then when I'm against any other Terumi I just kind of keel over. I'm probably going to record some of the replays I saved just because holy shit I popped off with some of my blocks, I actually consistently blocked him doing 5c -&gt; rc -&gt; j.b, which is WILD.</p>
+<p>Still a little annoyed at someone I played online who kept talking about how terrified he was when he proceeded to handily 5-0 me. Not sure why he got the impression he should be afraid and it kinda rubbed the salt in that I couldn't beat him. ...I also really need to still work on the fact that I get some kind of way about caring about what other people think.</p>
+<p>Despite all that, I still plan to register for BBBO this week. IIRC, TRO isn't running and TMN is only every other week, so I guess it's only the one for me this week.</p>
+<p>I really want to draw something, but we'll have to see if it happens...</p>
+<h2 id="tech-stuff">Tech Stuff</h2>
+<h3 id="github-actions">GitHub Actions</h3>
+<p>As part of the work I was catching up on, I started updating my work code to actually use GitHub actions. Took way longer than it should have because I kept doing stupid mistakes like naming the directory <code>.github/worfklows</code>. Aside from that it was straightforward enough to set up, just a few small things:</p>
+<p>When writing the workflow step, you have to set both <code>context</code> and <code>file</code> to point to the right subdirectory. For example, with the standard structure of the Dockerfile being in <code>share/docker</code>, the step looked like this:</p>
+<div class="highlight"><pre><span></span><code><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and push Docker image</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build_core</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./share/docker</span>
+<span class="w">          </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./share/docker/Dockerfile</span>
+<span class="w">          </span><span class="nt">push</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+
+<p>I've currently set <code>push</code> to false because I'm still testing that everything works as intended. It's a little odd because I'm using one <code>Dockerfile</code> for two images, so I'm not sure if my <code>target</code> and <code>tags</code> options are working correctly with this Docker <code>build-push-action</code>.</p>
+<p>In fact, I actually just checked and the docker build failed with a strange error:</p>
+<div class="highlight"><pre><span></span><code><span class="mf">10.18</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="p">:</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mf">1</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="mf">.</span><span class="n">sh</span><span class="p">:</span><span class="w"> </span><span class="n">Permission</span><span class="w"> </span><span class="n">denied</span>
+</code></pre></div>
+
+<p>Which is... odd. I'll have to figure out why that is, since it works normally on my machine -- my guesstimate is it has something to do with the fact that this is running on some GitHub action worker, and permissions are whack on it when it's copying the files into the image. (Maybe I just need to run <code>chmod +x</code> when I clone the file in the workflow?)</p>
+<h3 id="git">Git</h3>
+<p>At this point I should be way better at Git than I am. I'm going to write down the massive mess that happened in hopes that maybe I can show it to someone else and have them tell me what I was supposed to do.</p>
+<p>Essentially, I'm trying to implement the <code>main</code> and <code>dev</code> branch idea -- you branch off <code>dev</code>, merge changes into <code>dev</code>, then once enough changes collect and everything is tested, you merge into <code>main</code> and do a release.</p>
+<p>I had 3 branches:
+- <code>main</code>
+- <code>dev</code>
+- <code>dev_docker</code></p>
+<p>Essentially, I made <code>dev_docker</code> to try and test GitHub actions without dumping a bunch of commits straight into <code>main</code>. I misunderstood the errors I was making (hello, <code>worfklows</code>) and thought I had to have my workflows on the <code>main</code> branch if I wanted them to run at all.</p>
+<p>So, I made a new branch off of <code>main</code> named something like, <code>main_add_workflow</code>, I don't remember anymore. On that branch, I <code>cherry-pick</code>ed the commits from <code>dev_docker</code> that only pertained to the GitHub workflows, since it had some changes from being branched from <code>dev</code> that I didn't want merged in yet.</p>
+<p>I went ahead and merged <code>main_add_workflow</code> into <code>main</code> without issues. Then I tried to go to <code>dev</code> and ran <code>git rebase</code> to have it pull those commits from <code>main</code>. </p>
+<p>It didn't work.</p>
+<p>By the end of it, with a bunch of <code>merge</code> conflict resolutions, I ended up with a <code>dev</code> branch that was like 10 commits ahead of <code>main</code>. At that point, I said fuck it and merged <code>dev</code> into <code>main</code>, then nuked both <code>dev</code> and <code>dev_docker</code> and created new <code>dev</code> and <code>dev_docker</code> branches off of the current state of main.</p>
+<p>The whack thing is that this keeps happening. On my sprite manipulation github, I had an issue where I accidentally put an absolute path to a file in my Documents folder, which has a small bit of my irl identity. Not enough to identify me by, but I just straight up don't want anything tied to my legal identity on that repository since I don't know how kosher it is to be manipulating BBCF files. Furthermore, if this code actually ends up useful, a LOT of people who I have NO connection to will be using it and I don't want them to know personal information no matter how separated it is from me. I ended up having to rewrite history, and no matter how much I tried to tell git to stop fucking around it keeps marking the branch more and more desynchronized. At this rate, I'm going to just take the 2 files I made in that branch, obliterate the branch, and make a new branch.</p>
+<p>My guess at this point is maybe I'm not using the right git command? It's just so weird that it never just applies the commits normally. It always ends up saying that the <code>dev</code> branch is further ahead of <code>main</code> the more I try to fix it.</p>
+<h2 id="random-things-of-interest">Random Things of Interest</h2>
+<p>DGF had two recent sets that got uploaded that I need to study the shit out of. I already stole a new fatal combo that adds another hundred or so damage (and makes me feel cool -- I mean has better corner carry.)</p>
+<ul>
+<li>vs. Ragna <a href="https://www.youtube.com/watch?v=POl-xoXzwC0&amp;list=LL&amp;index=2&amp;t=1s&amp;pp=gAQBiAQB">here</a></li>
+<li>vs. Valk <a href="https://www.youtube.com/watch?v=9GWj4OD8rWM&amp;list=LL&amp;index=1&amp;t=909s&amp;pp=gAQBiAQB">here</a></li>
+</ul>
+<p>I also still need to re-watch his <a href="https://www.youtube.com/watch?v=qWJUufXjf14">Terumi guide</a> now that I'm less new. I'm actually starting to incorporate frame kills and consider the differences between hard knockdowns and soft knockdowns! I remember him mentioning how you gotta prioritize between building meter and doing damage, and I think focusing a little on that will make a big difference for me.</p>
+<p>I also was given <a href="https://youtu.be/qqyFknxaVWo?si=0jBbShlsG-cqb_k5">this neat video</a> about making overlays for tournament streams. I'm gonna try to learn some adobe aftereffects, since it's something I've always had my eye on.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/picture-day.html" rel="bookmark"
+                                title="Permalink to Picture Day?">Picture Day?</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-13T00:00:00-04:00">
                 Published: Thu 13 March 2025
@@ -28,49 +100,11 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/rtoi.html">rtoi</a> <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info --><p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
-<p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD person to the point I had to include it in today's post.</p>
-<p><span align="center" style="margin:auto; display:table;" >
-<img alt="a tiny kitten on a thumb with angry eyebrows, labelled &quot;very briefly experiencing the white-hot anger of a dying star&quot;." src="/imgs/smol_angy.jpg"></br>
-<em>Pictured: Systematical violently shaking with rage at themselves for natural human feelings.</em>
-</span></p>
-<p>I'm looking forward to TRO tonight, and I'll see if I can't fit some time to ping the matchmaking discord for games so I stop worrying about pinging specific people. Or I'll just put another lobby up.</p>
-<h2 id="tech-talk">Tech Talk</h2>
-<h3 id="code-review">Code Review</h3>
-<p>I attended a <a href="https://us-rse.org/">US-RSE</a> community call today about code review. It was fun to hear the discussion around code review as part of a community that comes from varied backgrounds. I personally think that code review can be extremely critical -- <em>if done right</em>. Hell, I even asked a friend to review my sprite code, since at this point I'm writing all of that just for the sake of practicing writing good code.</p>
-<p>Interestingly, a lot of people brought up CI and linting as part of code review. At first I didn't get it, but it makes sense -- we have all of these tools for automated testing and automated linting, so unlike the early days, there's less reason to spend time nitpicking about code style.</p>
-<p>Another attendee brought up how code review allows silo'd developers to communicate and feel like they're part of a team, and as a Ph.D candidate, I <em>really</em> agree with that. I wish that my research team had some code review, because not only would that give me an excuse to talk to my fellow classmates, I could learn a little bit about how they're doing the things they do.</p>
-<h3 id="pelican">Pelican</h3>
-<h4 id="images">Images</h4>
-<p>I've figured out how to add images to my website, which is neat! The one frustrating thing is that it doesn't show the embed in the markdown preview, but I'll either deal with that or make a little script that automatically pelican-ifies image links. It's also mildly annoying to center the images on the page, so I need to figure out a better way to do that other than using <code>&lt;span&gt;</code> tags.</p>
-<h4 id="toc">TOC</h4>
-<p>I've also figured out how to make a table of contents for markdown files in pelican, so I'm going to see if I can't add it as part of my theme customizations cus I think it'd be neat.</p>
-<h4 id="sub-headers">Sub-Headers</h4>
-<p>I've also just noticed that sub-headers are highlighted green on the index page but not in article pages and that bugs the everliving shit out of me, so I'm going to fix that soon.</p>
-<h4 id="skipped-categories">Skipped Categories</h4>
-<p>Sure enough my little hack to make BBCF posts not show up outside of their containment zone broke the "Other Articles" doo-dad, so I had to figure out what actually went wrong: turns out that variables in jinja templates are <em>very</em> restricted in their scope. Since I was potentially skipping the first article, I had to set a variable <code>first_done</code> which told the logic whether or not I've actually printed the first article. However, since I was using <code>{% set first_done=True %}</code> inside of a for loop, it was never actually persisting past the first loop! </p>
-<p>It looks like newer versions of jinja allow you to use something called a <code>namespace</code>. At the top of the template, I wrote:</p>
-<div class="highlight"><pre><span></span><code>{% set ns = namespace(first_done=False) %}
-</code></pre></div>
-
-<p>When I check the status, I would refer to it by the name <code>ns.first_done</code>, and I would assign to it using:</p>
-<div class="highlight"><pre><span></span><code>{% set ns.first_done = True %}
-</code></pre></div>
-
-<p>As you can see by the fact that below this article are correctly-abbreviated articles, it now works! I also had to fix a small off-by-one error. Previously, the theme just checked if <code>loop.length &gt; 1</code> to see if it needed to print an "Other Articles" section, but since I'm skipping entries, I had to check if the loop goes beyond my current iteration. Stupidly, I did <code>loop.length - loop.index &gt; 1</code>, which breaks on the edge case that there is 1 additional article. It wasn't a problem before because I had the other bug making it look intentional.</p>
-<p>Theoretically, if I was trying to be slick and make this a production-ready theme, I'd have to update the logic to check if there is at least 1 article beyond this article <em>that is not a skipped article</em>. I don't think I care about that case for now because there will always be at least 1 article that is not a skipped article on my <code>index.html</code> (which is the only place this rule is applied), although I'll need to see if it breaks once pagination kicks in.</p>
-<p>I also gotta say, this whole jinja template thing is pretty neat. I can more or less guess how to write something by writing it how it'd be written in python.</p>
-<h2 id="random-things-of-interest">Random Things of Interest</h2>
-<p>This podcast was linked in the community call, and I want to take a listen at some point: <a href="https://play.pocketcasts.com/podcasts/7eedc800-37ef-0139-3323-0acc26574db2/d2238833-2777-4693-a958-dbddabac0c7e?t=1973">Planning your research software - A workshop in Paris</a></p>
-<p>Kiki struck a cute pose this morning, so enjoy my cat tax payment:</p>
-<p><span align="center" style="margin:auto; display:table;" >
-<img alt="A domestic shorthair cat, laying in the sun. She looks like she was just awoken from a nap and is looking grouchily at the cameraperson." src="/imgs/kiki_posing.webp">
-</span></p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
+<p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD …</p>
+                            <a class="readmore" href="/picture-day.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/init-commit-i-mean-post.html" rel="bookmark"
