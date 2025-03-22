@@ -17,7 +17,73 @@
                 </header><!-- /#banner -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/hi-again.html">Hi again</a></h1>
+                            <h1 class="entry-title"><a href="/322.html">3/22</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-22T00:00:00-04:00">
+                Published: Sat 22 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> </p>        
+</footer><!-- /.post-info --><h2 id="tech-things">Tech Things</h2>
+<h3 id="blog">Blog</h3>
+<p>So the good news is, the broken blog wasn't actually about pagination or anything complicated. It was literally just this:</p>
+<p>I have 2 computers I work on, my personal laptop and my desktop. I try to have everything synchronized between these two computers so I can work on whichever one is most handy at that point.</p>
+<p>I never actually propogated the fixes to the blog theme that I did on my desktop to my laptop, so when I added a blog post on my laptop it used an old version of the theme. So... oops!</p>
+<p>Thanks to my own old blog post I was able to fix it in a couple of minutes, so that's good.</p>
+<p>In case you were wondering why I have to have my blog theme consistent between two computers, it's because I'm being as low-tech as possible about this whole blog thing. I don't want to deal with Wordpress or complicated websites or reactive websites because the more I have that kind of nonsense, the more I have to worry about the security of my website. This website does not even have any log-in functionality or anything: it is literally a static webpage.</p>
+<p>The way it works is I am using a tool that I previously mentioned called <code>pelican</code>. I write pages in <code>.md</code>, and <code>pelican</code> uses either an installed theme or a symlinked theme (aka, local development theme) to build that website into static html pages. I then push these pages to a github repository that is set up to serve via github pages, and there's my blog.</p>
+<p>The issue is I'm working with a developmental version of a theme, because I'm one of those people that likes to constantly make little adjustments. So, <code>pelican</code> builds according to another directory on my same computer, which is something I have to manually keep synchronized.</p>
+<h3 id="keeping-things-in-sync">Keeping things in Sync</h3>
+<p>Before you ask: yes it's very annoying to keep these two computers synchronized, <em>especially</em> because In:</p>
+<ol>
+<li>
+<p>Hate forced cloud synchronization tools such as OneDrive because of their aggressive corporatization and how little ethics the companies providing them have (Hi, Google.)</p>
+</li>
+<li>
+<p>Am working using WSL, which appears to be separating more from the windows filesystem with every update. (It used to be that I could easily open a WSL directory in windows explorer, and I abused that to work on a GUI application in windows while working on the pythonic backend in WSL.) So, a lot of these tools probably wouldn't work anyways.</p>
+</li>
+</ol>
+<p>I could theoretically spin up my own file server, but this comes back to the same problem about my website. Shit like that is a pain in the ass to keep secure and I don't want to spin something up and accidentally end up hosting a viral or spyware hotbed.</p>
+<p>Perceptive readers might notice (became a math book author for a sec there) that I mentioned running GUI in windows but developing in WSL. Why? Because I really, really hate how Python is handled in windows. This may be my own lack of experience, but I think it is extremely easy to accidentally not use a virtual environment in windows, and the whole installation process itself is extremely terminal-unfriendly.</p>
+<p>Windows being windows, it's trying to force users to use the app version of Python, to the point that you have to manually set up aliases if you install Python normally to have the command line recognize it. I've done enough development in python that I want very particular control over the version of python I'm using and the packages I'm using, and everything about the Windows version seems to be trying to not let me do that.</p>
+<p>So, my approach is like this:</p>
+<ul>
+<li>I only install Python in WSL for as long as physically possible.</li>
+<li>I use the tool <code>uv</code> to manage Python projects, so whenever I develop in python I can point VSCode to the <code>venv</code> created by <code>uv</code>.</li>
+<li>If I absolutely <em>must</em> use Python in Windows, I am using a bare minimum installation. I install only the packages I absolutely need and install them globally. I am considering occasionally nuking the whole installation to make sure I don't build up a collection of packages I don't use anymore.</li>
+</ul>
+<h2 id="personal-things">Personal things</h2>
+<p>I went to locals yesterday. I was debating whether or not to, since the past week has been absolutely exhausting, but I figured that in the most catastrophic case, I may not be able to go that often if at all in the future because of FFXIV + moving for work.</p>
+<p>It was fun! I'm still a little burnt out on BlazBlue. I was speaking with a friend and her response to my statement that I'm considering a hiatus made me kind of realize that I'm... not being normal about this game.</p>
+<p>She asked what I meant, and I said "I'll only play at locals and if I'm asked to play."</p>
+<p>She basically responded, "So like everyone here?"</p>
+<p>On one hand, yeah. On the other hand, I feel kind of like as a new player... I kind of have to do more than that? If I don't, I'm just dead in the water and not fun to play against because I barely even know what my buttons do. Hell if I hadn't gone that crazy when I first started playing, I have no doubt that the new players that have been showing up recently would be kicking my ass. Fighting games are not my genre. I am very bad at them, and in order to make up for that I have to practice way more than other people.</p>
+<p>But I'll save most of that rambling for the BBCF section. The long and the short of it is, I'm definitely grinding this game like I'm trying to be competitive (because I am). And unfortunately, the way I'm wired, I think that's the only way I <em>can</em> play the game without feeling like I've given up on it.</p>
+<p>That actually reminds me of a really funny conversation with a player who's been coaching me, I'll refer to him as G. Some background, he's a long-time player, he plays Hakumen and Jin. I first ran into him in a random player match lobby, and I could tell right off the bat that he wasn't playing to beat me. He was playing specifically to punish my mistakes. </p>
+<p>I went, oh. Wait. This is actually really useful? I stopped trying to win too and instead started trying to do all the different kinds of approaches I could think of when I'd only been playing for 3 months and seeing how he would respond to them.</p>
+<p>This went on for a bit, eventually he locked in and kicked my ass and I went "waow that's cool". I sent him a steam friend request to say ggs and thanks for the games and I must've done something to impress him. He's been helping me out with advice, sparring, and vod reviews since. I'd name him but again, I'm trying to avoid using actual tags in these posts.</p>
+<p>Anyways. I was in a VC with him and another long-time blazblue player. He was giving his pep talk about grinding and slow progress and how I need to not rush myself, and the other guy pipes up, "What the fuck dude, what are you saying? If I heard this when I first started playing I would have quit!". He goes (this is me phrasing with how I would phrase it, of course): "Yeah, well, (they) want to be competitive, they're one of the crazy ones," to which I went "Yeah, that!"</p>
+<p>So... yeah. I'm approaching this game a little intensely but that's how I am, eh? I just really gotta actually listen to G and stop trying to rush it. I want to be able to "play with the big kids" but burning myself out isn't going to help. </p>
+<p>I've been trying to pick up other games or other characters to force myself to chill but every time I don't lock in Terumi I think about all the Terumi-specific feedback I got from Z and all the other feedback I got from G that requires good knowledge of the character I'm playing on to work on. And I can't really work on <em>any</em> of that feedback without being on Terumi, so I feel like I'm wasting time.</p>
+<p>I also suddenly got told to practice T.O.'ing, which again, socializing jumpscare when I was already at -3 social battery. At least I had help because I still don't know several faces. I also put in a formal request to get to T.O. primarily blazblue brackets at beach episode so I have an excuse to get to meet people, so I'm looking forward to that. (I also confirmed that I'll actually get to play, so that's also cool!)</p>
+<h2 id="other">Other</h2>
+<p>I have a few RTOI things I want to add here. Hopefully I'll remember to update this post later in the day.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/hi-again.html" rel="bookmark"
+                                title="Permalink to Hi again">Hi again</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-21T00:00:00-04:00">
                 Published: Fri 21 March 2025
@@ -28,55 +94,11 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> </p>        
-</footer><!-- /.post-info --><p>Oh hi there. It's been a bit, eh? Like 5 days or so.</p>
-<p>It's been a hell of a couple of days. I finally have a little bit of time to breathe, so I finally have the emotional state to write a blog post without being unnecessarily emo/rude/something else.</p>
-<h2 id="timelines-thesis">Timelines + Thesis</h2>
-<p>So, some context as to what's been going on. I'm on the 6th year of my PhD, and I'm defending this year. My advisor and I decided that I will defend in the spring, but graduate in the summer because it seems like I might be able to get funding through the summer through my... externship? I dunno how to describe it and it's not worth describing. Basically I'm working at the same time as my PhD, because my work is research-focused and aligns enough with my thesis that it can be considered part of it.</p>
-<p>So basically -- I need to be employed and the fuck out of here by the end of the summer, but I am defending my thesis in May. So that means I need to have a presentation prepared by then, and 2 weeks before that I have to have actually written the thesis itself. Plenty of time, right?</p>
-<p>Except I'm applying to jobs in research. Which means I have to present on my research, because that's what they're interested in. Which means that in three days, on monday, I have to present on my thesis that I wasn't supposed to present on until May. -2 months.</p>
-<p>Of course, I mentioned this to my boss, because she has been extremely supportive about the whole deal (and works in the field I'm trying to get into, so knows people who knows people and can put in a great word for me. In fact, I think it's thanks to her that they responded to my application within 2 days of me sending it in.) Which means she went, "You know what would be very helpful for you? If you could give a practice talk! Why don't you present to the team meeting on Thursday?" Which means that I had to, with two days warning, prepare a presentation I wasn't supposed to present until May. </p>
-<p>Dearest reader.</p>
-<p>I was a mess.</p>
-<p>It happened, of course. If there's one thing I can say about myself, it's that if my nose gets put to the grindstone, I get it done. And I got it done honestly fairly fuckin' well. I got great reception from the team on my presentation, with some very helpful feedback that I was kind-of-sort-of expecting since I rushed it in two days. The presentation itself was great, they said the overarching storyline was great (I had to tie together two very separate projects), and I explained things very clearly and very confidently. I just need to, you know, actually fill out the slides with stuff you can't do easily in two days, like figures and examples.</p>
-<p>So... yeah. I survived. My mental was through the floor the past few days which only got worse with some rough times I was having with Blazblue, which I'll rant about (maybe?) in a separate post. Now that I know I have a workable presentation, even though I gotta actually be interviewed and present it on Monday, I feel a hell of a lot better.</p>
-<p>Which hey also, if you're reading this, you probably know me well enough for me to say that if you're interested in attending my thesis defense, feel free to reach out and I'll send you an invite to it. It'll be streamed online and I got the go ahead to share the link with whoever once it's made.</p>
-<h2 id="blog-issues">Blog Issues</h2>
-<p>Oh hey, I finally hit that point I predicted where my blog theme breaks because I broke pagination. I'll add that to the todo list and possibly update this entry as I fix it.</p>
-<h2 id="other">Other</h2>
-<p>Not much else to put here yet. I'm taking today to mostly recover from the past week so I might actually work on some fun projects today. I'm planning to just kind of bounce from coffee shop to coffee shop while waiting for locals to happen.</p>
-<ul>
-<li>Continue working on my pngtools nonsense<ul>
-<li>Character script parsing</li>
-<li>GUI nonsense -&gt; This'll be a little complciated because of the fact I code using WSL, so doing GUI dev is always a bit of a mess. I might still see if I can call pythong from C# or something because I despise tkinter.</li>
-<li>Usage guide</li>
-</ul>
-</li>
-<li>Catch up in FFXIV<ul>
-<li>Raid is starting soon, and I need to remember how to play.</li>
-<li>I also need to craft the new crafting/gathering gear, so I can be prepped to make pots/food. A friend offered to do it for me, but y'all know me. I try to be self-sufficient.</li>
-</ul>
-</li>
-<li>Read some classical scifi-fantasy fiction<ul>
-<li>I met a very fascinating person at the local coffee shop recently which was an awesome experience. He comes from a very different era of fantasy and D&amp;D, and he listed off some authors that I really think I should look into.</li>
-</ul>
-</li>
-<li>Draw<ul>
-<li>I have a few gliterumi emote ideas I want to draw.</li>
-<li>I also still need actually draw a character sheet for gliterumi so I can decide on his outfit. I can't decide how much I want to deviate from core Terumi, but I do want to add a bit of a personal spin to it.</li>
-</ul>
-</li>
-<li>Video edit<ul>
-<li>I keep "forgetting" (ADHD putting off) to edit together + upload my tournament VODs because I've been too upset over my gameplay. I've already lost the replay of my first set against Zander, which sucks because I distinctly remember forgetting to press record until after the first round. I might ask if it's OK for me to pull a clip from the BBBO recording so make up for it.</li>
-<li>I also owe another match compilation, but I accidentally ammased 3 hours of footage I have to strip down to 30 minutes of gameplay, so again I keep having decision paralysis and putting it off. I might just nuke the old gameplay and pick from newer matches, because I've had some bangers since then.</li>
-</ul>
-</li>
-</ul>
-<p>The unfortunate bit is I can't work on 90% of this because I'm on my laptop, and most of this has to happen on my desktop. So... we'll see what happens!</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>Oh hi there. It's been a bit, eh? Like 5 days or so.</p>
+<p>It's been a hell of a couple of days. I finally have a little bit of time to breathe, so I finally have the emotional state to write a blog post without being unnecessarily emo/rude/something …</p>
+                            <a class="readmore" href="/hi-again.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/whoops.html" rel="bookmark"
