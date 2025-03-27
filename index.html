@@ -17,7 +17,51 @@
                 </header><!-- /#banner -->
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="/lotta-things-have-happened-tm.html">Lotta Things Have Happened :TM:</a></h1>
+                        <h1 class="entry-title"><a href="/i-should-be-working-on-my-thesis.html">I Should be Working on my Thesis</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-27T00:00:00-04:00">
+                Published: Thu 27 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>For once I'm starting one of these posts with tech stuff in mind.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>So I mentioned in <a href="/lotta-things-have-happened-tm.html">yesterday's post</a>, I'm looking to make an easier way to record a set of replays of interest (I'm calling them ROIs from now on).</p>
+<p>There were a few issues I ran into.</p>
+<p>First: it looks like BBCF requires a file called <code>replay_list</code> to agree with the header of a given replay in order for the game to load it. This means I have to update <code>replay_list</code> when I swap out the replays.</p>
+<p>Second: <code>replay_list</code>, and the replays themselves, are in binary. I have never worked with binary files before, and will need to figure out what bits align with what information.</p>
+<p>My friend and I started looking into reading the replay files to see if we can guesstimate some of the information. First he showed me an important series of commands:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+
+<p>This allowed me to actually read the content of one of these files. (I was not kidding when I said I'd <em>never</em> worked with a binary file before.)</p>
+<p>We started taking a look at some of the content of the files, and it didn't seem <em>too</em> bad. Obviously there was a header, and we could clearly see the usernames at the very least. I also made the educated assumption that buttons are stored in 4 bits in hex, e.g. a button press is stored in <code>00 00</code>. I started trying to overthink it with stuff like "How few bits can you store flags as to whether or not 4 buttons are pressed?" but he explained that generally XInput devices store things in 16 bits, and I guesstimated that this game likely does the same (even if it parses it slightly to allow multiple types of controllers).</p>
+<p>I also reached out to the modding discord and asked if anyone had already figured out how to parse these files, just because it seemed like it <em>should</em> be a solved problem. Which, turns out it is!</p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayFile.h">Here is the header file the improvement mod uses to parse a replay file.</a></p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayList.h">Here is the header file the improvement mod uses to parse the replay_list file.</a></p>
+<p>So, I'm going to go off of these in my code to generate a new <code>replay_list</code> file off a provided directory of ROIs.</p>
+<p>More here after I do some work on my thesis and make some progress on this. It's going to take a while because it's been a <em>very</em> long time since I've worked in C#, let alone any visual C# and I'm trying to make a UI at the same time as I make the backend functionality.</p>
+<h2 id="personal">Personal</h2>
+<p>It felt wrong not to put a personal section.</p>
+<p>Uhh.</p>
+<p>Uh.</p>
+<p>I got a haircut!</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/lotta-things-have-happened-tm.html" rel="bookmark"
+                                title="Permalink to Lotta Things Have Happened :TM:">Lotta Things Have Happened :TM:</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-26T00:00:00-04:00">
                 Published: Wed 26 March 2025
@@ -28,60 +72,10 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/ffxiv.html">ffxiv</a> </p>        
-</footer><!-- /.post-info --><p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF talk in the BBCF notes section. I'll make a post about the first thing if/when it gets confirmed for certain.</p>
-<p>The thing I <em>can</em> talk about is my early presentation of my thesis went well, and I think that was overall good because it made me get a clear picture of the work I've done in the past year and now it shouldn't be too hard to write its chapter in my thesis and submit it as a poster somewhere.</p>
-<p>I'm taking today as a slow day after the emotional roller coaster of the past two-ish weeks. Going to see if I can't do some household things and (calmly) work on some of the work I've been behind on. I'm also going to maybe go out to eat to celebrate the thing I can't talk about yet, since I know there's a burger place near me that doesn't mind people pulling out their laptops and working at the bar during lunchtime. My arthritis is kicking my ass again so I don't know how much I'll want to get out of the house even for good food, though.</p>
-<p>I've said this before, but hopefully I'll edit this at the end of the day with more interesting things. I'm hoping to get a little more work done on my sprite tool, now that I'm not in do or die mode.</p>
-<h2 id="tech-things">Tech Things</h2>
-<p>Nice, my blog pagination finally broke! I'll try to fix that tonight.</p>
-<p>Oh, 5 hours later I've thought of something to talk about!</p>
-<h3 id="audio-nonsense">Audio Nonsense</h3>
-<p>So I have a funny little problem. I might have mentioned it before, but I honestly don't remember. I have pretty bad audio processing issues, so I generally have BBCF at 20% volume in-game and 4% volume through the Windows mixer. That's what I gotta do in order to hear Discord chat over the game, and for the in-game sfx to not feel like it's blowing out my eardrums. This is normally fine, except I've been trying to record + stream lately.</p>
-<p>So what ends up happening is, I have to set everything to 60%-ish on the capture in OBS while leaving BBCF at max volume. This ends up making my entire stream pretty damn quiet compared to most streams. More annoyingly, every time I record something, it ends up so quiet that I not only have to boost the entire bus by 200%, I have to ALSO boost the audio track itself by 150% for it to even hold a candle to normal youtube videos.</p>
-<p>I took some time yesterday to try and figure out a way around it. What I want is as follows:</p>
-<p>I want BBCF to export to 2 separate audio outputs. One is captured by OBS, and one is sent to by headphones. To my headphones, I want it to be at 20%, while to OBS, I want to leave it at 100%.</p>
-<p>It looks like this is nearly impossible??</p>
-<p>I've downloaded Voicemeter Banana, and while I can point BBCF to output to a virtual output(?) device that I can then point to my headphones alongside everything else, it seems like I'm still going to have to turn down the virtual output itself in vmb, and if I do that, I believe OBS will also capture the volume-down version. So... It doesn't actually help.</p>
-<p>I spoke to a friend about it, and it's beginning to seem like I'm at the point where I'll need actual hardware to do this sort of volume control. I do know someone else I could talk to, but I might just ask them in person next sort-of monthly instead of pestering them on discord.</p>
-<h3 id="replay-management-automatic-play">Replay Management + Automatic Play</h3>
-<p>So I'm mucking around with a new idea I stumbled upon. I (finally) realized that replays are literally just files you can copy around, so if I wanted to I could copy some old replays somewhere else and then paste them back into the replay directory when I want to view them.</p>
-<p>This came about because I accidentally over-wrote some of my replays with a local Ragna that I'd wanted to record, but I'd thankfully made a copy of the replays because I figured that would happen. I ended up having to load each replay in one by one using the improvement mod replay loader.</p>
-<p>Which uh.</p>
-<p>Was annoying.</p>
-<p>If I hadn't accidentally overwritten those replays, or was smarter about how I moved them into the replay folder, I probably could have just used <a href="https://github.com/taylorsussex/AutomaticReplayViewer/tree/master">the automatic replay viewer</a> to walk away and let OBS record them.</p>
-<p>So I'm thinking about an application like this:</p>
-<ol>
-<li>You have some replays of interest backed up somewhere.</li>
-<li>You have a replay folder with replays in it.</li>
-<li>You launch BBCF, leave it in the main menu.</li>
-<li>You launch App1, point it to the two folders.</li>
-<li>It backs up the replays already in your replay folder somewhere else temporarily.</li>
-<li>Empties your replay folder.</li>
-<li>Copies your replays of interest, renames them to fit the BBCF replay file naming schema.</li>
-<li>Navigates to the replay theater, which <em>should</em> now contain your replays of interest.</li>
-<li>Plays them one by one automatically.</li>
-<li>When done, you can tell it to restore your old replays.</li>
-</ol>
-<p>So, alright, theoretically I could just make an application that does the file management stuff, right? But there's one major pain point I have with the automatic replay viewer, and it's that it <em>requires</em> BBCF to be in the foreground. Alright, sure, that should be fine -- except I'm an ADHD mess and I alt tab between it selecting the replay and then the replay loading, so it doesn't hide the replay menu bar correctly because the window already doesn't have focus so it can't send the keypress.</p>
-<p>I pestered a friend of mine who is far better at some memory-focused programming than I am, and he did a bit of digging. He did find a theoretical way to send messages to a minimized application by creating a custom DLL that would have to be injected into BBCF. (From what I understand, it leaves an open pipe that accepts messages from App1 mentioned above, and just calls the internal <code>SendInput</code> function with the key sent in the message.)</p>
-<p>Which would be fantastic, because then I can use Voicemeter Banana to point BBCF to a virtual out that's not being piped to my headphones but is being captured by OBS, and the game itself can be minimized but still have its video captured by OBS. So I can actually use my computer while it's recording 2 hours of gameplay footage!</p>
-<p>So... Sounds like that might be something we can collaborate on and publish eventually, because I figure it'd be neat. If nothing else, it could save massive amounts of storage space -- just save the replays themselves, nuke the 20GB recording, and if you really need it you can always re-record it.</p>
-<p>I'm going to start working on the part I actually know how to handle, which is the file management bit, and I think my friend is already like... 25% of the way through the DLL portion. The hard part will probably be hooking the DLL into BBCF, since he doesn't have a copy of BBCF and I'm not sure how else he can test if the injection is working. It might have to be a pair programming kind of deal, or I might just buy it for him even though he's never had any interest in fighting games.</p>
-<p>We'll also need to re-implement the memory reading that the automatic replay viewer does, but he has a suggestion for a memory reading library for C# <a href="https://github.com/JamesMenetrey/MemorySharp">here</a> and the addresses for the relevant parts of memory are known. (And we can always find them.)</p>
-<h2 id="ffxiv">FFXIV</h2>
-<p>I'm being forced (joking) to return to FFXIV because I promised my raid group I'd still be around for next tier. And, to be honest, it's probably good for me to step back away from my intense 4 month hyperfocus with BBCF and do something else sometimes.</p>
-<p>I'm still 2 patches behind of current content since the last patch came out when I'd already gone on hiatus. I'll deal with that at some point, but for now I've just unlocked the new raid since that's what I'm here for. I've also gone and updated my glamour to match my Terumi palette a little better, so enjoy this silly little portrait of it. I'm not a huge gposer, so I'm not the best at taking photos.</p>
-<p><span align="center" style="margin:auto; display:table;" >
-<img alt="Glit the Au Ra posing with roses in a rectangular portrait." src="/imgs/glit_vip_portrait.png"></br>
-<em>I made this portrait during my Argenti fan era and I've decided I like it too much to change it.</em>
-</span></p>
-<p>Going to be doing this raid as a VIP (hopefully), and my goal right now is to just get my crafter and gatherer gear up to the point where I can craft food/pots for the group.</p>
-<p>Fun fact! This is why my comment in random places is "Hi I'm Glit". My username in MMOs has been some variation of Glit Gagarin ever since 2014-ish.</p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
+                            <a class="readmore" href="/lotta-things-have-happened-tm.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/322.html" rel="bookmark"
@@ -193,27 +187,6 @@
 </footer><!-- /.post-info -->                            <p>My arthritis is a nice safe 2/10 today! The meds I was prescribed helped deal with yesterday, and today Tylenol should do the trick.</p>
 <p>In the aftermath of my BBCF post yesterday, I stumbled upon this image, which I felt was extremely accurate to my experience as an ADHD …</p>
                             <a class="readmore" href="/picture-day.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/the-rambles-continue.html" rel="bookmark"
-                                title="Permalink to The Rambles Continue">The Rambles Continue</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-12T00:00:00-04:00">
-                Published: Wed 12 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal-rambling-tech-rtoi.html">personal rambling tech rtoi</a> </p>        
-</footer><!-- /.post-info -->                            <p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done …</p>
-                            <a class="readmore" href="/the-rambles-continue.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                     </ol><!-- /#posts-list -->

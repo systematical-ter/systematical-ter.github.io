@@ -17,7 +17,51 @@
                 </header><!-- /#banner -->
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="/326-bbcf-notes.html">3/26 BBCF Notes</a></h1>
+                        <h1 class="entry-title"><a href="/i-should-be-working-on-my-thesis.html">I Should be Working on my Thesis</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-03-27T00:00:00-04:00">
+                Published: Thu 27 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>For once I'm starting one of these posts with tech stuff in mind.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>So I mentioned in <a href="/lotta-things-have-happened-tm.html">yesterday's post</a>, I'm looking to make an easier way to record a set of replays of interest (I'm calling them ROIs from now on).</p>
+<p>There were a few issues I ran into.</p>
+<p>First: it looks like BBCF requires a file called <code>replay_list</code> to agree with the header of a given replay in order for the game to load it. This means I have to update <code>replay_list</code> when I swap out the replays.</p>
+<p>Second: <code>replay_list</code>, and the replays themselves, are in binary. I have never worked with binary files before, and will need to figure out what bits align with what information.</p>
+<p>My friend and I started looking into reading the replay files to see if we can guesstimate some of the information. First he showed me an important series of commands:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+
+<p>This allowed me to actually read the content of one of these files. (I was not kidding when I said I'd <em>never</em> worked with a binary file before.)</p>
+<p>We started taking a look at some of the content of the files, and it didn't seem <em>too</em> bad. Obviously there was a header, and we could clearly see the usernames at the very least. I also made the educated assumption that buttons are stored in 4 bits in hex, e.g. a button press is stored in <code>00 00</code>. I started trying to overthink it with stuff like "How few bits can you store flags as to whether or not 4 buttons are pressed?" but he explained that generally XInput devices store things in 16 bits, and I guesstimated that this game likely does the same (even if it parses it slightly to allow multiple types of controllers).</p>
+<p>I also reached out to the modding discord and asked if anyone had already figured out how to parse these files, just because it seemed like it <em>should</em> be a solved problem. Which, turns out it is!</p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayFile.h">Here is the header file the improvement mod uses to parse a replay file.</a></p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayList.h">Here is the header file the improvement mod uses to parse the replay_list file.</a></p>
+<p>So, I'm going to go off of these in my code to generate a new <code>replay_list</code> file off a provided directory of ROIs.</p>
+<p>More here after I do some work on my thesis and make some progress on this. It's going to take a while because it's been a <em>very</em> long time since I've worked in C#, let alone any visual C# and I'm trying to make a UI at the same time as I make the backend functionality.</p>
+<h2 id="personal">Personal</h2>
+<p>It felt wrong not to put a personal section.</p>
+<p>Uhh.</p>
+<p>Uh.</p>
+<p>I got a haircut!</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/326-bbcf-notes.html" rel="bookmark"
+                                title="Permalink to 3/26 BBCF Notes">3/26 BBCF Notes</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-26T00:00:00-04:00">
                 Published: Wed 26 March 2025
@@ -28,71 +72,10 @@
                 </address>
         <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
         
-</footer><!-- /.post-info --><p>So... I've been very frustrated with BBCF lately. To be more specific, I've been super frustrated with my own gameplay. It feels like I forgot how to do a lot of very basic gameplay things, like I've regressed to having my 5b -&gt; 5c -&gt; 2c -&gt; 5d blockstring be my default, which is obviously a very bad blockstring especially when I do it repeatedly. It's especially frustrating when I'm playing against really good players and I'm trying to show my best and I end up just brain farting and doing things like 6[b] and then pausing before doing a 5c of all things.</p>
-<p>But uh, anyways. I haven't written one of these in a while, and I wonder if that's a little bit it -- I got too unfocused on what I'm trying to work on and that means I've gotten a little mixed.</p>
-<p>I've done a few more tournament runs. Still need to make VODs for them, but I really don't feel driven to at all because they were just straight-up ass beatings. I don't even know if there's anything I can learn from them, <em>that</em> level of ass-beating. The most recent tournament I joined I got put on stream first again, vs. a Valk, which I have no experience in. So, I put up almost no fight and that was kind of the straw that broke the camel's back for that day. I at least appreciate that the commentators and chat weren't talking shit, even though I've definitely seen people in that matchmaking discord be very mean at times. To add insult to injury, after that match I had to go vs. a particular Haz player that loves to bm, and he bm'd so hard I managed to take a round from him so that added some frustration that I couldn't just be bad in peace without being mocked. At least he didn't feel secure enough to taunt, even though he's known for taunting mid tournament. Stupidly, I spun up a player room after, fought a Naoto who beat my ass because I wasn't in the right headspace at all. I feel kind of bad, I made a self-deprecating comment and they actually took the time to talk to me a little and mentioned that it might be time for a break. We had another set after that and they commented that I played a lot better that time, and that really kind of proved to me that it's literally my own self-critique that's making me play like shit. I thanked them and fucked off and played Satisfactory for a bit, which sure enough is very satisfying and has a lot of factories.</p>
-<p>I did have some VERY cool encounters between the salt. In DW's thursday lobbies there was a Jin player being hyped up who was looking for matches at a cabinet. I had the itch to play vs. a Jin, and G wasn't around, so I hopped in vs them. Damn, that was <em>fun</em>. It was obvious he wasn't going at full power, which G pointed out wouldn't have been interesting for the either of us, so I really got the chance to practice better movement and actually managed to take a match from him. He was apparently also an extremely well known Jin player, to the point that G was shocked that I got to play him, so that was a great feeling.</p>
-<p>Plus, another really fucking awesome thing happened on Monday:</p>
-<p>I'm pretty sure that I've talked about it here before, but I've had a small personal goal since I really started playing Blazblue: I wanted to fight all the Terumis I knew of. The reason is simple, even in my first days of playing blazblue it was very obvious that people had extremely unique ways of playing terumi. I seem to learn best by actually playing people, so I wanted to fight terumis who play differently so I can try to figure out what makes their tactic tick. I've fought most of the terumis I know of at this point; Z, S, F, F(2) if those names mean anything to you. But there was one I hadn't gotten to fight yet that I'm going to nickname D. You probably know who that is if you've had any passing curiousity about Terumi in competitive play or even watched a guide on the character. I've seen him show up in my player room once, but otherwise I know he doesn't really have the time to play so I just kind of accepted that I didn't know when I was going to get the chance to play him.</p>
-<p>Well, chat. He showed up in my player room. <em>And I got to fight him</em>. <em><strong>For twelve matches.</strong></em></p>
-<p>Holy <em>shit</em>. I was <em>outclassed</em>. Like, I'm working on my ABCs and this man is writing shakespeare. I don't think I've gotten so thoroughly obliterated in a <em>while</em>. Normally, sure, I'm getting my ass beat, but I don't feel like I'm literally not able to breathe.</p>
-<p>And <em>damn</em> was it educational. I still remember during my BBBO run, commentator A made a comment about how in Terumi vs. Terumi, the Terumi players get to feel how actually oppressive their pressure is. I definitely felt it a little vs my fight with Z, but I was still trying to mash/jump out at any given moment so I didn't fully get it. I've been trying to be more patient, so in those matches vs. D I <em>really</em> get it now.</p>
-<p>The main things I learned are as follows:</p>
-<ol>
-<li>
-<p>I have not been doing my 5b stagger nearly well enough. I checked, and my 5b 66 5b leaves a 10-12 frame gap when it's supposed to be 6 frames if done perfectly.</p>
-</li>
-<li>
-<p>The best ways to get out of Terumi pressure appears to be IB 6b, IB (my bad) 5b pressure, and IB a j.2d reset.</p>
-</li>
-<li>
-<p>I'm not taking good advantage of my space control with j.d and 6a. A LOT of his catches of me were slapping me with j.d, or punishing my air movement with 6a. Especially of interest I noticed was one time I actually managed to block his 6a, so I tried to figure whether that meant he had priority, I had priority, or we were back at neutral. The answer is actually that I completely forgot that you can jc 6a, so he can 6a jc j.2d. I might be able to 5a mash him out of his j.2d, but that puts any lows (2a I'm looking at you) off the table.</p>
-</li>
-</ol>
-<p>I'm sure there's still plenty more I can learn from those sets. I've recorded the set and I have it uploaded privately on my youtube (so I have the option to make it unlisted to get feedback from friends). There's also a lot about me just straight up getting out RPS'd, but I don't need to rub it in at this point because that's just something I need to figure out as I keep playing. Example: he clipped a really cool combo that he did on me because he hit me with a 6c -&gt; RC (after 2nd hit) -&gt; 2b . Annoyingly, people are mocking the fact I got hit with it, but those people are assholes who didn't get their brain destroyed by vs'ing D for 11 matches in a row. My train of thought there was :</p>
-<ol>
-<li>
-<p>He is 6c'ing me.</p>
-</li>
-<li>
-<p>He will definitely at least RC after the 3rd hit.</p>
-</li>
-<li>
-<p>If I IB the 2nd hit, that makes a gap.</p>
-</li>
-<li>
-<p>I should <em>just</em> hit 50 meter after the 2nd hit.</p>
-</li>
-<li>
-<p>I can DP after the 2nd hit.</p>
-</li>
-</ol>
-<p>But, of course, D being D, he was a layer ahead and figured that I knew about the gap between an IB'd 2nd hit and 3rd hit, and instead RC'd on the 2nd hit to try and catch me on my mashout.</p>
-<p>My attempt at a DP didn't work, and people are being cunts about it, but honestly the fact that I was able to think about taking that RPS option is already a huge step for me. That's something I definitely need to slowly work on. Z explained a little bit about his RPS thoughts and I realized that I've been playing entirely from the heart still, and this might be the point I need to start aggressively thinking about it. (That's probably why I'm playing so much worse right now. I'm trying to think while playing, and that means I'm not thinking about my basics.)</p>
-<h2 id="to-work-on">To work on</h2>
-<p>Okay, yapping done for now. Now to try and figure out set goals to keep working on.</p>
-<ul>
-<li>5b stagger pressure -- actually get it to 6-8 frames consistently.</li>
-<li>Shorter pressure strings -- copy some of the blockstrings and resets that D does.</li>
-<li>Movement -- I still need to get 66 bb down. In my fight vs the Jin, he used it a LOT against me and that reminded me that I need to work on it.</li>
-<li>Add another combo or so -- Need to figure out what starters I don't have good combos off of yet.</li>
-<li>Practice being patient on defense, BUT STILL EXPERIMENT -- I overcompensated for being too squirrely on defense. I'm able to block people out now, but I need to be <em>mindfully</em> trying to find places to mash out.</li>
-</ul>
-<h2 id="random-links">Random Links</h2>
-<p>Have some links.</p>
-<p>I've been sparring with a local Ragna, and here are VODs of our sets. (Note that they're unlisted, I don't know if he's okay with me having them public. I don't know if I am either, cus god damn some of my play is hot trash.)</p>
-<p><a href="https://www.youtube.com/watch?v=DbezXA8dyjE">3/19 -ish</a></p>
-<p><a href="https://www.youtube.com/watch?v=LTFy_kAwe_8">3/23</a></p>
-<p>Here's a link to my set vs D, but it's currently set to private. I genuinely don't know how people feel about me uploading these sets, so I'm erring on the side of private/unlisted because I don't want them to feel irritated that I'm uploading possibly not great play. (At the same time, my shit play did get clipped and I've had 2 separate people insult me for it, one directly fucking pinging me and pointing it out to my face, so I get the feeling I'm overthinking it. But to be fair to D, he did land a SICK ass combo on me so it was worth clipping.)</p>
-<p><a href="https://www.youtube.com/watch?v=zmz2h2IQsCc">me vs. D</a></p>
-<p>I also have that set vs that Jin player saved + privately uploaded, but I don't know if I need to link it here because I've already scrubbed through it pretty thoroughly with G's help.</p>
-<p>Oh yeah, also have a link to the video that D uploaded, because I'm <em>definitely</em> going to try to learn this combo some time. The key thing for me is I can't do the iad combos yet, and this one in particular is sick. I also need to work on non-ch 6c -&gt; rc -&gt; iad.</p>
-<p><a href="https://www.youtube.com/watch?v=MCN4dANXzG4">D kicking my ass in style</a></p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>So... I've been very frustrated with BBCF lately. To be more specific, I've been super frustrated with my own gameplay. It feels like I forgot how to do a lot of very basic gameplay things, like I've regressed to having my 5b -&gt; 5c -&gt; 2c -&gt; 5d blockstring be my default, which …</p>
+                            <a class="readmore" href="/326-bbcf-notes.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/lotta-things-have-happened-tm.html" rel="bookmark"
@@ -268,27 +251,6 @@
 </footer><!-- /.post-info -->                            <p>It was mostly a fine BBCF day at first? TMN was fine. </p>
 <p>Heads up that this is a little bit emo so feel free to skip to a section or whatever if you want. Just need to get this off my chest, and if I can't write about it in …</p>
                             <a class="readmore" href="/312-bbcf-notes.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/the-rambles-continue.html" rel="bookmark"
-                                title="Permalink to The Rambles Continue">The Rambles Continue</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-12T00:00:00-04:00">
-                Published: Wed 12 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal-rambling-tech-rtoi.html">personal rambling tech rtoi</a> </p>        
-</footer><!-- /.post-info -->                            <p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done …</p>
-                            <a class="readmore" href="/the-rambles-continue.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                     </ol><!-- /#posts-list -->
