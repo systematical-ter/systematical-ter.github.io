@@ -44,6 +44,31 @@
 <p>It looks like this is nearly impossible??</p>
 <p>I've downloaded Voicemeter Banana, and while I can point BBCF to output to a virtual output(?) device that I can then point to my headphones alongside everything else, it seems like I'm still going to have to turn down the virtual output itself in vmb, and if I do that, I believe OBS will also capture the volume-down version. So... It doesn't actually help.</p>
 <p>I spoke to a friend about it, and it's beginning to seem like I'm at the point where I'll need actual hardware to do this sort of volume control. I do know someone else I could talk to, but I might just ask them in person next sort-of monthly instead of pestering them on discord.</p>
+<h3 id="replay-management-automatic-play">Replay Management + Automatic Play</h3>
+<p>So I'm mucking around with a new idea I stumbled upon. I (finally) realized that replays are literally just files you can copy around, so if I wanted to I could copy some old replays somewhere else and then paste them back into the replay directory when I want to view them.</p>
+<p>This came about because I accidentally over-wrote some of my replays with a local Ragna that I'd wanted to record, but I'd thankfully made a copy of the replays because I figured that would happen. I ended up having to load each replay in one by one using the improvement mod replay loader.</p>
+<p>Which uh.</p>
+<p>Was annoying.</p>
+<p>If I hadn't accidentally overwritten those replays, or was smarter about how I moved them into the replay folder, I probably could have just used <a href="https://github.com/taylorsussex/AutomaticReplayViewer/tree/master">the automatic replay viewer</a> to walk away and let OBS record them.</p>
+<p>So I'm thinking about an application like this:</p>
+<ol>
+<li>You have some replays of interest backed up somewhere.</li>
+<li>You have a replay folder with replays in it.</li>
+<li>You launch BBCF, leave it in the main menu.</li>
+<li>You launch App1, point it to the two folders.</li>
+<li>It backs up the replays already in your replay folder somewhere else temporarily.</li>
+<li>Empties your replay folder.</li>
+<li>Copies your replays of interest, renames them to fit the BBCF replay file naming schema.</li>
+<li>Navigates to the replay theater, which <em>should</em> now contain your replays of interest.</li>
+<li>Plays them one by one automatically.</li>
+<li>When done, you can tell it to restore your old replays.</li>
+</ol>
+<p>So, alright, theoretically I could just make an application that does the file management stuff, right? But there's one major pain point I have with the automatic replay viewer, and it's that it <em>requires</em> BBCF to be in the foreground. Alright, sure, that should be fine -- except I'm an ADHD mess and I alt tab between it selecting the replay and then the replay loading, so it doesn't hide the replay menu bar correctly because the window already doesn't have focus so it can't send the keypress.</p>
+<p>I pestered a friend of mine who is far better at some memory-focused programming than I am, and he did a bit of digging. He did find a theoretical way to send messages to a minimized application by creating a custom DLL that would have to be injected into BBCF. (From what I understand, it leaves an open pipe that accepts messages from App1 mentioned above, and just calls the internal <code>SendInput</code> function with the key sent in the message.)</p>
+<p>Which would be fantastic, because then I can use Voicemeter Banana to point BBCF to a virtual out that's not being piped to my headphones but is being captured by OBS, and the game itself can be minimized but still have its video captured by OBS. So I can actually use my computer while it's recording 2 hours of gameplay footage!</p>
+<p>So... Sounds like that might be something we can collaborate on and publish eventually, because I figure it'd be neat. If nothing else, it could save massive amounts of storage space -- just save the replays themselves, nuke the 20GB recording, and if you really need it you can always re-record it.</p>
+<p>I'm going to start working on the part I actually know how to handle, which is the file management bit, and I think my friend is already like... 25% of the way through the DLL portion. The hard part will probably be hooking the DLL into BBCF, since he doesn't have a copy of BBCF and I'm not sure how else he can test if the injection is working. It might have to be a pair programming kind of deal, or I might just buy it for him even though he's never had any interest in fighting games.</p>
+<p>We'll also need to re-implement the memory reading that the automatic replay viewer does, but he has a suggestion for a memory reading library for C# <a href="https://github.com/JamesMenetrey/MemorySharp">here</a> and the addresses for the relevant parts of memory are known. (And we can always find them.)</p>
 <h2 id="ffxiv">FFXIV</h2>
 <p>I'm being forced (joking) to return to FFXIV because I promised my raid group I'd still be around for next tier. And, to be honest, it's probably good for me to step back away from my intense 4 month hyperfocus with BBCF and do something else sometimes.</p>
 <p>I'm still 2 patches behind of current content since the last patch came out when I'd already gone on hiatus. I'll deal with that at some point, but for now I've just unlocked the new raid since that's what I'm here for. I've also gone and updated my glamour to match my Terumi palette a little better, so enjoy this silly little portrait of it. I'm not a huge gposer, so I'm not the best at taking photos.</p>
