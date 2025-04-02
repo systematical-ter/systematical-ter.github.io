@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>I Should be Working on my Thesis</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="For once I'm starting one of these posts with tech stuff in mind. Tech things So I mentioned in yesterday's post, I'm looking to make an easier..." />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Systematical's Ramblings</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/blog.html">Blog</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/i-should-be-working-on-my-thesis.html" rel="bookmark"
+             title="Permalink to I Should be Working on my Thesis">I Should be Working on my Thesis</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-03-27T00:00:00-04:00">
+                Published: Thu 27 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info -->        <p>For once I'm starting one of these posts with tech stuff in mind.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>So I mentioned in <a href="/lotta-things-have-happened-tm.html">yesterday's post</a>, I'm looking to make an easier way to record a set of replays of interest (I'm calling them ROIs from now on).</p>
+<p>There were a few issues I ran into.</p>
+<p>First: it looks like BBCF requires a file called <code>replay_list</code> to agree with the header of a given replay in order for the game to load it. This means I have to update <code>replay_list</code> when I swap out the replays.</p>
+<p>Second: <code>replay_list</code>, and the replays themselves, are in binary. I have never worked with binary files before, and will need to figure out what bits align with what information.</p>
+<p>My friend and I started looking into reading the replay files to see if we can guesstimate some of the information. First he showed me an important series of commands:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>hexdump<span class="w"> </span>-C<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+
+<p>This allowed me to actually read the content of one of these files. (I was not kidding when I said I'd <em>never</em> worked with a binary file before.)</p>
+<p>We started taking a look at some of the content of the files, and it didn't seem <em>too</em> bad. Obviously there was a header, and we could clearly see the usernames at the very least. I also made the educated assumption that buttons are stored in 4 bits in hex, e.g. a button press is stored in <code>00 00</code>. I started trying to overthink it with stuff like "How few bits can you store flags as to whether or not 4 buttons are pressed?" but he explained that generally XInput devices store things in 16 bits, and I guesstimated that this game likely does the same (even if it parses it slightly to allow multiple types of controllers).</p>
+<p>I also reached out to the modding discord and asked if anyone had already figured out how to parse these files, just because it seemed like it <em>should</em> be a solved problem. Which, turns out it is!</p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayFile.h">Here is the header file the improvement mod uses to parse a replay file.</a></p>
+<p><a href="https://github.com/libreofficecalc/BBCF-Improvement-Mod/blob/master/src/Game/ReplayFiles/ReplayList.h">Here is the header file the improvement mod uses to parse the replay_list file.</a></p>
+<p>So, I'm going to go off of these in my code to generate a new <code>replay_list</code> file off a provided directory of ROIs.</p>
+<p>More here after I do some work on my thesis and make some progress on this. It's going to take a while because it's been a <em>very</em> long time since I've worked in C#, let alone any visual C# and I'm trying to make a UI at the same time as I make the backend functionality.</p>
+<h2 id="personal">Personal</h2>
+<p>It felt wrong not to put a personal section.</p>
+<p>Uhh.</p>
+<p>Uh.</p>
+<p>I got a haircut!</p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <div id="flavorimg" class="body">
+                        <img src="/theme/imgs/counter_anim.png" 
+                                title="I want to show off the cool gifs I make, OK?"/>
+                </div>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="/category/bbcfnotes.html">BBCF Notes</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="https://www.youtube.com/@systematicalgaming">Youtube</a></li>
+                                                        <li><a href="https://bsky.app/profile/systematical.bsky.social">Bluesky</a></li>
+                                                        <li><a href="https://www.twitch.tv/systematical">Twitch</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>

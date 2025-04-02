@@ -17,7 +17,140 @@
                 </header><!-- /#banner -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/322.html">3/22</a></h1>
+                            <h1 class="entry-title"><a href="/life-more-replay-nonsense.html">Life + More Replay Nonsense</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-02T00:00:00-04:00">
+                Published: Wed 02 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>This was supposed to be posted march 29th, but I kind of got distracted halfway through and never finished writing it, so I've merged today's post with the leftover of that post!</p>
+<h2 id="personal">Personal</h2>
+<p><strong><em>I GOT AN OFFER LETTER.</em></strong></p>
+<p>I haven't accepted yet for some small reasons I'm getting sorted out, but holy shit. This is actually happening. I still need to do salary negotiation (hopefully it's not too late for that -- fun fact, even what they offered me is more than 2x what I'm making now) and they're flying me out to visit before I have to decide, which is great.</p>
+<p>I'm taking a cursory look at apartments so that I can hopefully arrange visits while I'm there. Holy shit, I can't wait to have more than a single room to my name and maybe more than a single counter of space.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>Had to look at the previous post to figure out where I left off.</p>
+<p>So as I previously mentioned, the improvement mod already has a lot of the binary file mapped out. There is one problem though: they skip the first 8 bytes of the file. For their intents and purposes, it's irrelevant.</p>
+<p>But, turns out the first 2 bytes are super important for both <code>replay.dat</code> and <code>replay_list.dat</code> files: they're checksums. I was struggling with that a bit, but had the feeling that this was, again, a solved problem since if they can decompress and substitute BBCF data files, they've gotta have figured out how to spoof checksums.</p>
+<p>Thankfully I stopped being a shy nerd and just went ahead and explained where I was stuck in the modding discord, and sure enough a prominent developer nearly immediately gave me a solution:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">ushort</span><span class="w"> </span><span class="nf">CreateChecksum</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="n">x0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">0</span><span class="n">x2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="p">)((</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="m">0</span><span class="n">xFFFF</span><span class="p">;</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;&gt;&gt;=</span><span class="w"> </span><span class="m">0</span><span class="n">x10</span><span class="p">;</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">ushort</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>To use this function I just zero out the first two bytes and then it'll replace the first two bytes with the checksum. I really want to ask him how he figured this out, but I'll do it later because seems like he's dealing with some stuff right now.</p>
+<h3 id="to-do">To-do</h3>
+<p>I can now read in a <code>replay_list.dat</code> file and pull header information for all of the involved replays, but I need to write code to rewrite a particular header entry.</p>
+<p>I also need to write code that given a directory of replays, reads in the headers from all of those replays to pull out some info to show to the user (so they know what replays they're loading in) and prepare to substitute into the <code>replay_list.dat</code> file.</p>
+<p>I also need to write code that backs up the replays before copying in the old ones, and a button to revert changes. Same deal for backing up <code>replay_list.dat</code> before overwriting it, and reverting it.</p>
+<p>I also want to explore the headers in <code>replay_list.dat</code> a little bit more -- in particular, it has to have stage/music information in the header and I want to find where that data is stored. My plan to find the relevant bytes is really straightforward. Stupid, even.</p>
+<p>I'm going to twiddle bytes by adding +1 to each of the unknown padding bytes one-by-one and seeing which ones cause the stage/music to change. :^) Then I can try to figure out whether they're just integer IDs or some more complicated representation.</p>
+<p>Something important I gotta keep in mind is that if I want to do this exploration, I might want to strip out the file reading code into a library. That way I can actually write a console app that mucks around with the file info without having to make a UI or doing jank things in the UI app (on launch it makes change x to file y). This might be a good idea to do anyways because my friend suggested I make this program with WPF, not forms, if I want to make a really nice UI. (e.g. show character portraits, like in the replay theater.)</p>
+<p>Actually, my friend just pointed out that hex editors exist. So I might be able to just use one of those to manually toggle that information, though I might still want something to update the <code>replay_list.dat</code> file.</p>
+<h3 id="c">C</h3>
+<p>I'm so rusty with C#. It's been forever since I've had to code in it. Thankfully my friend is very patient and enjoys explaining things.</p>
+<p>Part of the funny bit of all of this is I'm terrible with vocabulary usage, so he keeps having to correct my use of words to make sure I describe things correctly. For example, he's made the following to stress the difference between an <code>Attribute</code> and a <code>Member</code>, and the difference between a <code>Property</code> and a <code>Field</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Declared as &quot;ExampleAttribute&quot; - is an attribute that can be attached to a class.</span>
+<span class="na">[Example]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Property; also a member of SomeClass</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_id</span><span class="p">;</span><span class="w"> </span><span class="c1">// Field; also a member of SomeClass</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_anotherNumber</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DoTheThing</span><span class="p">()</span><span class="w"> </span><span class="c1">// Method, also a member of Some Class</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>It's also been strange getting used to coding in a strongly-typed language again. For example, it's more appropriate to use the shortcut <code>var</code> rather than re-typing the type here:</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MemoryStream</span><span class="p">(</span><span class="n">bytearray</span><span class="p">))</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
+
+<p>In python you'd HAVE to declare the variable <code>ms</code> as a <code>MemoryStream</code>, as otherwise autocomplete and the limited type hinting would have no idea what it is.</p>
+<h2 id="other">Other</h2>
+<p>Lol I still haven't fixed my pagination. Oops.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/i-should-be-working-on-my-thesis.html" rel="bookmark"
+                                title="Permalink to I Should be Working on my Thesis">I Should be Working on my Thesis</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-03-27T00:00:00-04:00">
+                Published: Thu 27 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info -->                            <p>For once I'm starting one of these posts with tech stuff in mind.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>So I mentioned in <a href="/lotta-things-have-happened-tm.html">yesterday's post</a>, I'm looking to make an easier way to record a set of replays of interest (I'm calling them ROIs from now on).</p>
+<p>There were a few issues I ran …</p>
+                            <a class="readmore" href="/i-should-be-working-on-my-thesis.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/lotta-things-have-happened-tm.html" rel="bookmark"
+                                title="Permalink to Lotta Things Have Happened :TM:">Lotta Things Have Happened :TM:</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-03-26T00:00:00-04:00">
+                Published: Wed 26 March 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/ffxiv.html">ffxiv</a> </p>        
+</footer><!-- /.post-info -->                            <p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
+                            <a class="readmore" href="/lotta-things-have-happened-tm.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/322.html" rel="bookmark"
+                                title="Permalink to 3/22">3/22</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-03-22T00:00:00-04:00">
                 Published: Sat 22 March 2025
@@ -28,55 +161,13 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info --><h2 id="tech-things">Tech Things</h2>
+</footer><!-- /.post-info -->                            <h2 id="tech-things">Tech Things</h2>
 <h3 id="blog">Blog</h3>
 <p>So the good news is, the broken blog wasn't actually about pagination or anything complicated. It was literally just this:</p>
-<p>I have 2 computers I work on, my personal laptop and my desktop. I try to have everything synchronized between these two computers so I can work on whichever one is most handy at that point.</p>
-<p>I never actually propogated the fixes to the blog theme that I did on my desktop to my laptop, so when I added a blog post on my laptop it used an old version of the theme. So... oops!</p>
-<p>Thanks to my own old blog post I was able to fix it in a couple of minutes, so that's good.</p>
-<p>In case you were wondering why I have to have my blog theme consistent between two computers, it's because I'm being as low-tech as possible about this whole blog thing. I don't want to deal with Wordpress or complicated websites or reactive websites because the more I have that kind of nonsense, the more I have to worry about the security of my website. This website does not even have any log-in functionality or anything: it is literally a static webpage.</p>
-<p>The way it works is I am using a tool that I previously mentioned called <code>pelican</code>. I write pages in <code>.md</code>, and <code>pelican</code> uses either an installed theme or a symlinked theme (aka, local development theme) to build that website into static html pages. I then push these pages to a github repository that is set up to serve via github pages, and there's my blog.</p>
-<p>The issue is I'm working with a developmental version of a theme, because I'm one of those people that likes to constantly make little adjustments. So, <code>pelican</code> builds according to another directory on my same computer, which is something I have to manually keep synchronized.</p>
-<h3 id="keeping-things-in-sync">Keeping things in Sync</h3>
-<p>Before you ask: yes it's very annoying to keep these two computers synchronized, <em>especially</em> because In:</p>
-<ol>
-<li>
-<p>Hate forced cloud synchronization tools such as OneDrive because of their aggressive corporatization and how little ethics the companies providing them have (Hi, Google.)</p>
-</li>
-<li>
-<p>Am working using WSL, which appears to be separating more from the windows filesystem with every update. (It used to be that I could easily open a WSL directory in windows explorer, and I abused that to work on a GUI application in windows while working on the pythonic backend in WSL.) So, a lot of these tools probably wouldn't work anyways.</p>
-</li>
-</ol>
-<p>I could theoretically spin up my own file server, but this comes back to the same problem about my website. Shit like that is a pain in the ass to keep secure and I don't want to spin something up and accidentally end up hosting a viral or spyware hotbed.</p>
-<p>Perceptive readers might notice (became a math book author for a sec there) that I mentioned running GUI in windows but developing in WSL. Why? Because I really, really hate how Python is handled in windows. This may be my own lack of experience, but I think it is extremely easy to accidentally not use a virtual environment in windows, and the whole installation process itself is extremely terminal-unfriendly.</p>
-<p>Windows being windows, it's trying to force users to use the app version of Python, to the point that you have to manually set up aliases if you install Python normally to have the command line recognize it. I've done enough development in python that I want very particular control over the version of python I'm using and the packages I'm using, and everything about the Windows version seems to be trying to not let me do that.</p>
-<p>So, my approach is like this:</p>
-<ul>
-<li>I only install Python in WSL for as long as physically possible.</li>
-<li>I use the tool <code>uv</code> to manage Python projects, so whenever I develop in python I can point VSCode to the <code>venv</code> created by <code>uv</code>.</li>
-<li>If I absolutely <em>must</em> use Python in Windows, I am using a bare minimum installation. I install only the packages I absolutely need and install them globally. I am considering occasionally nuking the whole installation to make sure I don't build up a collection of packages I don't use anymore.</li>
-</ul>
-<h2 id="personal-things">Personal things</h2>
-<p>I went to locals yesterday. I was debating whether or not to, since the past week has been absolutely exhausting, but I figured that in the most catastrophic case, I may not be able to go that often if at all in the future because of FFXIV + moving for work.</p>
-<p>It was fun! I'm still a little burnt out on BlazBlue. I was speaking with a friend and her response to my statement that I'm considering a hiatus made me kind of realize that I'm... not being normal about this game.</p>
-<p>She asked what I meant, and I said "I'll only play at locals and if I'm asked to play."</p>
-<p>She basically responded, "So like everyone here?"</p>
-<p>On one hand, yeah. On the other hand, I feel kind of like as a new player... I kind of have to do more than that? If I don't, I'm just dead in the water and not fun to play against because I barely even know what my buttons do. Hell if I hadn't gone that crazy when I first started playing, I have no doubt that the new players that have been showing up recently would be kicking my ass. Fighting games are not my genre. I am very bad at them, and in order to make up for that I have to practice way more than other people.</p>
-<p>But I'll save most of that rambling for the BBCF section. The long and the short of it is, I'm definitely grinding this game like I'm trying to be competitive (because I am). And unfortunately, the way I'm wired, I think that's the only way I <em>can</em> play the game without feeling like I've given up on it.</p>
-<p>That actually reminds me of a really funny conversation with a player who's been coaching me, I'll refer to him as G. Some background, he's a long-time player, he plays Hakumen and Jin. I first ran into him in a random player match lobby, and I could tell right off the bat that he wasn't playing to beat me. He was playing specifically to punish my mistakes. </p>
-<p>I went, oh. Wait. This is actually really useful? I stopped trying to win too and instead started trying to do all the different kinds of approaches I could think of when I'd only been playing for 3 months and seeing how he would respond to them.</p>
-<p>This went on for a bit, eventually he locked in and kicked my ass and I went "waow that's cool". I sent him a steam friend request to say ggs and thanks for the games and I must've done something to impress him. He's been helping me out with advice, sparring, and vod reviews since. I'd name him but again, I'm trying to avoid using actual tags in these posts.</p>
-<p>Anyways. I was in a VC with him and another long-time blazblue player. He was giving his pep talk about grinding and slow progress and how I need to not rush myself, and the other guy pipes up, "What the fuck dude, what are you saying? If I heard this when I first started playing I would have quit!". He goes (this is me phrasing with how I would phrase it, of course): "Yeah, well, (they) want to be competitive, they're one of the crazy ones," to which I went "Yeah, that!"</p>
-<p>So... yeah. I'm approaching this game a little intensely but that's how I am, eh? I just really gotta actually listen to G and stop trying to rush it. I want to be able to "play with the big kids" but burning myself out isn't going to help. </p>
-<p>I've been trying to pick up other games or other characters to force myself to chill but every time I don't lock in Terumi I think about all the Terumi-specific feedback I got from Z and all the other feedback I got from G that requires good knowledge of the character I'm playing on to work on. And I can't really work on <em>any</em> of that feedback without being on Terumi, so I feel like I'm wasting time.</p>
-<p>I also suddenly got told to practice T.O.'ing, which again, socializing jumpscare when I was already at -3 social battery. At least I had help because I still don't know several faces. I also put in a formal request to get to T.O. primarily blazblue brackets at beach episode so I have an excuse to get to meet people, so I'm looking forward to that. (I also confirmed that I'll actually get to play, so that's also cool!)</p>
-<h2 id="other">Other</h2>
-<p>I have a few RTOI things I want to add here. Hopefully I'll remember to update this post later in the day.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+<p>I have 2 computers I work on, my personal laptop and my desktop. I try to have everything synchronized between these two computers so I can work …</p>
+                            <a class="readmore" href="/322.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/hi-again.html" rel="bookmark"
