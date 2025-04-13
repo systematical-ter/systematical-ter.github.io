@@ -4,42 +4,45 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>Eh</title>
+                        <title>Chuggin' along</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
-    <meta name="description" content="Not much to report today. The week of arthritis finally caught up to my mental so I have to write today off. I played some UNI2 challenge mode,..." />
+    <meta name="description" content="Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as..." />
         </head>
 
         <body id="index" class="home">
                 <header id="banner" class="body">
                         <h1><a href="/">Systematical's Ramblings</a></h1>
                         <nav><ul>
-                                                <li class="active"><a href="/category/blog.html">Blog</a></li>
-                                                <li><a href="/category/tech.html">Tech</a></li>
+                                                <li><a href="/category/blog.html">Blog</a></li>
+                                                <li class="active"><a href="/category/tech.html">Tech</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
   <section id="content" class="body">
     <article>
       <header>
         <h1 class="entry-title">
-          <a href="/eh.html" rel="bookmark"
-             title="Permalink to Eh">Eh</a></h1>
+          <a href="/chuggin-along.html" rel="bookmark"
+             title="Permalink to Chuggin' along">Chuggin' along</a></h1>
       </header>
 
       <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2025-03-14T00:00:00-04:00">
-                Published: Fri 14 March 2025
+        <abbr class="published" title="2025-04-11T00:00:00-04:00">
+                Published: Fri 11 April 2025
         </abbr>
 
                 <address class="vcard author">
                         By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
                 </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal.html">personal</a> </p>        
-</footer><!-- /.post-info -->        <p>Not much to report today. The week of arthritis finally caught up to my mental so I have to write today off.</p>
-<p>I played some UNI2 challenge mode, got up to Expert 17, I think? Looking forward to actually playing that game at some point. Gordeau's fun but I get the feeling I'm going to get hit in the mouth for depending on his C moves too much in neutral.</p>
-<p>I need to pick up a secondary on BBCF at some point; I feel bad showing up to chill streams or lobbies with Terumi and my nearly 4k games because I look like a tryhard spoiling the fun (even though my tryhard is still way below many people's casual play.) I did get a good 40 games in on Hazama today and I think I'm <em>starting</em> to properly understand him. Definitely not even close to being playable, but I've started being faster about my stance mix and started to actually move around with my chains. Need to remember that regular, non-stance pressure is a thing and to remember the post-launcher part of my combos.</p>
-<p>There'll probably be something more technical tomorrow. Brain no work good today.</p>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="/tag/replays.html">replays</a> </p>        
+</footer><!-- /.post-info -->        <p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
+<p>My python-focused development experience is causing some pretty intense miscommunications and... strange approaches from my end that's making this all way more complicated than it needs to be. I'm glad I'm learning that now and not later.</p>
+<p>I added functions that just read bytes but make sure that they're empty. I have a few regions that I'm assuming are just padding, but I'm putting them through these functions just to make sure, so if I ever get a file where that assumption doesn't hold I can tell immediately.</p>
+<p>I added a few more labels. I labelled <code>stage</code>, <code>music</code>, <code>palette</code>. There's 4 values (<code>Unknownx1c=10</code>,<code>Unknownx304=1</code>, <code>Unknownx308=6</code>, <code>Unknownx31c=1</code>) that always have the exact same value, so I added a test to make sure that holds. I might just add an exception to the <code>ReplayHeader</code> class instead so I can stop mis-using the test project. My guess is these have something to do with the game mode, since these were all player room matches set to ordinary matches (rather than like, practice room or free-for-all vs. match/spectate.)</p>
+<p>I also have been reading everything as <code>uint</code> and parsing it into an <code>int</code> in attributes, which might not be the right way to go about it. <code>Unknownx08</code> has to be a <code>uint</code> becaues it can reach values that turn negative as an <code>int</code>. I made a note of that and future me will deal with it, because I'm not using <code>Unknownx08</code> right now anyways.</p>
+<p>I'm going to update the <code>BBCFReplayConsole</code> project to have better verbs. My friend pointed out that I can just adjust the command line arguments to accept multiple files, and even combinations of files and folders. That'll make it easier to generate <code>.json</code> translations of various files. For now that's shoe-horned into the <code>BBCFReplayLib.Test</code> project, which isn't all that appropriate.</p>
+<p>... It's been two days and I forgot what else I was going to put here, so I'm just going to start a new post when I do. ADHD things, baybee!!!</p>
       </div><!-- /.entry-content -->
 
     </article>
