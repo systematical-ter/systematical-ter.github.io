@@ -16,9 +16,42 @@
                                                 <li><a href="/category/tech.html">Tech</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
-                <aside id="featured" class="body">
-                    <article>
-                        <h1 class="entry-title"><a href="/life-more-replay-nonsense.html">Life + More Replay Nonsense</a></h1>
+                <!-- first if -->
+                    <aside id="featured" class="body">
+                        <article>
+                            <h1 class="entry-title"><a href="/tough-goin.html">Tough Goin'</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-15T00:00:00-04:00">
+                Published: Tue 15 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>Short post to get a file started for today in case I think of something to post.</p>
+<p>Burned myself out on blazblue again, went really hard for two days and then started going down the mental void again and now I hate how I play and hate how I try but still suck hate that I just can't connect with most of the community for some reason and etc etc but that's enough of that. Just gonna try not to play for a few days and see if it goes away. Maybe do some video editing since I have some awesome matches I want to collect, but I'm worried that'll make me think too much about blazblue and not help.</p>
+<p><em>(Author's note: they did still end up playing Blazblue, because they are a pushover and if friends vaguely suggest that they want to play with them, they fold instantly. But they were still upset at themselves and played Jin instead of Terumi to try to keep it casual.)</em></p>
+<p>Two weeks left to have my thesis done and sent to my committee for review. God it's hard to write. Then I defend, and then it's just dotting is, crossing ts, and finishing up my work for the people funding this year of my phd.</p>
+<p>I'm doing poorly in ffxiv too. The rust is showing. I'm dying to mechanics I shouldn't be dying to and not being the cornerstone of the group I used to be. Expected, but I still feel bad.</p>
+<h2 id="content-creator-stuff">Content Creator Stuff</h2>
+<p>Figured might as well make a section. I put up VODs of my tournament runs, 6 and 4 views respectively. Not surprised, I should really stop putting them as unlisted but idk. I feel awkward putting games up with people's names on them without asking if that's OK first, but I get the feeling it's awkward to ask and I'm just being an outsider.</p>
+<p>Going to try and make an icon for my twitch channel + youtube at least. People keep being surprised when I tell them I've had a twitch channel since like, 2014. And have had affiliate since 2019. And right now even though I'm uploading stuff to youtube I think people still assume I don't do anything because I have the default icon. I'd just commission one or use a terumi sprite, but I feel like it's gotta be something I drew myself because it's supposed to be a representation of <em>me</em>, y'know? I have a sketch done, just gotta actually follow through on it.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/life-more-replay-nonsense.html" rel="bookmark"
+                                title="Permalink to Life + More Replay Nonsense">Life + More Replay Nonsense</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-04-02T00:00:00-04:00">
                 Published: Wed 02 April 2025
@@ -29,77 +62,15 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/tech.html">tech</a> <a href="/tag/personal.html">personal</a> </p>        
-</footer><!-- /.post-info --><p>This was supposed to be posted march 29th, but I kind of got distracted halfway through and never finished writing it, so I've merged today's post with the leftover of that post!</p>
+</footer><!-- /.post-info -->                            <p>This was supposed to be posted march 29th, but I kind of got distracted halfway through and never finished writing it, so I've merged today's post with the leftover of that post!</p>
 <h2 id="personal">Personal</h2>
 <p><strong><em>I GOT AN OFFER LETTER.</em></strong></p>
-<p>I haven't accepted yet for some small reasons I'm getting sorted out, but holy shit. This is actually happening. I still need to do salary negotiation (hopefully it's not too late for that -- fun fact, even what they offered me is more than 2x what I'm making now) and they're flying me out to visit before I have to decide, which is great.</p>
-<p>I'm taking a cursory look at apartments so that I can hopefully arrange visits while I'm there. Holy shit, I can't wait to have more than a single room to my name and maybe more than a single counter of space.</p>
-<h2 id="tech-things">Tech things</h2>
-<p>Had to look at the previous post to figure out where I left off.</p>
-<p>So as I previously mentioned, the improvement mod already has a lot of the binary file mapped out. There is one problem though: they skip the first 8 bytes of the file. For their intents and purposes, it's irrelevant.</p>
-<p>But, turns out the first 2 bytes are super important for both <code>replay.dat</code> and <code>replay_list.dat</code> files: they're checksums. I was struggling with that a bit, but had the feeling that this was, again, a solved problem since if they can decompress and substitute BBCF data files, they've gotta have figured out how to spoof checksums.</p>
-<p>Thankfully I stopped being a shy nerd and just went ahead and explained where I was stuck in the modding discord, and sure enough a prominent developer nearly immediately gave me a solution:</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">ushort</span><span class="w"> </span><span class="nf">CreateChecksum</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">uint</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="n">x0</span><span class="p">;</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">0</span><span class="n">x2</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="p">)((</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="m">0</span><span class="n">xFFFF</span><span class="p">;</span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;&gt;&gt;=</span><span class="w"> </span><span class="m">0</span><span class="n">x10</span><span class="p">;</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">ushort</span><span class="p">)</span><span class="o">~</span><span class="n">x</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>To use this function I just zero out the first two bytes and then it'll replace the first two bytes with the checksum. I really want to ask him how he figured this out, but I'll do it later because seems like he's dealing with some stuff right now.</p>
-<h3 id="to-do">To-do</h3>
-<p>I can now read in a <code>replay_list.dat</code> file and pull header information for all of the involved replays, but I need to write code to rewrite a particular header entry.</p>
-<p>I also need to write code that given a directory of replays, reads in the headers from all of those replays to pull out some info to show to the user (so they know what replays they're loading in) and prepare to substitute into the <code>replay_list.dat</code> file.</p>
-<p>I also need to write code that backs up the replays before copying in the old ones, and a button to revert changes. Same deal for backing up <code>replay_list.dat</code> before overwriting it, and reverting it.</p>
-<p>I also want to explore the headers in <code>replay_list.dat</code> a little bit more -- in particular, it has to have stage/music information in the header and I want to find where that data is stored. My plan to find the relevant bytes is really straightforward. Stupid, even.</p>
-<p>I'm going to twiddle bytes by adding +1 to each of the unknown padding bytes one-by-one and seeing which ones cause the stage/music to change. :^) Then I can try to figure out whether they're just integer IDs or some more complicated representation.</p>
-<p>Something important I gotta keep in mind is that if I want to do this exploration, I might want to strip out the file reading code into a library. That way I can actually write a console app that mucks around with the file info without having to make a UI or doing jank things in the UI app (on launch it makes change x to file y). This might be a good idea to do anyways because my friend suggested I make this program with WPF, not forms, if I want to make a really nice UI. (e.g. show character portraits, like in the replay theater.)</p>
-<p>Actually, my friend just pointed out that hex editors exist. So I might be able to just use one of those to manually toggle that information, though I might still want something to update the <code>replay_list.dat</code> file.</p>
-<h3 id="c">C</h3>
-<p>I'm so rusty with C#. It's been forever since I've had to code in it. Thankfully my friend is very patient and enjoys explaining things.</p>
-<p>Part of the funny bit of all of this is I'm terrible with vocabulary usage, so he keeps having to correct my use of words to make sure I describe things correctly. For example, he's made the following to stress the difference between an <code>Attribute</code> and a <code>Member</code>, and the difference between a <code>Property</code> and a <code>Field</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Declared as &quot;ExampleAttribute&quot; - is an attribute that can be attached to a class.</span>
-<span class="na">[Example]</span>
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Property; also a member of SomeClass</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Number</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_id</span><span class="p">;</span><span class="w"> </span><span class="c1">// Field; also a member of SomeClass</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_anotherNumber</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DoTheThing</span><span class="p">()</span><span class="w"> </span><span class="c1">// Method, also a member of Some Class</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>It's also been strange getting used to coding in a strongly-typed language again. For example, it's more appropriate to use the shortcut <code>var</code> rather than re-typing the type here:</p>
-<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MemoryStream</span><span class="p">(</span><span class="n">bytearray</span><span class="p">))</span><span class="w"> </span><span class="p">{...}</span>
-</code></pre></div>
-
-<p>In python you'd HAVE to declare the variable <code>ms</code> as a <code>MemoryStream</code>, as otherwise autocomplete and the limited type hinting would have no idea what it is.</p>
-<h2 id="other">Other</h2>
-<p>Lol I still haven't fixed my pagination. Oops.</p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+<p>I haven't accepted yet for some small reasons I'm getting sorted out …</p>
+                            <a class="readmore" href="/life-more-replay-nonsense.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/i-should-be-working-on-my-thesis.html" rel="bookmark"
@@ -124,6 +95,8 @@
                             <a class="readmore" href="/i-should-be-working-on-my-thesis.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/lotta-things-have-happened-tm.html" rel="bookmark"
@@ -141,10 +114,13 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/ffxiv.html">ffxiv</a> </p>        
-</footer><!-- /.post-info -->                            <p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
+</footer><!-- /.post-info -->                            <p><link href="/css/custom.css" rel="stylesheet"></link></p>
+<p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
                             <a class="readmore" href="/lotta-things-have-happened-tm.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/322.html" rel="bookmark"
@@ -169,6 +145,8 @@
                             <a class="readmore" href="/322.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/hi-again.html" rel="bookmark"
@@ -191,6 +169,8 @@
                             <a class="readmore" href="/hi-again.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/whoops.html" rel="bookmark"
@@ -214,6 +194,8 @@
                             <a class="readmore" href="/whoops.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/eh.html" rel="bookmark"
@@ -236,6 +218,8 @@
                             <a class="readmore" href="/eh.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/picture-day.html" rel="bookmark"
@@ -258,6 +242,8 @@
                             <a class="readmore" href="/picture-day.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/init-commit-i-mean-post.html" rel="bookmark"
@@ -280,10 +266,8 @@
                             <a class="readmore" href="/init-commit-i-mean-post.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
-                    </ol><!-- /#posts-list -->
-                    </section><!-- /#content -->
-                    </ol><!-- /#posts-list -->
-                    </section><!-- /#content -->
+                        </ol><!-- /#posts-list -->
+                        </section><!-- /#content -->
         
                 <div id="flavorimg" class="body">
                         <img src="/theme/imgs/counter_anim.png" 

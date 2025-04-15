@@ -4,8 +4,9 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>Systematical's Ramblings - replays</title>
+                        <title>Chuggin' along</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as..." />
         </head>
 
         <body id="index" class="home">
@@ -13,13 +14,18 @@
                         <h1><a href="/">Systematical's Ramblings</a></h1>
                         <nav><ul>
                                                 <li><a href="/category/blog.html">Blog</a></li>
-                                                <li><a href="/category/tech.html">Tech</a></li>
+                                                <li class="active"><a href="/category/tech.html">Tech</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
-                <!-- first if -->
-                    <aside id="featured" class="body">
-                        <article>
-                            <h1 class="entry-title"><a href="/chuggin-along.html">Chuggin' along</a></h1>
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/chuggin-along.html" rel="bookmark"
+             title="Permalink to Chuggin' along">Chuggin' along</a></h1>
+      </header>
+
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-04-11T00:00:00-04:00">
                 Published: Fri 11 April 2025
@@ -30,46 +36,17 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/replays.html">replays</a> </p>        
-</footer><!-- /.post-info --><p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
+</footer><!-- /.post-info -->        <p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
 <p>My python-focused development experience is causing some pretty intense miscommunications and... strange approaches from my end that's making this all way more complicated than it needs to be. I'm glad I'm learning that now and not later.</p>
 <p>I added functions that just read bytes but make sure that they're empty. I have a few regions that I'm assuming are just padding, but I'm putting them through these functions just to make sure, so if I ever get a file where that assumption doesn't hold I can tell immediately.</p>
 <p>I added a few more labels. I labelled <code>stage</code>, <code>music</code>, <code>palette</code>. There's 4 values (<code>Unknownx1c=10</code>,<code>Unknownx304=1</code>, <code>Unknownx308=6</code>, <code>Unknownx31c=1</code>) that always have the exact same value, so I added a test to make sure that holds. I might just add an exception to the <code>ReplayHeader</code> class instead so I can stop mis-using the test project. My guess is these have something to do with the game mode, since these were all player room matches set to ordinary matches (rather than like, practice room or free-for-all vs. match/spectate.)</p>
 <p>I also have been reading everything as <code>uint</code> and parsing it into an <code>int</code> in attributes, which might not be the right way to go about it. <code>Unknownx08</code> has to be a <code>uint</code> becaues it can reach values that turn negative as an <code>int</code>. I made a note of that and future me will deal with it, because I'm not using <code>Unknownx08</code> right now anyways.</p>
 <p>I'm going to update the <code>BBCFReplayConsole</code> project to have better verbs. My friend pointed out that I can just adjust the command line arguments to accept multiple files, and even combinations of files and folders. That'll make it easier to generate <code>.json</code> translations of various files. For now that's shoe-horned into the <code>BBCFReplayLib.Test</code> project, which isn't all that appropriate.</p>
-<p>... It's been two days and I forgot what else I was going to put here, so I'm just going to start a new post when I do. ADHD things, baybee!!!</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/more-about-replays.html" rel="bookmark"
-                                title="Permalink to More About Replays">More About Replays</a></h1>
-                        </header>
+<p>... It's been two days and I forgot what else I was going to put here, so I'm just going to start a new post when I do. ADHD things, baybee!!!</p>
+      </div><!-- /.entry-content -->
 
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-09T00:00:00-04:00">
-                Published: Wed 09 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/replays.html">replays</a> <a href="/tag/how-to.html">how-to</a> </p>        
-</footer><!-- /.post-info -->                            <p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
-<h1 id="replays">Replays</h1>
-<p>Making good progress on reading replay files …</p>
-                            <a class="readmore" href="/more-about-replays.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                        </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-        
+    </article>
+  </section>
                 <div id="flavorimg" class="body">
                         <img src="/theme/imgs/counter_anim.png" 
                                 title="I want to show off the cool gifs I make, OK?"/>

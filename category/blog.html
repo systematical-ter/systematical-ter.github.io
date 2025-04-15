@@ -17,9 +17,42 @@
                         </ul></nav>
                 </header><!-- /#banner -->
 
-                <aside id="featured" class="body">
-                    <article>
-                        <h1 class="entry-title"><a href="/thesisssssssssss.html">Thesisssssssssss</a></h1>
+                <!-- first if -->
+                    <aside id="featured" class="body">
+                        <article>
+                            <h1 class="entry-title"><a href="/tough-goin.html">Tough Goin'</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-15T00:00:00-04:00">
+                Published: Tue 15 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>Short post to get a file started for today in case I think of something to post.</p>
+<p>Burned myself out on blazblue again, went really hard for two days and then started going down the mental void again and now I hate how I play and hate how I try but still suck hate that I just can't connect with most of the community for some reason and etc etc but that's enough of that. Just gonna try not to play for a few days and see if it goes away. Maybe do some video editing since I have some awesome matches I want to collect, but I'm worried that'll make me think too much about blazblue and not help.</p>
+<p><em>(Author's note: they did still end up playing Blazblue, because they are a pushover and if friends vaguely suggest that they want to play with them, they fold instantly. But they were still upset at themselves and played Jin instead of Terumi to try to keep it casual.)</em></p>
+<p>Two weeks left to have my thesis done and sent to my committee for review. God it's hard to write. Then I defend, and then it's just dotting is, crossing ts, and finishing up my work for the people funding this year of my phd.</p>
+<p>I'm doing poorly in ffxiv too. The rust is showing. I'm dying to mechanics I shouldn't be dying to and not being the cornerstone of the group I used to be. Expected, but I still feel bad.</p>
+<h2 id="content-creator-stuff">Content Creator Stuff</h2>
+<p>Figured might as well make a section. I put up VODs of my tournament runs, 6 and 4 views respectively. Not surprised, I should really stop putting them as unlisted but idk. I feel awkward putting games up with people's names on them without asking if that's OK first, but I get the feeling it's awkward to ask and I'm just being an outsider.</p>
+<p>Going to try and make an icon for my twitch channel + youtube at least. People keep being surprised when I tell them I've had a twitch channel since like, 2014. And have had affiliate since 2019. And right now even though I'm uploading stuff to youtube I think people still assume I don't do anything because I have the default icon. I'd just commission one or use a terumi sprite, but I feel like it's gotta be something I drew myself because it's supposed to be a representation of <em>me</em>, y'know? I have a sketch done, just gotta actually follow through on it.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/thesisssssssssss.html" rel="bookmark"
+                                title="Permalink to Thesisssssssssss">Thesisssssssssss</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-04-04T00:00:00-04:00">
                 Published: Fri 04 April 2025
@@ -30,66 +63,14 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info --><p>Once again, I should be working on my thesis, so I'm dumping thoughts here so they stop taking up VRAM.</p>
+</footer><!-- /.post-info -->                            <p>Once again, I should be working on my thesis, so I'm dumping thoughts here so they stop taking up VRAM.</p>
 <h2 id="tech-things">Tech things</h2>
-<p>Making good progress on trying to figure out the structure of <code>replay</code> files. I bit the bullet and downloaded Ghidra, which is extremely overkill but I'm enjoying it. It lets me define types to chunk the memory into, which is mostly <code>uint</code> for these files with a few <code>ulonglong</code>s. It also automatically finds two-byte unicode, which is great (though I did have to adjust it in a few places to fix offsets because it didn't automatically include the trailing <code>00</code>.) It also lets me add various types of comments!</p>
-<p>Here's some information I've already found in <code>replay</code> files that looks promising:</p>
-<div class="highlight"><pre><span></span><code>        **************************************************************
-        <span class="k">*</span> Round start information?                                   *
-        **************************************************************
-        00000480 92 79 f3 03     uint       66288018
-        00000484 66 dc cc 90     uint       2429344870
-        00000488 d9 11 00 00     uint       4569
-        0000048c 01 00 00 00     uint       1
-        00000490 01 00 00 00     uint       1
-        00000494 00 00 00 00     uint       0
-        00000498 01 00 00 00     uint       1
-        0000049c 00 00 00 00     uint       0
-        000004a0 a0 86 01 00     uint       100000
-                             burst meter?
-        000004a4 a0 86 01 00     uint       100000
-                             burst meter p2?
-</code></pre></div>
-
-<p>I want to test if <code>x480</code> and <code>x484</code> could be a <code>ulonglong</code> instead of a <code>uint</code>. My hunch is it's some form of checksum or timestamp or other index so that the game knows where to skip to when you tell it to skip to next round.</p>
-<p>I think I've also found the stage and music information. I'll need to change these values to test, but it seems logical:</p>
-<div class="highlight"><pre><span></span><code>        00000398 02 00 00 00     uint       2
-                             # of rounds to win
-        0000039c 63 00 00 00     uint       99
-                             seconds per round
-        000003a0 0f 00 00 00     uint       15
-                             unknown - stage or music?
-        000003a4 20 00 00 00     uint       32
-                             unknown - stage or music?
-        000003a8 04 64 00 00     uint       25604       repeated in 00000414
-        000003ac 00 00 00 00     uint       0
-        000003b0 19 00 00 00     uint       25
-                             ?
-        000003b4 00 00 00 00     uint       0
-        000003b8 01 00 00 00     uint       1           repeated in 00000424
-        000003bc 05 00 00 00     uint       5
-</code></pre></div>
-
-<p>There's one more interesting value I need to find which is how long the players allowed the stage intro and character intro to play out before skipping. I'm sure that's stored somewhere because that skip delay is consistent with the real match. I'd guess that's the values at <code>x480</code> and <code>x484</code>, since players can also choose to skip the per-round win animation, but that doesn't quite work out because there's only one animation to skip there but two animations to skip at match start. My guess is it's some <code>ulonglong</code> representing <code>ms</code> after which to skip. (maybe that much isn't necessary and <code>x488</code> suffices?)</p>
-<p>I'll need to compare between known replays to check. Have one where we don't skip, one where we instantly skip, and one where we skip a little bit in. Keep everything else consistent (players, characters, stages, etc. if possible). This'll be a nice thing to know so maybe I can programmatically update replays to skip intros so I don't have to worry about editing them out in post. Or add them back for cinematic purposes.</p>
-<p>There's a few more values I bet I can find in replays I need to sus out. Interestingly, it doesn't seem like icons are saved in replays, so I don't have to worry about those. No player card information is saved at all, in fact, other than username and rank. (Will need to be able to translate between named ranks and whatever number they use to represent it.)</p>
-<p>What's mildly annoying about all of this is despite how powerful Ghidra is, it seems like there still isn't really a way to copy "annotations" from one file to another. The closest I can do is define structs, put those structs into a project archive, and re-use them in another file. I think that's what I'm going to do -- just build up more and more complex structs that end up containing the overall structure of the file. For example, I made a struct that encompasses the entirety of the date representation, including the unix epoch representation, the numeric representation, and the string representation.</p>
-<p>I'm running into a small bit of an issue over player names. I can't use the same player struct for the recording player metadata, because that makes everything off by two bytes. I'm not sure what that's about. Maybe I need to make my player strings include two more <code>00 00</code>s just to keep things consistent.</p>
-<p>I'd put an example of these structs here, but I've already closed it for the day and I think my brain will fold in on itself if I try to re-align it to that work again.</p>
-<h3 id="software-design">Software Design</h3>
-<p>More I work on this the more I agree with my friend's opinion of making a library and then making a separate UI. I probably want to make a library for actually munging the <code>replay</code> and <code>replay_list</code> files, because now I have two UIs I want to make.</p>
-<ol>
-<li>The user friendly <code>replay_list</code> repair and <code>replay.dat</code> replacement UI</li>
-<li>A tool I can use to edit replays by hand while testing what values mean what.</li>
-</ol>
-<h3 id="additional-thought">Additional thought</h3>
-<p>It seems like the memory representation of a replay may be identical to the way it's written in a binary file, if the offsets in the improvement mod's headers are anything to go by. Instead of modifying the files, maybe I just download cheatengine and fuck with the values in game? Alternatively, I edit a file and load it using IM to see what changes so I don't have to worry about keeping <code>replay_list</code> or checksums in check while testing.</p>
-<p>I'm a little worried about using cheatengine just because it's such a red flag and I'm very bad about making sure applications aren't running before doing other things. Even my friend got instabanned from Warframe because he accidentally opened it while trying to open Word, although he managed to get his account unbanned by explaining that it was an accident.</p>                    </article>
-                </aside><!-- /#featured -->
-                    <section id="content" class="body">
-                        <h1>Other articles</h1>
-                        <hr />
-                        <ol id="posts-list" class="hfeed">
+<p>Making good progress on trying to figure out the structure of <code>replay</code> files. I bit the bullet and downloaded Ghidra, which is extremely overkill but I'm enjoying it …</p>
+                            <a class="readmore" href="/thesisssssssssss.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/life-more-replay-nonsense.html" rel="bookmark"
@@ -114,6 +95,8 @@
                             <a class="readmore" href="/life-more-replay-nonsense.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/i-should-be-working-on-my-thesis.html" rel="bookmark"
@@ -138,6 +121,8 @@
                             <a class="readmore" href="/i-should-be-working-on-my-thesis.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/lotta-things-have-happened-tm.html" rel="bookmark"
@@ -155,10 +140,13 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/ffxiv.html">ffxiv</a> </p>        
-</footer><!-- /.post-info -->                            <p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
+</footer><!-- /.post-info -->                            <p><link href="/css/custom.css" rel="stylesheet"></link></p>
+<p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
                             <a class="readmore" href="/lotta-things-have-happened-tm.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/322.html" rel="bookmark"
@@ -183,6 +171,8 @@
                             <a class="readmore" href="/322.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/hi-again.html" rel="bookmark"
@@ -205,6 +195,8 @@
                             <a class="readmore" href="/hi-again.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/whoops.html" rel="bookmark"
@@ -228,6 +220,8 @@
                             <a class="readmore" href="/whoops.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/eh.html" rel="bookmark"
@@ -250,6 +244,8 @@
                             <a class="readmore" href="/eh.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
+                <!-- first if -->
+                <!-- else loop -->
                     <li><article class="hentry">
                         <header>
                             <h1><a href="/picture-day.html" rel="bookmark"
@@ -272,45 +268,13 @@
                             <a class="readmore" href="/picture-day.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/the-rambles-continue.html" rel="bookmark"
-                                title="Permalink to The Rambles Continue">The Rambles Continue</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-12T00:00:00-04:00">
-                Published: Wed 12 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal-rambling-tech-rtoi.html">personal rambling tech rtoi</a> </p>        
-</footer><!-- /.post-info -->                            <p>Arthritis is still at a 4/10 today. Maybe even creeping back up to a 6/10 the more I sit with it. I'm hoping it doesn't affect my TMN run too badly. Even though I'm not much better yet, it's really amusing to look back at things I've done …</p>
-                            <a class="readmore" href="/the-rambles-continue.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                    </ol><!-- /#posts-list -->
-  <nav>
-    <ul>
-      <li>Page 1 / 2</li>
-        <li><a href="/category/blog2.html">&rang;</a></li>
-        <li><a href="/category/blog2.html">&Rang;</a></li>
-    </ul>
+                        </ol><!-- /#posts-list -->
+  <nav align="center">
+      &nbsp;Page 1 / 2&nbsp;
+        <a href="/category/blog2.html">&rang;</a>
+        <a href="/category/blog2.html">&Rang;</a>
   </nav>
-                    </section><!-- /#content -->
-                    </ol><!-- /#posts-list -->
-  <nav>
-    <ul>
-      <li>Page 1 / 2</li>
-        <li><a href="/category/blog2.html">&rang;</a></li>
-        <li><a href="/category/blog2.html">&Rang;</a></li>
-    </ul>
-  </nav>
-                    </section><!-- /#content -->
+                        </section><!-- /#content -->
         
 
                 <div id="flavorimg" class="body">

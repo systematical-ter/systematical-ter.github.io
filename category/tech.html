@@ -17,9 +17,41 @@
                         </ul></nav>
                 </header><!-- /#banner -->
 
-                <aside id="featured" class="body">
-                    <article>
-                        <h1 class="entry-title"><a href="/more-about-replays.html">More About Replays</a></h1>
+                <!-- first if -->
+                    <aside id="featured" class="body">
+                        <article>
+                            <h1 class="entry-title"><a href="/chuggin-along.html">Chuggin' along</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-11T00:00:00-04:00">
+                Published: Fri 11 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="/tag/replays.html">replays</a> </p>        
+</footer><!-- /.post-info --><p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
+<p>My python-focused development experience is causing some pretty intense miscommunications and... strange approaches from my end that's making this all way more complicated than it needs to be. I'm glad I'm learning that now and not later.</p>
+<p>I added functions that just read bytes but make sure that they're empty. I have a few regions that I'm assuming are just padding, but I'm putting them through these functions just to make sure, so if I ever get a file where that assumption doesn't hold I can tell immediately.</p>
+<p>I added a few more labels. I labelled <code>stage</code>, <code>music</code>, <code>palette</code>. There's 4 values (<code>Unknownx1c=10</code>,<code>Unknownx304=1</code>, <code>Unknownx308=6</code>, <code>Unknownx31c=1</code>) that always have the exact same value, so I added a test to make sure that holds. I might just add an exception to the <code>ReplayHeader</code> class instead so I can stop mis-using the test project. My guess is these have something to do with the game mode, since these were all player room matches set to ordinary matches (rather than like, practice room or free-for-all vs. match/spectate.)</p>
+<p>I also have been reading everything as <code>uint</code> and parsing it into an <code>int</code> in attributes, which might not be the right way to go about it. <code>Unknownx08</code> has to be a <code>uint</code> becaues it can reach values that turn negative as an <code>int</code>. I made a note of that and future me will deal with it, because I'm not using <code>Unknownx08</code> right now anyways.</p>
+<p>I'm going to update the <code>BBCFReplayConsole</code> project to have better verbs. My friend pointed out that I can just adjust the command line arguments to accept multiple files, and even combinations of files and folders. That'll make it easier to generate <code>.json</code> translations of various files. For now that's shoe-horned into the <code>BBCFReplayLib.Test</code> project, which isn't all that appropriate.</p>
+<p>... It's been two days and I forgot what else I was going to put here, so I'm just going to start a new post when I do. ADHD things, baybee!!!</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/more-about-replays.html" rel="bookmark"
+                                title="Permalink to More About Replays">More About Replays</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-04-09T00:00:00-04:00">
                 Published: Wed 09 April 2025
@@ -30,135 +62,14 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/replays.html">replays</a> <a href="/tag/how-to.html">how-to</a> </p>        
-</footer><!-- /.post-info --><p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
+</footer><!-- /.post-info -->                            <p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
 <h1 id="replays">Replays</h1>
-<p>Making good progress on reading replay files. I've made <code>Property</code> representations of a lot of <code>Field</code>s, so now they're properly exported when the replay is serialized. Here's an example of a serialized replay, <em>so far</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;IsValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Date1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-04-08T18:37:19&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Date2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-04-08T18:37:19&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;P1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TheZanderBug&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;SteamID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;P2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Systemagical&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;SteamID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;Recorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Systemagical&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;SteamID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;P1CharID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;P2CharID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Unknownx304&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Unknownx308&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;P1Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;P2Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;Unknownx31c&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;RoundsToWin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;SecondsPerRound&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;StageOrMusic1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;StageOrMusic2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;P1Info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Unknown1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25604</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;CharacterID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Unknown2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Unknown3&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;P2Info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Unknown1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25604</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;CharacterID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Unknown2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Unknown3&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>(If you find this because I put your full IGN: ... Hi Zander!)</p>
-<p>I'm still trying to figure out what some of these unknowns are. My running theory is that <code>Unknown3</code> under <code>P1Info</code>/<code>P2Info</code> is the palette choice (0-indexed), which checks out because I'm using Palette 6 in this replay and Zander was, in fact, using Palette 17. I'm not sure what unknown 1/2 are. Levels are definitely -1 off what they are in game (so again, 0 indexed.)</p>
-<p>The good news is, it looks like I have free reign to actually modify some of these values straight in the file without having to update the checksum or the replay list. (My guess is, only the header is validated, but I won't make any concrete statements yet.) I've been able to confirm that <code>Unknown3</code> is palette, and <code>Unknown2</code> is <em>weird</em>. Changing it from <code>0</code> to <code>1</code> causes the entire match to go differently -- it seems like it causes P1's inputs to start <em>before</em> the round starts. Meanwhile, changing P2's from <code>1</code> to <code>0</code> had no difference on the start of the match. My guess is it has something to do with when inputs start processing, or something along those lines...?</p>
-<p>Changing <code>Unknown1</code> from <code>25604</code> to <code>25600</code> doesn't seem to have changed anything in the early match either. (I chose <code>25600</code> because I saw it in another replay somewhere.)</p>
-<p>I haven't serialized it yet, but I've also found round-start information that looks kind of like below:</p>
-<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">/* Example data block: (3th int on is consistent between replays 6,7,11 for the first round.)</span>
-<span class="cm">         *</span>
-<span class="cm">         * 00000480 92  79  f3  03    uint       66288018</span>
-<span class="cm">         * 00000484 66  dc  cc  90    uint       2429344870</span>
-<span class="cm">         * 00000488 d9  11  00  00    uint       4569</span>
-<span class="cm">         * 0000048c 01  00  00  00    uint       1</span>
-<span class="cm">         * 00000490 01  00  00  00    uint       1 # p1 has burst</span>
-<span class="cm">         * 00000494 00  00  00  00    uint       0</span>
-<span class="cm">         * 00000498 01  00  00  00    uint       1 # p2 has burst</span>
-<span class="cm">         * 0000049c 00  00  00  00    uint       0</span>
-<span class="cm">         * 000004a0 a0  86  01  00    uint       100000</span>
-<span class="cm">         *                      burst meter?</span>
-<span class="cm">         * 000004a4 a0  86  01  00    uint       100000</span>
-<span class="cm">         *                      burst meter p2?</span>
-<span class="cm">         */</span>
-</code></pre></div>
-
-<p>While mucking about with the binary, I found that the 2nd <code>uint</code> represents the intro animation (despite the fact this is only shown in the first round.) Replacing it causes a different intro animation to play, which has a different length of time before the players can act, which causes inputs to desynchronize. (In my example case, the intro animation was longer, and therefore a bunch of inputs got ingored.) The third number appears to be related to which inputs to process, though it doesn't seem like it's just the offset to start reading from. (Otherwise, replacing the 2nd round's value with the 1st round's should cause it to replay the first round, but that's not the case.)</p>
-<p>It seems like intro/outro skipping is based off of user inputs, so that's... frustrating. I'll need to look into how to dummy those inputs cleanly if I want to add the ability to add skips to a replay.</p>
-<p>It also looks like my initial assumption that the replay list is only loaded on game start is true, which is rough. Either I'll need to figure out how to force the game to reload the replay list, or figure out how to modify the values in memory, .. or just make some UI that users reference instead of the in game replay list. I don't like any of these three options, but we'll see what happens. The third is probably the most straightforward since it doesn't require any injection or anything. Or I can just make users restart the game. (shrug emoji)</p>
-<h1 id="how-to-command-line-arguments-in-c">How-To: Command Line Arguments in C</h1>
-<p>Again, I'm not used to coding in C# so I'm having to re-learn a lot of things that were "easy" for me to do in python. An example is actually writing a CLI. For example, in my Replay code, I have a CLI that currently has two major modes of use:</p>
-<ol>
-<li>Translate into JSON so I can see what differences are between different replays.</li>
-<li>Modify a replay file with some adjustment.</li>
-</ol>
-<p>Part 2 might need a UI, but for now I'm going to hard-code it. Eventually I'll make some complex opts where you can define what values to change, but for now I am going to <em>hard hard code it</em> where every time you run it it does a specific adjustment to a specific part of the replay.</p>
-<p>First off, I learned that the different "actions" a CLI can do are called "verbs", which was way more accurate than I expected.</p>
-<p>Second off, I was provided this example syntax on how to do it:</p>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GlobalOptions</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="na">[Option(&#39;v&#39;, &quot;verbose&quot;, Default = false, HelpText = &quot;Output should be more verbose&quot;)]</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Verbose</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="na">[Verb(&quot;json&quot;)]</span>
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">JsonOptions</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GlobalOptions</span>
-<span class="p">{</span>
-<span class="p">}</span>
-
-<span class="na">[Verb(&quot;edit&quot;)]</span>
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">EditOptions</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GlobalOptions</span>
-<span class="p">{</span>
-<span class="p">}</span>
-
-<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Allow the console to handle ANSI escape sequences.</span>
-<span class="w">    </span><span class="n">VirtualTerminal</span><span class="p">.</span><span class="n">EnableAnsi</span><span class="p">();</span>
-
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">exitCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Parser</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">ParseArguments</span><span class="o">&lt;</span><span class="n">EditOptions</span><span class="p">,</span><span class="w"> </span><span class="n">JsonOptions</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">MapResult</span><span class="p">(</span>
-<span class="w">            </span><span class="p">(</span><span class="n">EditOptions</span><span class="w"> </span><span class="n">opts</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">RunEdit</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span>
-<span class="w">            </span><span class="p">(</span><span class="n">JsonOptions</span><span class="w"> </span><span class="n">opts</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">RunJson</span><span class="p">(</span><span class="n">opts</span><span class="p">),</span>
-<span class="w">            </span><span class="n">HandleErrors</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">exitCode</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">RunEdit</span><span class="p">(</span><span class="n">EditOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">RunJson</span><span class="p">(</span><span class="n">JsonOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">HandleErrors</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="n">errors</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p>Don't mind the <code>EnableAnsi</code> bit. I'll need to figure if I actually want to use that right now, because it seems to add a tiny bit of complexity. So this is neat.</p>
-<p>This is where I admit that I made this blog post entirely just because I couldn't remember how to do this, and realized it was getting progressively more difficult to find this to reference it the more I talked with my friend about my project. So... here it is. I'm going back to actually implementing this now.</p>                    </article>
-                </aside><!-- /#featured -->
+<p>Making good progress on reading replay files …</p>
+                            <a class="readmore" href="/more-about-replays.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                        </ol><!-- /#posts-list -->
+                        </section><!-- /#content -->
         
 
                 <div id="flavorimg" class="body">
