@@ -19,7 +19,74 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/chuggin-along.html">Chuggin' along</a></h1>
+                            <h1 class="entry-title"><a href="/random-things.html">Random things</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-04-16T00:00:00-04:00">
+                Published: Wed 16 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info --><p>(Yeah I'm making a new short silly post to get the emo one off the front page. What about it?)</p>
+<h2 id="blog">blog</h2>
+<p>Oh I forgot to mention earlier:</p>
+<p>I fixed pagination on my blog so that's good. The posts in hidden section still shows up on pages that aren't the first page, but that should be an easy enough fix. Basically, for some reason the <code>index.html</code> source included two pagination starters, so literally all I had to do was delete one of them. I also changed the pagination template itself so look a little nicer -- I changed it from being a vertical <code>&lt;ul&gt;</code> object with entries for first, prev, cur, next, and last to cramming all five of those things into a single row. I think it looks nice.</p>
+<p>I do also need to still see if it's paginating at the right <em>count</em> of posts, but I haven't bothered counting the posts.</p>
+<p>I also just thought of a cute little idea to do: Right now it's a little awkward when I push a new Blog post and a new Tech post because they end up fighting for the front page and people can easily miss one because they only expect one update a day. Maybe I can adjust my theme to show the most recent of both posts? Perhaps a little side menu that floats along the left of the main post body that lets you select which one to view. I made a quick <code>draw.io</code> example below:</p>
+<p><span class="center-span">
+<img alt="A post from this blog. A small sub-menu floats to the left of the post, with the entry &quot;Blog&quot; highlighted. Below it is the entry &quot;Tech&quot;. Both entries have an 'updated on' date." src="/imgs/blogconcept_sectionselector.png">
+<em>Having it float would be a pain in the ass, and I'll have to get very comfortable with css, but it could be neat.</em>
+</span></p>
+<h2 id="ffxiv">ffxiv</h2>
+<p>I'm doing better in FFXIV again. I think I've just been sleep deprived and now that I'm catching back up a little bit the mechanics are settling in my head a hell of a lot easier. I'm finding a lot of little mechanic concept shortcuts I should have found earlier that make it a lot less difficult to think about.</p>
+<h2 id="bbcf">bbcf</h2>
+<p>Only a small comment, otherwise I'd make it a new post as usual. My playstyle <em>really</em> suits playing Jin and I don't know how to feel about that. Looking back at some of my games, sure I'm making the usual mistakes I do on Terumi, but they work out a lot better because of Jin's kit -- and in fact, sometimes are <em>really good</em> strategies for Jin. So I don't know how I feel about that. I'm definitely going to keep Jin as a sub-character, but if a single person tells me that my Jin is better than my Terumi I'm actually going to walk into the ocean to never be seen again. I'll find all the tea we threw into the harbor forever ago.</p>
+<p>Have this silly little meme I made after I did a <code>2a -&gt; 2a -&gt; 66 -&gt; 312C</code> and it caught someone trying to jump out of my jab pressure. I literally made it at 12:40 am.</p>
+<p><span class="center-span">
+<img alt="A sign that reads &quot;This is a jump-free zone&quot;. A smaller sign next to it says, &quot;Enforced by Rehhyou&quot;." src="/imgs/jumpfreezone.png"></br>
+<em>No idea what I was thinking but it looked cool as fuck when I did it, so I'll take it.</em>
+</span></p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/tough-goin.html" rel="bookmark"
+                                title="Permalink to Tough Goin'">Tough Goin'</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-04-15T00:00:00-04:00">
+                Published: Tue 15 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info -->                            <p>Short post to get a file started for today in case I think of something to post.</p>
+<p>Burned myself out on blazblue again, went really hard for two days and then started going down the mental void again and now I hate how I play and hate how I try …</p>
+                            <a class="readmore" href="/tough-goin.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/chuggin-along.html" rel="bookmark"
+                                title="Permalink to Chuggin' along">Chuggin' along</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-04-11T00:00:00-04:00">
                 Published: Fri 11 April 2025
@@ -30,18 +97,11 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/replays.html">replays</a> </p>        
-</footer><!-- /.post-info --><p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
-<p>My python-focused development experience is causing some pretty intense miscommunications and... strange approaches from my end that's making this all way more complicated than it needs to be. I'm glad I'm learning that now and not later.</p>
-<p>I added functions that just read bytes but make sure that they're empty. I have a few regions that I'm assuming are just padding, but I'm putting them through these functions just to make sure, so if I ever get a file where that assumption doesn't hold I can tell immediately.</p>
-<p>I added a few more labels. I labelled <code>stage</code>, <code>music</code>, <code>palette</code>. There's 4 values (<code>Unknownx1c=10</code>,<code>Unknownx304=1</code>, <code>Unknownx308=6</code>, <code>Unknownx31c=1</code>) that always have the exact same value, so I added a test to make sure that holds. I might just add an exception to the <code>ReplayHeader</code> class instead so I can stop mis-using the test project. My guess is these have something to do with the game mode, since these were all player room matches set to ordinary matches (rather than like, practice room or free-for-all vs. match/spectate.)</p>
-<p>I also have been reading everything as <code>uint</code> and parsing it into an <code>int</code> in attributes, which might not be the right way to go about it. <code>Unknownx08</code> has to be a <code>uint</code> becaues it can reach values that turn negative as an <code>int</code>. I made a note of that and future me will deal with it, because I'm not using <code>Unknownx08</code> right now anyways.</p>
-<p>I'm going to update the <code>BBCFReplayConsole</code> project to have better verbs. My friend pointed out that I can just adjust the command line arguments to accept multiple files, and even combinations of files and folders. That'll make it easier to generate <code>.json</code> translations of various files. For now that's shoe-horned into the <code>BBCFReplayLib.Test</code> project, which isn't all that appropriate.</p>
-<p>... It's been two days and I forgot what else I was going to put here, so I'm just going to start a new post when I do. ADHD things, baybee!!!</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
+<p>My python-focused development experience is causing …</p>
+                            <a class="readmore" href="/chuggin-along.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                 <!-- first if -->
                 <!-- else loop -->
                     <li><article class="hentry">
@@ -166,56 +226,6 @@
 </footer><!-- /.post-info -->                            <p><link href="/css/custom.css" rel="stylesheet"></link></p>
 <p>So... A lot has happened in the past few days. I won't necessarily talk about all of it here, first off because my family has the superstition that talking about things before they happen is very bad luck, and second off because I still kind of want to keep BBCF …</p>
                             <a class="readmore" href="/lotta-things-have-happened-tm.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/322.html" rel="bookmark"
-                                title="Permalink to 3/22">3/22</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-22T00:00:00-04:00">
-                Published: Sat 22 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info -->                            <h2 id="tech-things">Tech Things</h2>
-<h3 id="blog">Blog</h3>
-<p>So the good news is, the broken blog wasn't actually about pagination or anything complicated. It was literally just this:</p>
-<p>I have 2 computers I work on, my personal laptop and my desktop. I try to have everything synchronized between these two computers so I can work …</p>
-                            <a class="readmore" href="/322.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/hi-again.html" rel="bookmark"
-                                title="Permalink to Hi again">Hi again</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-21T00:00:00-04:00">
-                Published: Fri 21 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> </p>        
-</footer><!-- /.post-info -->                            <p>Oh hi there. It's been a bit, eh? Like 5 days or so.</p>
-<p>It's been a hell of a couple of days. I finally have a little bit of time to breathe, so I finally have the emotional state to write a blog post without being unnecessarily emo/rude/something …</p>
-                            <a class="readmore" href="/hi-again.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                         </ol><!-- /#posts-list -->
