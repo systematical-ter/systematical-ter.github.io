@@ -19,7 +19,65 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/oh-hai.html">Oh hai</a></h1>
+                            <h1 class="entry-title"><a href="/update.html">Update</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-06-21T00:00:00-04:00">
+                Published: Sat 21 June 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+        
+</footer><!-- /.post-info --><p>Tried to write this before, failed, deleted it. Take 2.</p>
+<h2 id="life-updates">Life Updates</h2>
+<p>Uh, life stuff happened. I defended my thesis! It went really well. The committee interrogation portion was easy and a lot of people tell me I did the presentation really well. I spent a couple of weeks dying because I got a <em>ton</em> of feedback on my thesis itself and I ended up having to re-write 30% of it, but now I've submitted all my edits for a final version and ordered some hard copies for myself, my mom, and my advisor. Can't make any changes now even if I wanted to (which I do). It came to a grand total of 90 pages.</p>
+<p>I will be flying twice in the next 3 weeks, so that's... fun. A lot of work to do, a lot of travelling to do, and it will be "?" levels of fun.</p>
+<h2 id="side-projects">Side Projects</h2>
+<p>I do some TO'ing now. The process for check-ins was irritating me because it involved exporting an excel spreadsheet from start.gg, and I don't have excel. So I then have to upload the excel spreadsheet to google drive and open it with google sheets, just to copy and paste one column into another google sheet.</p>
+<p>Turns out that start.gg does have an API, and the API is pretty in-depth but uses some odd third party API library or something called GraphQL.</p>
+<p>The workflow is as follows:</p>
+<ol>
+<li>have an auth token.</li>
+<li>get the "slug" of the tournament + event you want to pull attendees from. (e.g. <code>tournament/boston-blue-beat-online-weeklies-2025-5-19-to-5/event/5-19-bbcf-pc-bbb-online-2025-weekly</code>)</li>
+<li>get the eventID from the slug</li>
+<li>get the attendee information from the eventID</li>
+</ol>
+<p>There's a little more complexity about it I'll get into on a Tech post. But for now I have a functional script that can make a <code>.csv</code> (just a name per line) of every attendee for a given event that I can just copy and paste into google sheets. Makes the entire process approximately 75% less annoying for me.</p>
+<p>I have a few goals to work on:</p>
+<ul>
+<li>make a UI. (not again!)</li>
+<li>make it properly use GraphQL so I can populate objects rather than brute forcing through the response JSON</li>
+<li>make it possible to choose what attributes to print out, thanks to the above point</li>
+<li>make it easier to get a tournament slug; maybe make it so you paste the tournament name and then the event name and then it fills out the rest, or you provide the entire page URL it and gets the slug from that.</li>
+</ul>
+<p>Point 3 exists because people like to set their discord names different from their start.gg names, but because the tournament I'm TO'ing for requires you to have a discord account connection, start.gg has their discord usernames. I can make the script so it also shows the player's discord name so I know what to ping when they're not checking in.</p>
+<p>I could theoretically go farther and make this a whole discord bot, but then this'll be like, the 3rd bot I know of to do this same thing, and if it was actually good then it would have been more widely adopted by now.</p>
+<h2 id="blazblue">Blazblue</h2>
+<p>Minor blazblue update. Both Haz and Teru are improving. I've received a lot of compliments on my movement recently ("what was that run under super jump air grab reacharound?" was one of my favourites) so I guess my goal to focus on schoovement has really paid off.</p>
+<p>I was feeling nice on Haz but y'all know that graph of knowledge vs. skill and how they'll meet, but then knowledge will spike above skill? Yeah I had that moment and now I'm trying not to be mad at how I handle myself on Haz again. Just gotta watch more of other Hazama's gameplay and try imitating it in practice mode for a bit.</p>
+<p>Teru is weird because I feel like I get the core bits, I'm just not being nearly creative enough. I think I know small places to improve, I'm just not sure if they're worth focusing on or if I need to find bigger fish to fry. This is where I'd ping G for games and feedback, but I won't be able to actually play for at least another week because of travel. I might have like, 5 days where I'll be at my good computer and able to play.</p>
+<p>I need to ping F for a mentoring session again but I don't think I'll have time to commit to another session until after my second trip. I may ping during those 5 days I mentioned just to see if the stars align, but otherwise I'm aiming for after that second trip.</p>
+<h2 id="terumi-chibi">Terumi Chibi</h2>
+<p>Oh I completely forgot about this! I'll need to update this post because I'm running out of time today, but I finally got tired of lamenting that there were no HQ pictures of the Terumi chibis from the blazblue radio show, so I threw 8 hours to the wind and drew over some screenshots to make HQ versions. There's 4 poses and I think 11 expressions, and I've uploaded them to Google drive so people can use them if they want:</p>
+<p><a href="https://drive.google.com/file/d/1u1hf_J8mtnE25Nw_nsFG8yMFnsLHLNNu/view?usp=drive_link">Terumi Radio Show Chibi</a></p>
+<p>I specifically made it in a way to make it as easy as possible to recolor, so I made a version with my custom palette that I'm going to use as my talksprite. If you're a terumi player who makes videos or streams and is reading this, feel free to reach out to me and I can prolly make you a recolor too.</p>
+<p>I also ordered a keychain version for myself because I think it's friggen' adorable.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/oh-hai.html" rel="bookmark"
+                                title="Permalink to Oh hai">Oh hai</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-06-03T00:00:00-04:00">
                 Published: Tue 03 June 2025
@@ -30,48 +88,12 @@
                 </address>
         <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
         
-</footer><!-- /.post-info --><p>Damn.</p>
+</footer><!-- /.post-info -->                            <p>Damn.</p>
 <p>It's been a while, eh.</p>
-<p>Lotta life stuff happened, will talk about that in a normal, non-bbcf post. The long and the short of it is I haven't had nearly as much time to play Blazblue as I wanted. To be fair, I <em>technically</em> had the time, the problem was I was so mentally distracted and frustrated with life stuff that I couldn't actually focus, and because I couldn't focus I couldn't actually play <em>well</em>, and not playing well made me so frustrated (because I was already frustrated) that I could immediately tell that I needed to step away right that second.</p>
-<p>So, I banished myself for training mode for a bit because pressing buttons is fun! </p>
-<h2 id="tournaments">Tournaments</h2>
-<p>Like I alluded to in previous posts, I can't really join any tournaments. BBBO is on Mondays and I have FFXIV raid, TMN is on Wednesdays on the exact same cadence as my BBBO UNI2 TO'ing, and the Witching Hour is on Sundays when I also have raid. I technically have TRO, but it cancelled one week, did a 2v2 bracket the next (and I'm not joining one of those with my current skill level.), and next it's doing showcase matches for good players going to CEO.</p>
-<p>So, uh, yeah, zero chance to enter any sort of competitive BBCF. I went to locals, one week there was only me &amp; my haz friend there so we just played goofy ass mirror matches for X hours. The next week I was in the work trenches and didn't have the mental to play whatsoever and got instantly 0-2'd.</p>
-<p>I'm hoping to start joining again once TRO is done with the special events. My guess is that'll be after CEO since they're probably going to not have a bracket the week of CEO.</p>
-<p>I guess no tournaments is a good thing, since it lets me have time to fuck around on Hazama without worrying about how rusty my Terumi is.</p>
-<h2 id="teruma">Teruma</h2>
-<p>Get it? Teruma? Like Terumi + Hazama? Hazumi rolls off the tongue better but I'm being stubborn about putting Terumi first so that's what I'm stuck with.</p>
-<p>Still really glad about picking up Hazama. Mentoring has been fantastic, F has seemingly been happy to mentor me, so I've been slowly being less weird about being all "I hope I'm not wasting your time!" The last session we had we just churned out some games, and it somehow turned into a ft100. I went 0-100, of course, but I thought it was a really good experience and F says that I definitely did start to pick up on things during the set. I'm also just happy to have run a ft100 because I've been talking shit to my friends saying that I'd be down for a ft100 ez. Let's just say this was probably the best way to have had my first ft100; if it was an actual even match I probably would have actually died on the spot 8 hours in. Though, the irony of me not playing anything but a single ft5 for a week and then immediately jumping into a ft100 is NOT lost on me, and it's definitely very funny.</p>
-<p>I also actually got the courage to just ask my questions, despite knowing they're probably things I could figure out by watching hours of footage myself, and F gave super thoughtful and thorough responses and dude. It's super cool that I can just ask him things and get a full answer from the perspective of someone who has that much experience and is at such a different level of gameplay of me. I'm a little used to people saying things like, "This is above your level so I'm not going to talk about it yet" or "I don't want to overload you with too much information so here's a short answer" which makes me sit like the "no talk me angy" kitten meme. When talking, sure, because my short term memory isn't great and I can easily lose parts of sentences. But in writing? Give me that shit. I love paragraphs. I have a PhD, half my life is reading things explained in 20 paragraphs that <em>could</em> have been explained in 1. I'm actually, literally formally trained in taking a dense document I don't understand and breaking it out into what I <em>do</em> understand, what I <em>need</em> to understand, and what I should come back to and understand later.</p>
-<p>I mentioned last time about my Terumi becoming rusty. It's interesting because I feel like that's true but also it's not? I had a set with G about a week or two ago, a set the day after that, and then had another set yesterday. Between that time I very minimally played Terumi and mostly played Hazama. Vesus G I played Terumi, because there is no universe where my Hazama is capable of putting up a fight against G yet, and I'm not fighting G to test my Hazama. I'm fighting G to test how my core gameplay/fundies are evolving, and the best character to do that with is Terumi.</p>
-<p>The first set, it was definitely evident that I'd just come off Hazama and was still trying to play Terumi. I played like garbage. The next day I asked him for a rematch because I wasn't happy with it at all, hence the 2nd set. In THAT set I did exceptionally better. I had a brief moment there where I had to sit with the fact that Hazama had made my Terumi considerably worse and it took hard switching gears to get back to where I was before on Terumi.</p>
-<p>But then, in the third set, I had a similar set-up. I'd only been playing Hazama, and then he pinged me and I immediately went into matches with him on Terumi. But I did fine? In fact, I was actually really happy with how the set went. I was still dropping things I wouldn't have dropped had I been labbing Terumi this entire time, but I think that playing Hazama has made me <em>really</em> focus on my movement and spacing so much that it actually really positively affected my Terumi gameplay. I checked him with a lot more non-committal buttons and got out of the corner really safely a few times. I need to upload that set to Youtube. Maybe not public, since I just recently uploaded videos vs. him, but I definitely need to review that set to see if I actually did as well as I thought I did, and check to see if it wasn't just Hazama habits carrying over for better or for worse. Maybe I'm starting to finally make enough of a gameplay style on Hazama so it's easier for me to separate out when I'm on one vs. the other and that's making it easier to switch gears, while still keeping the habits I've learned about checking spacing and movement.</p>
-<p>I've been really enjoying Hazama but I'm not sure yet if it's a "he's new and shiny with a lot of obvious things to work on" honeymoon thing or here to genuinely challenge Terumi for the spot of my main. I don't want to give up on Terumi and I still really enjoy Terumi so I guess I might try to pull a J and be a both main. We'll see how that goes.</p>
-<h2 id="other">Other</h2>
-<p>Got a few major things I want to do:</p>
-<ul>
-<li>Compile all the feedback I've gotten on Terumi into a document.</li>
-</ul>
-<p>As mentioned previously I've gotten a shitton of feedback on playing Terumi. I need to sit down and put them into a proper organized document so I can process it bit by bit and make sure I don't lose anything.</p>
-<ul>
-<li>Make a "To-Do" list... thing.</li>
-</ul>
-<p>Got some really good advice from F about "feedback overload". Essentially, the question I raised him was, how do you deal with the fact that you have to play games to get better at things, but every time you play games you find new things you need to work on? At some point, the mental stack of things I need to work on overflows and I collapse back to full autopilot, which is worst case scenario.</p>
-<p>He responded with what I boiled down to -- </p>
-<p>Only work on one or two things at any given moment. Accept that whatever you're not working on can and will lose you the game, but don't care about that, care about the progress you're making on the thing you're practicing.</p>
-<p>Prioritize and categorize. As you find things to work on, add them to the list in priority order and work on them from most important, moving down in importance as you make progress on the most important things. Also categorize things into things you can practice in training mode vs things you HAVE to practice in matches.</p>
-<p>An example I'm rotating my head is neutral and combos. Combos are obviously something I can practice in practice mode. Get them to the point that I can do them consistently (5+ times in a row) with zero pressure before making it a goal to practice them in matches. Neutral can be broken down into two parts: being comfortable with moving with chains and then <em>actual</em> neutral. I use practice mode to work on the first bit, just flinging myself around and seeing what I can do on various types of chain approaches. But, for <em>actual</em> neutral, that's something I have to actually actively practice in matches. Look at the enemy, look at me, and see what they're doing. Or look at the enemy, look at me, and see what I can do. I think I have to approach it from those two perspectives, and eventually, as I'm comfortable enough to not have to worry about what <em>I</em> can do, instead my priority will be to look at what the enemy is doing and what can I do to <em>counter</em> what they do. Then, eventually, I look at the enemy and figure out what they <em>want</em> to do and think about what I can do to counter that. (Plus, the whole "what <em>I</em> can do thing is actually something I should practice in training mode!)</p>
-<ul>
-<li>Watch more vods lmao.</li>
-</ul>
-<p>I haven't been watching VODs of my own or other people's gameplay for like two months now and that's kinda a problem. I need to stop being so antsy about getting into games and just watch some vods for a bit.</p>
-<h2 id="final-note">Final Note</h2>
-<p>Been having the interesting thought about my state in BBCF. It's an interesting position because I have absolutely everything I need to succeed, externally. I have so many friends and connections that are more than happy to help answer any questions I have. It's entirely down to my own physical capabilities and my own dedication at this point. Not sure what else to say about it, it's just an interesting thought. I hope I can put in what I need to.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+<p>Lotta life stuff happened, will talk about that in a normal, non-bbcf post. The long and the short of it is I haven't had nearly as much time to play Blazblue as I wanted. To be fair, I <em>technically</em> had the time, the problem …</p>
+                            <a class="readmore" href="/oh-hai.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                 <!-- first if -->
                 <!-- else loop -->
                     <li><article class="hentry">
@@ -264,31 +286,6 @@
 </footer><!-- /.post-info -->                            <p><link href="/css/custom.css" rel="stylesheet"></link></p>
 <p>It's been a while since one of these, eh? There's no better way to realize just how much my ADHD affects my perception of time as going "hey it's been a few days since I made an update post" only to look and realize it's been possibly over two weeks …</p>
                             <a class="readmore" href="/updates.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/more-about-replays.html" rel="bookmark"
-                                title="Permalink to More About Replays">More About Replays</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-09T00:00:00-04:00">
-                Published: Wed 09 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/replays.html">replays</a> <a href="/tag/how-to.html">how-to</a> </p>        
-</footer><!-- /.post-info -->                            <p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
-<h1 id="replays">Replays</h1>
-<p>Making good progress on reading replay files …</p>
-                            <a class="readmore" href="/more-about-replays.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                         </ol><!-- /#posts-list -->

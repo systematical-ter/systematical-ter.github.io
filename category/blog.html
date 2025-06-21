@@ -20,7 +20,65 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/thesis-draft-is-in.html">Thesis Draft is In.</a></h1>
+                            <h1 class="entry-title"><a href="/update.html">Update</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-06-21T00:00:00-04:00">
+                Published: Sat 21 June 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+        
+</footer><!-- /.post-info --><p>Tried to write this before, failed, deleted it. Take 2.</p>
+<h2 id="life-updates">Life Updates</h2>
+<p>Uh, life stuff happened. I defended my thesis! It went really well. The committee interrogation portion was easy and a lot of people tell me I did the presentation really well. I spent a couple of weeks dying because I got a <em>ton</em> of feedback on my thesis itself and I ended up having to re-write 30% of it, but now I've submitted all my edits for a final version and ordered some hard copies for myself, my mom, and my advisor. Can't make any changes now even if I wanted to (which I do). It came to a grand total of 90 pages.</p>
+<p>I will be flying twice in the next 3 weeks, so that's... fun. A lot of work to do, a lot of travelling to do, and it will be "?" levels of fun.</p>
+<h2 id="side-projects">Side Projects</h2>
+<p>I do some TO'ing now. The process for check-ins was irritating me because it involved exporting an excel spreadsheet from start.gg, and I don't have excel. So I then have to upload the excel spreadsheet to google drive and open it with google sheets, just to copy and paste one column into another google sheet.</p>
+<p>Turns out that start.gg does have an API, and the API is pretty in-depth but uses some odd third party API library or something called GraphQL.</p>
+<p>The workflow is as follows:</p>
+<ol>
+<li>have an auth token.</li>
+<li>get the "slug" of the tournament + event you want to pull attendees from. (e.g. <code>tournament/boston-blue-beat-online-weeklies-2025-5-19-to-5/event/5-19-bbcf-pc-bbb-online-2025-weekly</code>)</li>
+<li>get the eventID from the slug</li>
+<li>get the attendee information from the eventID</li>
+</ol>
+<p>There's a little more complexity about it I'll get into on a Tech post. But for now I have a functional script that can make a <code>.csv</code> (just a name per line) of every attendee for a given event that I can just copy and paste into google sheets. Makes the entire process approximately 75% less annoying for me.</p>
+<p>I have a few goals to work on:</p>
+<ul>
+<li>make a UI. (not again!)</li>
+<li>make it properly use GraphQL so I can populate objects rather than brute forcing through the response JSON</li>
+<li>make it possible to choose what attributes to print out, thanks to the above point</li>
+<li>make it easier to get a tournament slug; maybe make it so you paste the tournament name and then the event name and then it fills out the rest, or you provide the entire page URL it and gets the slug from that.</li>
+</ul>
+<p>Point 3 exists because people like to set their discord names different from their start.gg names, but because the tournament I'm TO'ing for requires you to have a discord account connection, start.gg has their discord usernames. I can make the script so it also shows the player's discord name so I know what to ping when they're not checking in.</p>
+<p>I could theoretically go farther and make this a whole discord bot, but then this'll be like, the 3rd bot I know of to do this same thing, and if it was actually good then it would have been more widely adopted by now.</p>
+<h2 id="blazblue">Blazblue</h2>
+<p>Minor blazblue update. Both Haz and Teru are improving. I've received a lot of compliments on my movement recently ("what was that run under super jump air grab reacharound?" was one of my favourites) so I guess my goal to focus on schoovement has really paid off.</p>
+<p>I was feeling nice on Haz but y'all know that graph of knowledge vs. skill and how they'll meet, but then knowledge will spike above skill? Yeah I had that moment and now I'm trying not to be mad at how I handle myself on Haz again. Just gotta watch more of other Hazama's gameplay and try imitating it in practice mode for a bit.</p>
+<p>Teru is weird because I feel like I get the core bits, I'm just not being nearly creative enough. I think I know small places to improve, I'm just not sure if they're worth focusing on or if I need to find bigger fish to fry. This is where I'd ping G for games and feedback, but I won't be able to actually play for at least another week because of travel. I might have like, 5 days where I'll be at my good computer and able to play.</p>
+<p>I need to ping F for a mentoring session again but I don't think I'll have time to commit to another session until after my second trip. I may ping during those 5 days I mentioned just to see if the stars align, but otherwise I'm aiming for after that second trip.</p>
+<h2 id="terumi-chibi">Terumi Chibi</h2>
+<p>Oh I completely forgot about this! I'll need to update this post because I'm running out of time today, but I finally got tired of lamenting that there were no HQ pictures of the Terumi chibis from the blazblue radio show, so I threw 8 hours to the wind and drew over some screenshots to make HQ versions. There's 4 poses and I think 11 expressions, and I've uploaded them to Google drive so people can use them if they want:</p>
+<p><a href="https://drive.google.com/file/d/1u1hf_J8mtnE25Nw_nsFG8yMFnsLHLNNu/view?usp=drive_link">Terumi Radio Show Chibi</a></p>
+<p>I specifically made it in a way to make it as easy as possible to recolor, so I made a version with my custom palette that I'm going to use as my talksprite. If you're a terumi player who makes videos or streams and is reading this, feel free to reach out to me and I can prolly make you a recolor too.</p>
+<p>I also ordered a keychain version for myself because I think it's friggen' adorable.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/thesis-draft-is-in.html" rel="bookmark"
+                                title="Permalink to Thesis Draft is In.">Thesis Draft is In.</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-05-15T00:00:00-04:00">
                 Published: Thu 15 May 2025
@@ -31,30 +89,11 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
 <p>tags: <a href="/tag/personal.html">personal</a> </p>        
-</footer><!-- /.post-info --><p>Fun fact, this posted was started on 05/05. I proceeded to fail to finish writing it 3 times over the past 10 days because I was too stressed about my thesis! So have what I'd written before the thesis, and I'll make a new, post-thesis defense post eventually.</p>
-<p>Not much to write here, I think. Lot of work stuff happened -- sudden 3 day work trip, got my thesis draft in, turned into a potato for 2 days to recover. Then immediately after those 2 days it was the local sort-of-monthly (once every 2 months) which I'd offered to help at, so I ended up being there for nearly 12 hours (1:30pm to 1am).</p>
-<p>TO'ing was considerably less stressful than expected. I just need to get used to yelling to tell people to gather 'round on bracket start. This time someone else had to do the yelling for me cus my Being Loud skills are very rusty. Otherwise, on multi-bracket participants I just wandered over to the other TO, said "hey gimme them when they're done with their match" and they went "aight" and did so. And other TO's would ask me the same and I'd just tell the participant that tourney [x] wanted them.</p>
-<p>My arthritis is really starting to flare up because of the fact it's been a week of inconsistent sleep. It also probably didn't help that I played blazblue for like.. nearly 10 of those 12 hours, and then proceeded to have a 3 hour set the next day. I need to find my compression gloves again because my hands are <em>beyond</em> fucked.</p>
-<p>We'll need to see how the next weeks go. I need to get back to editing my draft, since turns out it's not done for another 2 weeks, that was just a deadline to get a version to my committee for them to critique and give feedback on.</p>
-<p>Quick check-in about my coding projects because I don't know what else to talk about.</p>
-<h2 id="sprite-mgmt-library">Sprite Mgmt Library</h2>
-<p>I'm at an odd little point with this project. The next component is <em>extremely</em> UI heavy, and I really, really, <em>really</em> don't want to make UI in python. So, my knee-jerk reaction is to re-create the whole thing in C#, but that sounds miserable in itself. Specifically, I'm extremely heavily relying on a python package called <code>pillow</code>. <code>pillow</code> is a godsend, like 90% of the actual functionality is the code is super easy because <code>pillow</code> happened to have functions to do exactly what I wanted to do.</p>
-<p><code>pillow</code> does not exist for C#. It appears as though the best alternative I can use is something called <code>ImageMagick</code>, which is... interesting. Essentially, my understanding is that <code>ImageMagick</code> is C library. It is <em>extremely old-school</em>. There exists an interop wrapper to use it in C#, but this interop wrapper was written by a C developer for a C developer, so for my very-much-not-a-C-developer ass, the syntax can be extremely confusing. I'll try to put up some examples the next time I come across them.</p>
-<p>I also don't know <em>if</em> <code>ImageMagick</code> in C# can do everything I need it to do out of the box. I <em>think</em> it can, but I'm going to have to really dig into <code>ImageMagick</code> itself and re-figure-out how to do certain image manipulation I had to figure out in <code>pillow</code>, specifically (ranked vaguely from easiest to hardest):</p>
-<ol>
-<li>Finding + manipulating transparency metadata</li>
-<li>Saving transparent gifs/pngs</li>
-<li>Finding transparent pixels (some canvases export with a weird background that needs to be removed for centering purposes)</li>
-<li>Overlaying multiple images together (for mouth animations; may be difficult because in <code>pillow</code>, I have to do image type conversions)</li>
-</ol>
-<h2 id="replay-mgmt-library">Replay Mgmt Library</h2>
-<p>Have to stop and think about how I plan to actually develop it for a little bit. I've got it pulling a bunch of information from replay files -- mostly metadata stuff, like the players involved, the date, the stage, the music, etc. I haven't started parsing the inputs yet, but I do hope to eventually for a reason I'll explain later.</p>
-<p>Okay, well, I've told myself 3 times now that I'll finish this part and haven't, so I'm just going to post this and get back to it another day so I can finally get this post out of the door. See you after my defense!</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>Fun fact, this posted was started on 05/05. I proceeded to fail to finish writing it 3 times over the past 10 days because I was too stressed about my thesis! So have what I'd written before the thesis, and I'll make a new, post-thesis defense post eventually.</p>
+<p>Not …</p>
+                            <a class="readmore" href="/thesis-draft-is-in.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                 <!-- first if -->
                 <!-- else loop -->
                     <li><article class="hentry">
@@ -254,31 +293,6 @@
 </footer><!-- /.post-info -->                            <p>Oh hi there. It's been a bit, eh? Like 5 days or so.</p>
 <p>It's been a hell of a couple of days. I finally have a little bit of time to breathe, so I finally have the emotional state to write a blog post without being unnecessarily emo/rude/something …</p>
                             <a class="readmore" href="/hi-again.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/whoops.html" rel="bookmark"
-                                title="Permalink to Whoops">Whoops</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-03-16T00:00:00-04:00">
-                Published: Sun 16 March 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/personal.html">personal</a> <a href="/tag/rambling.html">rambling</a> <a href="/tag/tech.html">tech</a> <a href="/tag/rtoi.html">rtoi</a> </p>        
-</footer><!-- /.post-info -->                            <p>So I'm apparently a big Liar with a capital L because there was not, in fact, anything more technical yesterday. That's because I spent 2 hours writing my thesis and then approximately 12 hours at locals. (I'm more than OK skipping a blog post for that tbh.)</p>
-<h2 id="personal-rambling">Personal Rambling</h2>
-<p>I …</p>
-                            <a class="readmore" href="/whoops.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                         </ol><!-- /#posts-list -->
