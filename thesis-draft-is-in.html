@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Thesis Draft is In.</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="Fun fact, this posted was started on 05/05. I proceeded to fail to finish writing it 3 times over the past 10 days because I was too stressed..." />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Systematical's Ramblings</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/blog.html">Blog</a></li>
+                                                <li><a href="/category/tech.html">Tech</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/thesis-draft-is-in.html" rel="bookmark"
+             title="Permalink to Thesis Draft is In.">Thesis Draft is In.</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-05-15T00:00:00-04:00">
+                Published: Thu 15 May 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/personal.html">personal</a> </p>        
+</footer><!-- /.post-info -->        <p>Fun fact, this posted was started on 05/05. I proceeded to fail to finish writing it 3 times over the past 10 days because I was too stressed about my thesis! So have what I'd written before the thesis, and I'll make a new, post-thesis defense post eventually.</p>
+<p>Not much to write here, I think. Lot of work stuff happened -- sudden 3 day work trip, got my thesis draft in, turned into a potato for 2 days to recover. Then immediately after those 2 days it was the local sort-of-monthly (once every 2 months) which I'd offered to help at, so I ended up being there for nearly 12 hours (1:30pm to 1am).</p>
+<p>TO'ing was considerably less stressful than expected. I just need to get used to yelling to tell people to gather 'round on bracket start. This time someone else had to do the yelling for me cus my Being Loud skills are very rusty. Otherwise, on multi-bracket participants I just wandered over to the other TO, said "hey gimme them when they're done with their match" and they went "aight" and did so. And other TO's would ask me the same and I'd just tell the participant that tourney [x] wanted them.</p>
+<p>My arthritis is really starting to flare up because of the fact it's been a week of inconsistent sleep. It also probably didn't help that I played blazblue for like.. nearly 10 of those 12 hours, and then proceeded to have a 3 hour set the next day. I need to find my compression gloves again because my hands are <em>beyond</em> fucked.</p>
+<p>We'll need to see how the next weeks go. I need to get back to editing my draft, since turns out it's not done for another 2 weeks, that was just a deadline to get a version to my committee for them to critique and give feedback on.</p>
+<p>Quick check-in about my coding projects because I don't know what else to talk about.</p>
+<h2 id="sprite-mgmt-library">Sprite Mgmt Library</h2>
+<p>I'm at an odd little point with this project. The next component is <em>extremely</em> UI heavy, and I really, really, <em>really</em> don't want to make UI in python. So, my knee-jerk reaction is to re-create the whole thing in C#, but that sounds miserable in itself. Specifically, I'm extremely heavily relying on a python package called <code>pillow</code>. <code>pillow</code> is a godsend, like 90% of the actual functionality is the code is super easy because <code>pillow</code> happened to have functions to do exactly what I wanted to do.</p>
+<p><code>pillow</code> does not exist for C#. It appears as though the best alternative I can use is something called <code>ImageMagick</code>, which is... interesting. Essentially, my understanding is that <code>ImageMagick</code> is C library. It is <em>extremely old-school</em>. There exists an interop wrapper to use it in C#, but this interop wrapper was written by a C developer for a C developer, so for my very-much-not-a-C-developer ass, the syntax can be extremely confusing. I'll try to put up some examples the next time I come across them.</p>
+<p>I also don't know <em>if</em> <code>ImageMagick</code> in C# can do everything I need it to do out of the box. I <em>think</em> it can, but I'm going to have to really dig into <code>ImageMagick</code> itself and re-figure-out how to do certain image manipulation I had to figure out in <code>pillow</code>, specifically (ranked vaguely from easiest to hardest):</p>
+<ol>
+<li>Finding + manipulating transparency metadata</li>
+<li>Saving transparent gifs/pngs</li>
+<li>Finding transparent pixels (some canvases export with a weird background that needs to be removed for centering purposes)</li>
+<li>Overlaying multiple images together (for mouth animations; may be difficult because in <code>pillow</code>, I have to do image type conversions)</li>
+</ol>
+<h2 id="replay-mgmt-library">Replay Mgmt Library</h2>
+<p>Have to stop and think about how I plan to actually develop it for a little bit. I've got it pulling a bunch of information from replay files -- mostly metadata stuff, like the players involved, the date, the stage, the music, etc. I haven't started parsing the inputs yet, but I do hope to eventually for a reason I'll explain later.</p>
+<p>Okay, well, I've told myself 3 times now that I'll finish this part and haven't, so I'm just going to post this and get back to it another day so I can finally get this post out of the door. See you after my defense!</p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <div id="flavorimg" class="body">
+                        <img src="/theme/imgs/counter_anim.png" 
+                                title="I want to show off the cool gifs I make, OK?"/>
+                </div>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="/category/bbcfnotes.html">BBCF Notes</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="https://www.youtube.com/@systematicalgaming">Youtube</a></li>
+                                                        <li><a href="https://bsky.app/profile/systematical.bsky.social">Bluesky</a></li>
+                                                        <li><a href="https://www.twitch.tv/systematical">Twitch</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>

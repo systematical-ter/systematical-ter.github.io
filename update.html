@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Update</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="Tried to write this before, failed, deleted it. Take 2. Life Updates Uh, life stuff happened. I defended my thesis! It went really well. The..." />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">Systematical's Ramblings</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/blog.html">Blog</a></li>
+                                                <li><a href="/category/tech.html">Tech</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/update.html" rel="bookmark"
+             title="Permalink to Update">Update</a></h1>
+      </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-06-21T00:00:00-04:00">
+                Published: Sat 21 June 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+        
+</footer><!-- /.post-info -->        <p>Tried to write this before, failed, deleted it. Take 2.</p>
+<h2 id="life-updates">Life Updates</h2>
+<p>Uh, life stuff happened. I defended my thesis! It went really well. The committee interrogation portion was easy and a lot of people tell me I did the presentation really well. I spent a couple of weeks dying because I got a <em>ton</em> of feedback on my thesis itself and I ended up having to re-write 30% of it, but now I've submitted all my edits for a final version and ordered some hard copies for myself, my mom, and my advisor. Can't make any changes now even if I wanted to (which I do). It came to a grand total of 90 pages.</p>
+<p>I will be flying twice in the next 3 weeks, so that's... fun. A lot of work to do, a lot of travelling to do, and it will be "?" levels of fun.</p>
+<h2 id="side-projects">Side Projects</h2>
+<p>I do some TO'ing now. The process for check-ins was irritating me because it involved exporting an excel spreadsheet from start.gg, and I don't have excel. So I then have to upload the excel spreadsheet to google drive and open it with google sheets, just to copy and paste one column into another google sheet.</p>
+<p>Turns out that start.gg does have an API, and the API is pretty in-depth but uses some odd third party API library or something called GraphQL.</p>
+<p>The workflow is as follows:</p>
+<ol>
+<li>have an auth token.</li>
+<li>get the "slug" of the tournament + event you want to pull attendees from. (e.g. <code>tournament/boston-blue-beat-online-weeklies-2025-5-19-to-5/event/5-19-bbcf-pc-bbb-online-2025-weekly</code>)</li>
+<li>get the eventID from the slug</li>
+<li>get the attendee information from the eventID</li>
+</ol>
+<p>There's a little more complexity about it I'll get into on a Tech post. But for now I have a functional script that can make a <code>.csv</code> (just a name per line) of every attendee for a given event that I can just copy and paste into google sheets. Makes the entire process approximately 75% less annoying for me.</p>
+<p>I have a few goals to work on:</p>
+<ul>
+<li>make a UI. (not again!)</li>
+<li>make it properly use GraphQL so I can populate objects rather than brute forcing through the response JSON</li>
+<li>make it possible to choose what attributes to print out, thanks to the above point</li>
+<li>make it easier to get a tournament slug; maybe make it so you paste the tournament name and then the event name and then it fills out the rest, or you provide the entire page URL it and gets the slug from that.</li>
+</ul>
+<p>Point 3 exists because people like to set their discord names different from their start.gg names, but because the tournament I'm TO'ing for requires you to have a discord account connection, start.gg has their discord usernames. I can make the script so it also shows the player's discord name so I know what to ping when they're not checking in.</p>
+<p>I could theoretically go farther and make this a whole discord bot, but then this'll be like, the 3rd bot I know of to do this same thing, and if it was actually good then it would have been more widely adopted by now.</p>
+<h2 id="blazblue">Blazblue</h2>
+<p>Minor blazblue update. Both Haz and Teru are improving. I've received a lot of compliments on my movement recently ("what was that run under super jump air grab reacharound?" was one of my favourites) so I guess my goal to focus on schoovement has really paid off.</p>
+<p>I was feeling nice on Haz but y'all know that graph of knowledge vs. skill and how they'll meet, but then knowledge will spike above skill? Yeah I had that moment and now I'm trying not to be mad at how I handle myself on Haz again. Just gotta watch more of other Hazama's gameplay and try imitating it in practice mode for a bit.</p>
+<p>Teru is weird because I feel like I get the core bits, I'm just not being nearly creative enough. I think I know small places to improve, I'm just not sure if they're worth focusing on or if I need to find bigger fish to fry. This is where I'd ping G for games and feedback, but I won't be able to actually play for at least another week because of travel. I might have like, 5 days where I'll be at my good computer and able to play.</p>
+<p>I need to ping F for a mentoring session again but I don't think I'll have time to commit to another session until after my second trip. I may ping during those 5 days I mentioned just to see if the stars align, but otherwise I'm aiming for after that second trip.</p>
+<h2 id="terumi-chibi">Terumi Chibi</h2>
+<p>Oh I completely forgot about this! I'll need to update this post because I'm running out of time today, but I finally got tired of lamenting that there were no HQ pictures of the Terumi chibis from the blazblue radio show, so I threw 8 hours to the wind and drew over some screenshots to make HQ versions. There's 4 poses and I think 11 expressions, and I've uploaded them to Google drive so people can use them if they want:</p>
+<p><a href="https://drive.google.com/file/d/1u1hf_J8mtnE25Nw_nsFG8yMFnsLHLNNu/view?usp=drive_link">Terumi Radio Show Chibi</a></p>
+<p>I specifically made it in a way to make it as easy as possible to recolor, so I made a version with my custom palette that I'm going to use as my talksprite. If you're a terumi player who makes videos or streams and is reading this, feel free to reach out to me and I can prolly make you a recolor too.</p>
+<p>I also ordered a keychain version for myself because I think it's friggen' adorable.</p>
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+                <div id="flavorimg" class="body">
+                        <img src="/theme/imgs/counter_anim.png" 
+                                title="I want to show off the cool gifs I make, OK?"/>
+                </div>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="/category/bbcfnotes.html">BBCF Notes</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="https://www.youtube.com/@systematicalgaming">Youtube</a></li>
+                                                        <li><a href="https://bsky.app/profile/systematical.bsky.social">Bluesky</a></li>
+                                                        <li><a href="https://www.twitch.tv/systematical">Twitch</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>
