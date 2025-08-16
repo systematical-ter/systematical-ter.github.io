@@ -19,7 +19,90 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/holy-shit-its-been-a-while.html">Holy shit it's been a while</a></h1>
+                            <h1 class="entry-title"><a href="/small-updates.html">Small Updates</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-08-16T00:00:00-04:00">
+                Published: Sat 16 August 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+        
+</footer><!-- /.post-info --><p>Small update to keep myself honest on updating this blog.</p>
+<h1 id="quick-side-bbcf-update">Quick side BBCF update</h1>
+<p>But first, a quick small BBCF update: I decided to do Haz-only in a few tournaments for a bit because I wasn't feeling swapping to Terumi only for tournaments. I went 4-2 at my locals! A lot of the very strong players were missing, but still -- I held my own through 16 games and didn't let the nerves get the best of me. And I beat my fellow hazama player who has been helping me! It was extremely close and two very fun sets.</p>
+<p>I've still got several glaring issues in my Haz gameplay I want to fix, but at least this has really shown me (again?) that yes, I <em>can</em> play this character. I may stick with him for a bit, because I keep getting chastised for swapping constantly between characters, and come back to Terumi once I've gotten a better handle on fundies.</p>
+<p>I may commission an icon of my lil hazama design to celebrate yesterday. Still can't believe I actually did it...</p>
+<h1 id="replay-project">Replay Project</h1>
+<p>As previously mentioned, one of my big projects centers around processing and storing replays. I've made a lot of progress UI-wise on the thing. I now have a window that can load backed-up replays from a particular folder and its subfolders, process all of those replays into <code>ReplayHeader</code> objects, and display them.</p>
+<p><span class="center-span">
+<img alt="A screenshot of a program window. It has two halves. The left half lists a bunch of replay information, such as the date of the match and the characters the two players were playing. The left half has the beginnings of a filtering system based on player name and player character." src="/imgs/replay_replacer/ex_replay_replacer.png">
+<em>This example loads in approximately 3.7k replays in less than 5 seconds. Yes, I have that many replays backed up. My oldest saved replay is from December of last year.</em>
+</span></p>
+<p>I've also added a sub-window that takes my chaos replay backups (literally me <code>ctrl + c</code>'ing my Save folder and pasting it into a folder in a new subfolder) and sorts it out to only the unique replays and renames them.</p>
+<p><span class="center-span">
+<center><img alt="A screenshot of a program window. It has fields for an input directory and an output directory, statistics on the number of replay files found and the number of unique replay files found, and a button to start the copy method." src="/imgs/replay_replacer/chaos_repair.png"></center></br>
+<img alt="A screenshot of a folder on a windows filesystem. It lists over 3 thousand files, named a series of numbers and a date." src="/imgs/replay_replacer/chaos_repaired.png"></br>
+<em>The names look like nonsense, but they can be broken up like this: date_p1steamid_p2steamid. The reason I use steamids instead of usernames is because people love to name themselves silly things that aren't valid characters to put in a filename.</em>
+</span></p>
+<p>There's still a few things I need to work on.</p>
+<ol>
+<li>The list isn't properly sorting by date yet, I don't think. I believe it's still treating it like a string, not an actual date object.</li>
+<li>There's no filtering.</li>
+<li>There's no way to pick replays and load them into the replay folder.</li>
+</ol>
+<h2 id="data-binding">Data Binding</h2>
+<p>Parts 1 and 2 are a little complicated, and that requires going into how I made the display. I'm using a <code>DataGridView</code>, which can take a <code>BindingSource</code>, so it updates whenever anything is added and removed. But the problem is, <code>BindingSource</code>s don't have any sorting or filtering functionality, unlike <code>List</code>s. There's some third party classes that implement sorting/filtering, but these are pay for, and I'm not doing that for this silly little pet project.</p>
+<p>I'm considering two options: either see if I can bind the <code>DataGridView</code> directly to a <code>List</code> and just force the <code>DataGridView</code> to update myself (by re-setting its binding), or write some subclass of <code>BindingSource</code> that adds a sorting function.</p>
+<p>(I'm almost certainly doing the first one. I'll just need to see how bad the performance is. It's way easier for the second one to have horrible performance, so I don't want to risk it.)</p>
+<p>You may wonder why I'm worrying about performance. Unfortunately, it does kind of matter in this case. Before a <code>DataGridView</code>, I used just a <code>ListView</code>, and the <code>ListView</code> took over 40 seconds to populate. So... I want to avoid that.</p>
+<h2 id="replay_listdat">replay_list.dat</h2>
+<p>I kind of skipped a big part of this whole project in the beginning in all of this description. Some madlads who actually read this blog and understand my ramblings may remember that it's not enough to just have the <code>replay[0-9]+.dat</code> files -- BBCF also expects a <code>replay_list.dat</code> file. I'd already found that the <code>replay_list.dat</code> is literally just a collection of the header data from the replay files -- hence why I made <code>ReplayHeader</code> objects, not <code>Replay</code> objects. I don't need to care about parsing anything past that header (though at this rate, I will.)</p>
+<p>I also need to update the 2-byte checksum at the very beginning of the file, but I was given C# code on how to do this. I just actually need to <em>add</em> this part now. I have a program that can load in a folder of backed up replays, I need to now make it so that it can take a subset of those, create a dummy <code>replay_list.dat</code> file, and put everything into the correct locations. Shouldn't be too hard, but I always hesitate in saying for certain.</p>
+<p>I'll also need to add UI capabilities for a user to be able to select <em>which</em> replays to copy. That <em>shouldn't</em> be too bad, because I'm fairly certain you can select rows in <code>DataGridView</code>. If anything, I may be able to add a column of checkboxes and just take the first 100 rows with a checked checkbox.</p>
+<p>I should also paginate the data, but for now I'll avoid that because that adds complexity. What if a user selects 5 from one page, 5 from 2 pages past that, and 90 from three pages past that? It'll be doable, I just need to make the structure to handle all that, which I don't want to yet.</p>
+<p>(Though, if I do that, it may make it so I can use something <em>other</em> than a <code>DataGridView</code> so I can do better replay selectability since I only have to load, say, 50 replays at a time rather than all 3.7k.)</p>
+<h2 id="other-deets">Other Deets</h2>
+<p>I eventually want to start parsing the actual inputs to see if I can still force a replay to skip the intro. This is huge scope creep, but it shouldn't be too bad because Xinput seems fairly standardized. I also noticed that there's some neat information available in the IM about current frame, and that counts <em>backwards</em>, so that might have been the hint I needed to figure out how to parse the replay.</p>
+<p>It also seems like every time I talk about this project to someone they completely don't understand why it's useful at all. I figured that something that lets you have more than 100 replays saved would be super obviously useful, but I guess I'm alone in that. I should make a pretty little document that describes it with pictures so I stop feeling stupid every time I describe it to a friend and they go "uh. okay."</p>
+<h1 id="misc-tech-stuff">Misc Tech Stuff</h1>
+<h2 id="wsl-dev">WSL dev</h2>
+<p>I've had a lot of luck developing on WSL lately. For some magical reason, docker just... works on both of my machines now. That's good!</p>
+<p>The one issue I'm running into now is I'm being silly and starting an instance of a WSL terminal every time I want to have another folder open at the same time. I don't know the specifics of the performance and resource hit this causes, but I know it is there. I'm going to learn to use <code>tmux</code> so I can have just one instance running but <code>vsplit</code> and <code>hsplit</code> my way into imitating the tiling wm behavior I used to love on my linux laptop.</p>
+<h2 id="docker">Docker</h2>
+<p>Every time I stop using docker and have to use it again I remember how much I hate it...</p>
+<p>For my work I have to develop using an experimental branch of a piece of open-source software that is 3 minor patches behind the current release, <em>and</em> is <em>specifically incompatible</em> with other versions of logs generated by that software because the point of the branch is to add additional data to the logs.</p>
+<p>But the point of this software is for HPC logging. My laptop and my desktop are not HPC machines and I do not want to install spack, an HPC package manager, on either of my development machines so that I can install the experimental version of this software.</p>
+<p>So, I made a docker image! Easy, right?</p>
+<p>No.</p>
+<p>It was fucking miserable.</p>
+<p>It's done now, and it's working, but note the fact that it takes over fifteen minutes to build the image, because spack is <em>recompiling all of the dependencies from source</em>. I don't know why! I don't want to ask at this point! The point is that this is causing frustrating issues because I finally set up GitHub actions to build the container on every push to <code>dev</code> and <code>main</code> (that contain changes in the <code>share/docker</code> subdir), and every time I have to wait <em>fifteen minutes</em>. (I also made it so it tags the image based on the branch it came from!)</p>
+<p>This <em>technically</em> shouldn't be an issue moving forwards, because I think I finally made good images. Note the plural. I've made two: a basic one that just gets you a docker with the dependencies installed for the sake of command-line testing (e.g. test that the package <em>I'M</em> developing installs properly) and a second "development" image. The development image is actually kind of cool and I'm pretty happy with it-- it has jupyter lab and when you boot it, it just spins up a jupyter lab instance you can connect to through the browser.</p>
+<p>I also learned about <code>docker-compose.yml</code> files, which is apparently a thing I was supposed to know about already. I've made one for the basic image and one for the development image that default attaches a volume to the source directory of the repository so I don't need to manually mount them. It also handles port forwarding.</p>
+<p>(I may go back and add examples later, but right now all these changes are still on my laptop only so I can't fetch them right now.)</p>
+<p>I also was extra nerdy and realized that there may be a quiet failure: if someone is developing on <code>dev</code>, the <code>docker-compose.yml</code> files have the <code>main</code> release of the docker image as default. If they're trying to develop against the <code>dev</code> version of the image, which may differ from <code>main</code> (in fact it does right now, because <code>main</code> doesn't even exist yet teehee). So, I created two <code>.env</code> files that can be provided whe running <code>docker-compose.yml</code>: <code>.env</code> that sets <code>TAG</code> to <code>main</code>, and a <code>.env.dev</code> that sets <code>TAG</code> to <code>dev</code>!</p>
+<p>Yippee!</p>
+<p>Hopefully I remember how to use these files in the future lol. Should be easier than remembering how to use <code>docker build</code> raw.</p>
+<p>I also got the fun news that they're actually planning to finally merge the experimental branch into the main branch lmfao. So that's probably going to have to completely change my code, because they probably have to completely change the logs so they stop being incompatible.</p>
+<p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH.</p>
+<p>Whatever. I'm only on this project for one more week. I just need to make sure I set my stuff to pull the <em>specific</em> commit before they start rebasing at the very least.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- False -->
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/holy-shit-its-been-a-while.html" rel="bookmark"
+                                title="Permalink to Holy shit it's been a while">Holy shit it's been a while</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-08-02T00:00:00-04:00">
                 Published: Sat 02 August 2025
@@ -30,24 +113,11 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
         
-</footer><!-- /.post-info --><p>I'm pretty sure I mentioned a while back about my time-blindness. Well, have a great example! How the <em>hell</em> has it been almost 2 months since I last made a blog post? Just gonna make a small post to prove to myself that this blog isn't dead.</p>
-<p>Anyways, a lot is still happening. Travel upon travel upon flights delayed by 6 hours into attending my first regional. It was fun! I got to TO! I hung out with some super awesome people! I went 0-2... But I'll deal with that. Done with that crashout, no use to crash out again.</p>
-<h3 id="replay-processing">Replay Processing</h3>
-<p>Going to be picking back up my replay project. Talking about it to someone reminded me that it exists and I think it'd be fun to work on again. There's two major things I still want to work on:</p>
-<ol>
-<li>The UI.</li>
-<li>Processing inputs, too.</li>
-</ol>
-<p>Part 1 is important because right now I am up to over 130 folders of backed up BBCF save folders (containing replays + replay_list files) and I'd like to be able to actually look through them effectively to pull out specific replays I want to re-watch. Actually progressing on this project on the UI front will enable me to do that.</p>
-<p>Part 2 is interesting because part of the whole point of this project is I wanted to be able to control whether or not the players skipped the intro sequence. I haven't been able to figure it out from the binary itself yet, so maybe it'll help if I actually parse the binary into XInput inputs. (My guess is some value represents the "start processing" offset, and turning the XInput inputs into actual objects will help determine which of those values it is.)</p>
-<h3 id="sprite-recolor">Sprite Recolor</h3>
-<p>I do also want to continue my spriterecolor project, but that's lower priority because it completely exploded out of scope. First thing I do before I even start considering it is figure out whether I want to rewrite it in C# or bite the bullet and just make UI in Python. (Which might not be a bad thing to learn anyways.)</p>
-<p>I've also learned a lot about making packages in python since starting my sprite recolor project, so I might want to refactor the whole thing (again) anyways.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                            <p>I'm pretty sure I mentioned a while back about my time-blindness. Well, have a great example! How the <em>hell</em> has it been almost 2 months since I last made a blog post? Just gonna make a small post to prove to myself that this blog isn't dead.</p>
+<p>Anyways, a lot …</p>
+                            <a class="readmore" href="/holy-shit-its-been-a-while.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                 <!-- False -->
                 <!-- first if -->
                 <!-- else loop -->
@@ -153,31 +223,6 @@
 </footer><!-- /.post-info -->                            <p>Short post to get a file started for today in case I think of something to post.</p>
 <p>Burned myself out on blazblue again, went really hard for two days and then started going down the mental void again and now I hate how I play and hate how I try …</p>
                             <a class="readmore" href="/tough-goin.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- False -->
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/chuggin-along.html" rel="bookmark"
-                                title="Permalink to Chuggin' along">Chuggin' along</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-11T00:00:00-04:00">
-                Published: Fri 11 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/replays.html">replays</a> </p>        
-</footer><!-- /.post-info -->                            <p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
-<p>My python-focused development experience is causing …</p>
-                            <a class="readmore" href="/chuggin-along.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                 <!-- True -->
