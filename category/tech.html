@@ -150,10 +150,12 @@ fragment SetFields on Set {
 <img alt="A screenshot of a command input for OuroBOTro. The command is report, and it is providing hints for the arguments: two players must be pinged, and two integers must be provided." src="/imgs/wsc_report_command.png"><br/>
 <em>When submitting the <code>/report</code> command, users have to provide two valid user pings as well as two integers in exactly the order provided.</em>
 </span></p>
-<p>This hinting solves a bunch of problems:
-- TOs don't have to worry about resolving a nickname to a start.gg name (something that can get really annoying)
-- Players don't have to know their opponent's start.gg name and can just ping them directly
-- Players are forced to put everything in a particular order, so it's obvious what score goes to who</p>
+<p>This hinting solves a bunch of problems:</p>
+<ul>
+<li>TOs don't have to worry about resolving a nickname to a start.gg name (something that can get really annoying)</li>
+<li>Players don't have to know their opponent's start.gg name and can just ping them directly</li>
+<li>Players are forced to put everything in a particular order, so it's obvious what score goes to who</li>
+</ul>
 <p>I also made the commands smart so it doesn't care the order of reporting, it'll figure out the winner from the scores. It also uses information taken from the start.gg query to find the set between the two players to figure out whether it's ft2 or ft3, and kick back errors as appropriate.</p>
 <p>The downside is... <strong>sometimes the slash commands just don't work</strong>.</p>
 <p>I cannot control for this whatsoever. It's literally always either discord error (they tabbed away and tabbed back and discord didn't resume the command selection) or user error (they pressed shift+enter and this de-selects the command).</p>
