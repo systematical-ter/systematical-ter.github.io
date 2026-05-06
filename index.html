@@ -19,10 +19,10 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/in-bot-hell.html">In Bot Hell</a></h1>
+                            <h1 class="entry-title"><a href="/bot-hell-pt-2.html">Bot Hell Pt 2</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2026-04-04T00:00:00-04:00">
-                Published: Sat 04 April 2026
+        <abbr class="published" title="2026-05-06T00:00:00-04:00">
+                Published: Wed 06 May 2026
         </abbr>
 
                 <address class="vcard author">
@@ -30,27 +30,180 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
-</footer><!-- /.post-info --><p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech stuff in this post.</p>
-<h2 id="steamsneggy">SteamSneggy</h2>
-<p>I technically started this bot second but also I finished it first so I'll talk about it first. It's stupid simple. If you're reading this you might know about a bot called "ShuuBox" that used to exist; basically it just watches for any messages that contain a steam lobby URL and responds to that message with the same URL, but now clickable. Well, that bot went offline a few months ago and that was kinda it.</p>
-<p>So, I decided to make my own. Shouldn't be too hard, right?</p>
-<p>(For once, it wasn't.)</p>
-<p>The bot's stupid simple. The source code is available <a href="https://github.com/systematical-ter/steamsneggy">here</a>. There's two components: the discord bot and the web API.</p>
-<h3 id="discord-bot">Discord Bot</h3>
-<p>I coded it in Python because that's what I'm comfortable with. There's a <em>fairly</em> good (I'll talk about my issues with it later) library in Python for communicating with Discord called <code>discordpy</code>, more information over <a href="https://discordpy.readthedocs.io/en/stable/">here</a>.</p>
-<p>Deadass all it does is look for discord messages that fulfill a regex that looks for steam URLs, breaks it up into the three IDs, and makes a new URL that'll point to the web API, and sends a new message responding to the original message. It also mentions the person who originally wrote the message, and also pings anyone that they replied to or mentioned.</p>
-<p>Simple. Just gotta make sure to enable message intent in the bot's information page, and note that the moment the bot hits 100 servers you/I'll be forced to hand Discord a government ID to keep the bot running because of that. We'll burn that bridge when we get there -- for now I'm just restricting who can install my bot.</p>
-<h3 id="web-api">Web API</h3>
-<p>The web API is the component I wasn't actually sure how to do at first, but turns out it's stupid simple too. All it needs to do is at a given url, redirect the requestor to the equivalent steam URL. I kept it as simple as possible -- there's a single endpoint, it takes the 3 IDs as url params, and given those 3 IDs redirects the user to a reconstructed steam lobby join link.</p>
-<p>I specifically broke the steam lobby link into the three IDs when taking it as an input for a simple reason: I didn't want to have to deal with string safety lmao. If had the API just take whatever URL it was handed and redirect the user, that can get super sketchy super fast. If I try to do any fancy parsing, I run into problems with string parsing. So, the API just wants three integers, and the bot takes them from a discord message's content (which should be pre-sanitized by Discord to be safe.)</p>
-<h2 id="wsc-tournament-bot">WSC Tournament Bot</h2>
-<p>I got distracted watching a friend's Mewgenics run for like three hours so I don't have time to finish this post. Tomorrow, hopefully.</p>
-<p>Seeya.</p>                        </article>
+</footer><!-- /.post-info --><p>Okay, take 2. Hopefully I'll get to the difficult/interesting stuff this time.</p>
+<h1 id="wsc-bot">WSC Bot</h1>
+<p>So I made the bot for this year's World Serpent Championship. Admittedly, this was my first time making a discord bot so I had a lot to learn. It ended up taking a lot more time than expected, but that was entirely my own fault. Not because it was hard or a lot to learn, but because I kind of... decided to try to make it as user-friendly as possible? And that's where things always get difficult.</p>
+<p>Absolutely zero offense intended to the users, but frankly I've seen first hand that command line interface-line control of bots just does not go over well. For SteamSneggy I tried to add slash commands and saw people immediately struggle to use those, so that also kinda confirmed my suspicions even though it was after the fact. So, interacting with the Discord API was alright. Interacting with the Start.gg API was also alright, although kind of a huge struggle for reasons I'll describe later. The hard part was trying to add a UI element to the bot so I don't have to depend on people using slash commands.</p>
+<p>I'll break this post into 3 parts, I guess?</p>
+<ol>
+<li>The Start.GG Components</li>
+<li>The Discord Components</li>
+<li>The UI Components</li>
+</ol>
+<p>Note that I'm going to talk about the bot in its final state. Originally this was one big bot, but I've since broken it up into 3 components (start.gg queries, discord queries, and the main bot logic itself). It's not gonna be helpful to describe the original version so I'm gonna talk about things in the context of the current version.</p>
+<h2 id="1-the-startgg-components">1. The Start.GG Components</h2>
+<p>The first part I kind of conceptually worked on for the bot was the Start.GG informatio component. This is kinda because the whole point of the bot was to interact with Start.gg on behalf of players + TOs, so if I couldn't figure out how to do that, the whole bot was dead in the water. I've also heard... unpleasant things about the Start.GG api. Partially unfounded, I think, since I can kind of see where it's just trying to make their database structure accessible. But also I do have some pretty big complaints and I <em>HOPE</em> they're taking care of in the background... I'll get to that later.</p>
+<h3 id="queries">Queries</h3>
+<p>I created two helper objects: a <code>QueryHelper (qh)</code> and a <code>StartHelper (sh)</code>. The <code>qh</code> manages the actual queries to the start.gg endpoint, and the <code>sh</code> takes the results of those queries and turns them into objects that the other components can understand.</p>
+<p>The objects include: <code>Participant</code>, <code>Event</code>, and <code>Tournament</code>. There are/were a few others, but they're either being phased out or are backend implementation specific. (e.g. I use a sqlite db for persistent data storage, so to store player check-in information, I made an object that's just a combination of <code>participant.id</code> and <code>event.id</code> and a few attributes to store whether that participant is checked in, dq'd from, etc, a particular event.)</p>
+<p>So, I'll start complaining now, I guess.</p>
+<p>I won't complain too much about the structure. There's <code>Participants</code>, <code>Entrants</code>, <code>Users</code>, and more I can't remember right now. At first glance this is kinda ridiculous, but it slowly (begrudingly) kind of makes sense. <code>Events</code> contain <code>Entrants</code>, which <em>can</em> be one to one with <code>Participants</code>, but in the case of team tournaments, an <code>Entrant</code> can refer to a team of two <code>Participants</code>. Also, <code>Participant</code> contains the information of a player in a tournament, but to get their actual Start.gg user account information, that's stored in the <code>Users</code> table so you gotta go through the <code>User</code> link in <code>Participant</code> to get that info. There's also a <code>Player</code> object/table, but I was able to avoid caring about it.</p>
+<p>So, the way I get the information about a tournament is I run the following queries:</p>
+<ul>
+<li>Get tournament information from their slug (unique identifier that's contained in their URL)</li>
+<li>Get all the events (and their information) from a tournament</li>
+<li>Get all participants (and their information) from a tournament.</li>
+</ul>
+<p>... I kind of lied, this is how I <em>used</em> to do it.</p>
+<p>I ran into an issue: WSC is big enough that I could not get every single participant in a tournament in a single query, because the Start.gg api has a max query result complexity limit, and I hit it within the first 100 participants. (As of writing this, WSC is now at 151 entrants.) So, I tried to do the obvious thing: use pagination.</p>
+<h3 id="pagination">Pagination</h3>
+<p>The way it works is, in the GraphQL query, you can describe pagination variables: what page you want and how many entries you want per page.</p>
+<p>This is my major complaint with the current state of the Start.gg API. I have made a post about this on their Discord, and received no response other than another third-party dev confirming the bug I saw and pinging one of the staff (who still didn't respond).</p>
+<p>The bug is as follows:</p>
+<p>You run a query asking for page 1 of 20 participants. It responds and gives you 20 participants.</p>
+<p>You run a follow-up query asking for page 2 of 20 participants. It responds and give you 20 participants.</p>
+<p>There is NO guarantee that the second set of 20 participants is completely unique from the first set of 20 participants. In fact, in the example I provided to the third party dev who wanted to try it for himself, FIVE of the participants were repeated.</p>
+<p>That meant that even if I asked for n pages of m participants, such that <code>n*m&gt;total_participants</code>, I <em>will not get every single participant in the tournament</em>. This behavior isn't consistent either -- sometimes only one participant is a duplicate, other times five or none are.</p>
+<p>Okay, that sucks, I thought to myself. Well, at least there seems to be a participants filter option in the query, and the filter has a field called <code>ids</code>! Maybe I can just get the participant IDs, and then paginate myself by sending 20-long lists of participant IDs using this field?</p>
+<p>Well.</p>
+<p>Turns out that filter doesn't work!</p>
+<p>If I provided a participant ID to the field <code>id</code>, it correctly returned that participant in that tournament. If I provided the exact same ID, in brackets to make it a list, to the field <code>ids</code>, it returned nothing.</p>
+<p>Fun!</p>
+<p>This is the point where I made my bug report in the start.gg discord, got ignored, and went looking for other solutions.</p>
+<h3 id="solutions">Solutions</h3>
+<p>Thankfully, it turns out that tournament participants can also be filtered by <code>eventId</code>, so for the time being that's how I'm cutting down the query response size to something manageable. Since I already grabbed every event in a given tournament, for every event I run a separate query to get all participants in that particular event. This involved adding some checks to the datastore to make sure I didn't store any duplicates, but that's just back end tech stuff.</p>
+<p>I was also provided another alternative at this point by another third party dev in the discord: in GraphQL you can perform multiple queries in a single... well... query.</p>
+<p>Here's the example they gave me, for your reference:</p>
+<div class="highlight"><pre><span></span><code>query MultipleSets($id1: ID!, $id2: ID!, $id3: ID!) {
+    set1: set(id: $id1) {
+        ...SetFields
+    }
+    set2: set(id: $id2) {
+        ...SetFields
+    }
+    set3: set(id: $id3) {
+        ...SetFields
+    }
+}
+
+fragment SetFields on Set {
+    id
+    fullRoundText
+    completedAt
+    phaseGroup {
+        phase {
+            name
+        }
+    }
+    slots {
+        entrant {
+            name
+        }
+    }
+    games {
+        selections {
+            character {
+                name
+            }
+            entrant {
+                name
+            }
+            orderNum
+        }
+    }
+}
+</code></pre></div>
+
+<p>I do use this for a different function in the bot. Occasionally, it checks for new registrants, and the way it does this is by <em>only</em> pulling the participant IDs from an event and checking if there's any IDs it isn't aware of. If there are new participants, it then builds a multiple-query query like above: for every ID, it creates a separate <code>participant{n}: participant(id: $id{n}){...}</code> query block, adds the ID to the <code>variables</code> dictionary, and then parses the results.</p>
+<p>I'm still pretty annoyed that this is what it came to. It's strange to have an entire pagination feature fail to paginate, as well as an entire filter to fail this catastrophically. I really wish they'd just put some documentation or something somewhere saying "hey this doesn't work" or "hey use this instead".</p>
+<p>But whatever. It works now. There's still a chance that an event can reach too many participants to fetch in one go, in which case I'll have to pull IDs only and do what I just described to manually paginate. Which, again, annoying. I may also check if there's other places to pull participant information that has <em>functional</em> pagination or filters, but I don't have to deal with that yet so I won't.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>So, yeah, that's rant over. The bot pulls information about tournaments, events, and players from the API, turns them into representative objects that the other components know how to use. Yay!</p>
+<p>This is also were the queries to assign set scores live. Originally I stored information about sets in the bot too, but I realized it really never cares about a set except when it's trying to report one. So, whenever a player goes to report a set, the <code>qh</code> looks for sets between those two players. If the rest of the bot decides it's good to report, it then submits a <code>mutation</code> query to update the score of the set accordingly.</p>
+<h2 id="2-the-discord-components">2. The Discord Components</h2>
+<p>So, this section will be cut a little short cus I'm just going to talk about raw bits of working with the bot, not trying to create visualizations. I have a whole different section to talk about trying to make interactive messages to make the bot as user-friendly as possible, so I'll be talking about a lot of Discord API silliness there.</p>
+<p>Main thing that the bot does is watch for slash commands.</p>
+<p>There's a little bit of sillyness involving slash commands, ordinary commands, guild (server) specificity, user pinging, and start.gg/discord integration I'll get to in this section.</p>
+<h3 id="user-pinging">User Pinging</h3>
+<p>So, pinging actually behaves very strangely when it comes to bots. As long as a user is in the same Server, in a slash command or in a message from a bot, you can ping a user without them actually being in that channel. This obviously means they don't get a notification, but you can still hover over the ping to see the user's profile and get quick actions. And, if you're in a slash command, that means it can autofill the user's information and guarantee you have their ID without you having to enable developer mode.</p>
+<p>That's super useful! I've adjusted commands where possible to turn them into slash commands to take advantage of this where applicable. A case I'll get to later is when someone's start.gg account is associated with a discord account they don't actually use. This happened three (maybe four?) times in the NA WSC tournament. Has happened once so far with the SA WSC tournament. I don't know why so many people have so many discord accounts, and frankly don't currently care because it might have to deal with gossip reasons and I just don't care about getting my nose into that shit anymore.</p>
+<p>Anyways, point is, before I had a <code>/fix_user</code> command, where the TO had to type:</p>
+<div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">fix_user</span><span class="w"> </span><span class="p">[</span><span class="n">discord</span><span class="w"> </span><span class="kt">id</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">gg</span><span class="w"> </span><span class="n">discriminator</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Start.gg discriminator is whatever, if you've TO'd for a Start.gg tournament you know what this is by now. I can also put an example. Discord ID, however, is considerably more complicated to get. I have my discord in developer mode so I can just right click anyone, but if you don't I'm not actually sure how to get a user's discord ID.</p>
+<p>So, I made this command into a proper slash command, and set the first field to be a user ping field, and now as long as that user is in the server, you can mention them and the bot will get the ID itself. Yay!</p>
+<p>I tried to also use this functionality in messages sent by the bot. For example, there are two options when checking users who haven't checked in: Viewing the DQlist, and Pinging the DQlist. Ping, obviously, sends a message to the check-in channel directly pinging the user and telling them to check the fuck in. Viewing the DQlist spits a list of names to the bot channel for the TO's information.</p>
+<p>I wanted to make this mention the users directly, with ping permissions turned off, to give TOs a clickable list of usernames. Unfortunately, it turns out that Discord nowadays <em>strongly</em> caches mentions, especially on mobile. If the user isn't already loaded in the discord client's cache, it will not bother resolving the mention at all. Here's an example of the lead of WSC failing to see mentioned users:</p>
+<p><span class="center-span">
+<img alt="A screenshot of a command on OuroBOTro. A few discord users are pinged, but interspersed through the names are a ton of mentions of an &quot;unknown-user&quot;, even though those users are in the server." src="/imgs/unknown_users.png"><br/>
+<em>Every user in this message was present in the server. Yet, they were still labelled as <code>@unknown-user</code> because the viewer's discord client had not loaded their information into cache for a previous reason, and didn't bother loading them for a mention.</em>
+</span></p>
+<p>So... that just straight up is not an option for me. I feel like there may still be a workaround, but I don't have the time to experiment right now.</p>
+<p>A small hint I have is at this github issue <a href="https://github.com/Rapptz/discord.py/issues/5791">here</a>. Basically, it seems like Discord uses different lookup logic for the two types of pings (<code>&lt;@!id&gt;</code> vs <code>&lt;@id&gt;</code>), so I might need to experiment with that.</p>
+<p>That's a future problem for future me, basically.</p>
+<h3 id="slash-commands-vs-ordinary-commands">Slash Commands vs. Ordinary Commands</h3>
+<p>So, I tried to restrict commands to slash commands as much as possible. The reason for this is simple: slash commands are very very obvious to the user. Like, it shows up a hint in the textbox. It can also provide hints, like "hey this field is supposed to be a user so we literally won't let you submit it without pinging an actual user in this server".</p>
+<p>For example, consider the <code>/report</code> command:</p>
+<p><span class="center-span">
+<img alt="A screenshot of a command input for OuroBOTro. The command is report, and it is providing hints for the arguments: two players must be pinged, and two integers must be provided." src="/imgs/wsc_report_command.png"><br/>
+<em>When submitting the <code>/report</code> command, users have to provide two valid user pings as well as two integers in exactly the order provided.</em>
+</span></p>
+<p>This hinting solves a bunch of problems:
+- TOs don't have to worry about resolving a nickname to a start.gg name (something that can get really annoying)
+- Players don't have to know their opponent's start.gg name and can just ping them directly
+- Players are forced to put everything in a particular order, so it's obvious what score goes to who</p>
+<p>I also made the commands smart so it doesn't care the order of reporting, it'll figure out the winner from the scores. It also uses information taken from the start.gg query to find the set between the two players to figure out whether it's ft2 or ft3, and kick back errors as appropriate.</p>
+<p>The downside is... <strong>sometimes the slash commands just don't work</strong>.</p>
+<p>I cannot control for this whatsoever. It's literally always either discord error (they tabbed away and tabbed back and discord didn't resume the command selection) or user error (they pressed shift+enter and this de-selects the command).</p>
+<p>Theoretically TOs can just step in and tell them to try again or just report it for them. But, again, I tried to make this as user-friendly as possible and decided to make fallback commands instead. (This was definitely going too far.) For the <code>/checkin</code>, <code>/dq</code>, and <code>/undq</code> command, the bot <em>also</em> looks for ordinary commands and accepts those. I haven't implemented this for reporting yet, as that involves implementing a bunch of validation since the users aren't forced by type hints to input certain things anymore.</p>
+<p>Honestly, I might not. This might just be left up to the TO, or their opponent, if they genuinely can't make the slash commands work.</p>
+<p>Everything without parameters has a backup slash command. That should be good enough. Everything with parameters involves spending several hours adding content validation, so that is either a future me problem or won't be considered, and currently I've already put far more time than was needed into this bot. I believe I am past 60 hours at this point.</p>
+<p>A small note is that at first, I thought slash commands were always available to all users in all channels. Well... turns out this isn't true! The functionality to set this just isn't in <code>discord.py</code>. There's a whole admin panel for managing bot integrations:</p>
+<p><span class="center-span">
+<img alt="A screenshot of command management permissions through an admin-only panel." src="/imgs/wsc_command_permissions.png"><br/>
+<em>For the bot as a whole, or for independent commands, admins can control what users and what channels can see commands.</em>
+</span></p>
+<p>It turns out that the reason why <code>discord.py</code> doesn't expose this is because it requires additional authorizations. You see, most of the time when you do bot commands, it's enough to use the Bot token. This is a bot equivalent of a <code>Bearer</code> token, which you usually use to prove your identity when working with APIs. Well, in order to access the endpoints that let you modify command permissions, you actually have to go get a proper Bearer token. </p>
+<p>Using the bot's <code>client</code> and <code>secret</code>, you make a response to the <code>/oauth2/token</code> endpoint with the required scope (in this case, <code>applications.commands.permissions.update</code>), get back an expiring <code>Bearer</code> token, and then you can make calls to the <code>applications/:applicationid/guilds/:guildid/commands/:commandid/permissions</code> endpoint.</p>
+<p>I haven't implemented all of this yet. I probably won't for this iteration of the WSC bot, because frankly it needs to be wrapped up into a finalized v1. But this is definitely something I will be looking into for the future. For now, admins should just use the in-client discord permissions management to control who sees what commands.</p>
+<h3 id="startgg-discord-integration">Start.GG &amp; Discord Integration</h3>
+<p>Okay, this is mostly just a complaint since there isn't a lot I can do about it. As I kinda alluded to earlier, it's possible for a user to have the wrong discord account associated with their start.gg account. To add insult to injury, they can theoretically associate <em>multiple</em> discords with their account -- one can be the account-wide association (which I may not have access to, based on their privacy settings!) and they also can accidentally associate an entirely different account when registering for the tournament (which is what I <em>actually</em> have access to.)</p>
+<p>There is nothing I can do about that. And unfortunately, the failure is a little hidden. All the bot can do is ping the accounts it knows of. If someone has the wrong account associated with their start.gg account, their actual account will not have the role that is pinged when check-ins start. Furthermore, when missing check-ins are pinged, and it pings the players directly, it will ping the wrong account.</p>
+<p>There is no way around this. If the player is not checking the discord, they will miss it. I cannot magically get their "right" discord ID and fix it.</p>
+<p>Thankfully, so far it seems like people are paying attention. They'll mention, "Wait, I tried to check in, and it won't let me." If they can't check in, they can't score report either. So they <em>have</em> to have their discord account-start.gg account association fixed.</p>
+<p>I already mentioned the command I made to fix this, <code>\fix_user</code>. This is actually part of the reason why I implemented persistent storage in this bot: once a tournament has been loaded, and you use <code>\fix_user</code> to fix a player's discord-start.gg association, it'll keep this information as long as you don't tell it to dump all tournament information. Fixing this association will make <code>\checkin</code>, <code>\d</code>, <code>\undq</code>, and <code>\report</code> commands all work as expected.</p>
+<p>If this were a long-term project, I'd add the capability to save these associates between tournaments, but for now I think on a per-tournament basis is fine. Plus, this'll bring the discrepancy to the attention of the player, and hopefully they fix it for the future.</p>
+<h1 id="conclusion_1">Conclusion</h1>
+<p>Okay, I didn't get to part 3, the UI components. I'll get back to that in another post, because I've been writing this for literal hours and I'm kind of exhausted at this point. To be continued!</p>                        </article>
                     </aside><!-- /#featured -->
                         <section id="content" class="body">
                             <h1>Other articles</h1>
                             <hr />
                             <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/in-bot-hell.html" rel="bookmark"
+                                title="Permalink to In Bot Hell">In Bot Hell</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2026-05-05T00:00:00-04:00">
+                Published: Tue 05 May 2026
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
+</footer><!-- /.post-info -->                            <p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech …</p>
+                            <a class="readmore" href="/in-bot-hell.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
                 <!-- first if -->
                 <!-- else loop -->
                     <li><article class="hentry">
@@ -248,36 +401,11 @@
                             <a class="readmore" href="/more-about-replays.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/thesisssssssssss.html" rel="bookmark"
-                                title="Permalink to Thesisssssssssss">Thesisssssssssss</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-04T00:00:00-04:00">
-                Published: Fri 04 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/blog.html">Blog</a>.</p>
-<p>tags: <a href="/tag/tech.html">tech</a> </p>        
-</footer><!-- /.post-info -->                            <p>Once again, I should be working on my thesis, so I'm dumping thoughts here so they stop taking up VRAM.</p>
-<h2 id="tech-things">Tech things</h2>
-<p>Making good progress on trying to figure out the structure of <code>replay</code> files. I bit the bullet and downloaded Ghidra, which is extremely overkill but I'm enjoying it …</p>
-                            <a class="readmore" href="/thesisssssssssss.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
                         </ol><!-- /#posts-list -->
   <nav align="center">
-      &nbsp;Page 1 / 2&nbsp;
+      &nbsp;Page 1 / 3&nbsp;
         <a href="/index2.html">&rang;</a>
-        <a href="/index2.html">&Rang;</a>
+        <a href="/index3.html">&Rang;</a>
   </nav>
                         </section><!-- /#content -->
         

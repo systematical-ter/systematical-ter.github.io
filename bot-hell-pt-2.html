@@ -4,8 +4,9 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>Systematical's Ramblings - discord-bots</title>
+                        <title>Bot Hell Pt 2</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="Okay, take 2. Hopefully I'll get to the difficult/interesting stuff this time. WSC Bot So I made the bot for this year's World Serpent..." />
         </head>
 
         <body id="index" class="home">
@@ -13,13 +14,18 @@
                         <h1><a href="/">Systematical's Ramblings</a></h1>
                         <nav><ul>
                                                 <li><a href="/category/blog.html">Blog</a></li>
-                                                <li><a href="/category/tech.html">Tech</a></li>
+                                                <li class="active"><a href="/category/tech.html">Tech</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
-                <!-- first if -->
-                    <aside id="featured" class="body">
-                        <article>
-                            <h1 class="entry-title"><a href="/bot-hell-pt-2.html">Bot Hell Pt 2</a></h1>
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/bot-hell-pt-2.html" rel="bookmark"
+             title="Permalink to Bot Hell Pt 2">Bot Hell Pt 2</a></h1>
+      </header>
+
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2026-05-06T00:00:00-04:00">
                 Published: Wed 06 May 2026
@@ -30,7 +36,7 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
-</footer><!-- /.post-info --><p>Okay, take 2. Hopefully I'll get to the difficult/interesting stuff this time.</p>
+</footer><!-- /.post-info -->        <p>Okay, take 2. Hopefully I'll get to the difficult/interesting stuff this time.</p>
 <h1 id="wsc-bot">WSC Bot</h1>
 <p>So I made the bot for this year's World Serpent Championship. Admittedly, this was my first time making a discord bot so I had a lot to learn. It ended up taking a lot more time than expected, but that was entirely my own fault. Not because it was hard or a lot to learn, but because I kind of... decided to try to make it as user-friendly as possible? And that's where things always get difficult.</p>
 <p>Absolutely zero offense intended to the users, but frankly I've seen first hand that command line interface-line control of bots just does not go over well. For SteamSneggy I tried to add slash commands and saw people immediately struggle to use those, so that also kinda confirmed my suspicions even though it was after the fact. So, interacting with the Discord API was alright. Interacting with the Start.gg API was also alright, although kind of a huge struggle for reasons I'll describe later. The hard part was trying to add a UI element to the bot so I don't have to depend on people using slash commands.</p>
@@ -175,38 +181,11 @@ fragment SetFields on Set {
 <p>I already mentioned the command I made to fix this, <code>\fix_user</code>. This is actually part of the reason why I implemented persistent storage in this bot: once a tournament has been loaded, and you use <code>\fix_user</code> to fix a player's discord-start.gg association, it'll keep this information as long as you don't tell it to dump all tournament information. Fixing this association will make <code>\checkin</code>, <code>\d</code>, <code>\undq</code>, and <code>\report</code> commands all work as expected.</p>
 <p>If this were a long-term project, I'd add the capability to save these associates between tournaments, but for now I think on a per-tournament basis is fine. Plus, this'll bring the discrepancy to the attention of the player, and hopefully they fix it for the future.</p>
 <h1 id="conclusion_1">Conclusion</h1>
-<p>Okay, I didn't get to part 3, the UI components. I'll get back to that in another post, because I've been writing this for literal hours and I'm kind of exhausted at this point. To be continued!</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/in-bot-hell.html" rel="bookmark"
-                                title="Permalink to In Bot Hell">In Bot Hell</a></h1>
-                        </header>
+<p>Okay, I didn't get to part 3, the UI components. I'll get back to that in another post, because I've been writing this for literal hours and I'm kind of exhausted at this point. To be continued!</p>
+      </div><!-- /.entry-content -->
 
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2026-05-05T00:00:00-04:00">
-                Published: Tue 05 May 2026
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
-</footer><!-- /.post-info -->                            <p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech …</p>
-                            <a class="readmore" href="/in-bot-hell.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                        </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-        
+    </article>
+  </section>
                 <div id="flavorimg" class="body">
                         <img src="/theme/imgs/counter_anim.png" 
                                 title="I want to show off the cool gifs I make, OK?"/>
