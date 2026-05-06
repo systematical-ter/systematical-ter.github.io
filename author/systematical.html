@@ -19,7 +19,96 @@
                 <!-- first if -->
                     <aside id="featured" class="body">
                         <article>
-                            <h1 class="entry-title"><a href="/update.html">Update</a></h1>
+                            <h1 class="entry-title"><a href="/in-bot-hell.html">In Bot Hell</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2026-04-04T00:00:00-04:00">
+                Published: Sat 04 April 2026
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
+</footer><!-- /.post-info --><p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech stuff in this post.</p>
+<h2 id="steamsneggy">SteamSneggy</h2>
+<p>I technically started this bot second but also I finished it first so I'll talk about it first. It's stupid simple. If you're reading this you might know about a bot called "ShuuBox" that used to exist; basically it just watches for any messages that contain a steam lobby URL and responds to that message with the same URL, but now clickable. Well, that bot went offline a few months ago and that was kinda it.</p>
+<p>So, I decided to make my own. Shouldn't be too hard, right?</p>
+<p>(For once, it wasn't.)</p>
+<p>The bot's stupid simple. The source code is available <a href="https://github.com/systematical-ter/steamsneggy">here</a>. There's two components: the discord bot and the web API.</p>
+<h3 id="discord-bot">Discord Bot</h3>
+<p>I coded it in Python because that's what I'm comfortable with. There's a <em>fairly</em> good (I'll talk about my issues with it later) library in Python for communicating with Discord called <code>discordpy</code>, more information over <a href="https://discordpy.readthedocs.io/en/stable/">here</a>.</p>
+<p>Deadass all it does is look for discord messages that fulfill a regex that looks for steam URLs, breaks it up into the three IDs, and makes a new URL that'll point to the web API, and sends a new message responding to the original message. It also mentions the person who originally wrote the message, and also pings anyone that they replied to or mentioned.</p>
+<p>Simple. Just gotta make sure to enable message intent in the bot's information page, and note that the moment the bot hits 100 servers you/I'll be forced to hand Discord a government ID to keep the bot running because of that. We'll burn that bridge when we get there -- for now I'm just restricting who can install my bot.</p>
+<h3 id="web-api">Web API</h3>
+<p>The web API is the component I wasn't actually sure how to do at first, but turns out it's stupid simple too. All it needs to do is at a given url, redirect the requestor to the equivalent steam URL. I kept it as simple as possible -- there's a single endpoint, it takes the 3 IDs as url params, and given those 3 IDs redirects the user to a reconstructed steam lobby join link.</p>
+<p>I specifically broke the steam lobby link into the three IDs when taking it as an input for a simple reason: I didn't want to have to deal with string safety lmao. If had the API just take whatever URL it was handed and redirect the user, that can get super sketchy super fast. If I try to do any fancy parsing, I run into problems with string parsing. So, the API just wants three integers, and the bot takes them from a discord message's content (which should be pre-sanitized by Discord to be safe.)</p>
+<h2 id="wsc-tournament-bot">WSC Tournament Bot</h2>
+<p>I got distracted watching a friend's Mewgenics run for like three hours so I don't have time to finish this post. Tomorrow, hopefully.</p>
+<p>Seeya.</p>                        </article>
+                    </aside><!-- /#featured -->
+                        <section id="content" class="body">
+                            <h1>Other articles</h1>
+                            <hr />
+                            <ol id="posts-list" class="hfeed">
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/small-updates.html" rel="bookmark"
+                                title="Permalink to Small Updates">Small Updates</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-16T00:00:00-04:00">
+                Published: Sat 16 August 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+        
+</footer><!-- /.post-info -->                            <p>Small update to keep myself honest on updating this blog.</p>
+<h1 id="quick-side-bbcf-update">Quick side BBCF update</h1>
+<p>But first, a quick small BBCF update: I decided to do Haz-only in a few tournaments for a bit because I wasn't feeling swapping to Terumi only for tournaments. I went 4-2 at my locals! A …</p>
+                            <a class="readmore" href="/small-updates.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/holy-shit-its-been-a-while.html" rel="bookmark"
+                                title="Permalink to Holy shit it's been a while">Holy shit it's been a while</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-02T00:00:00-04:00">
+                Published: Sat 02 August 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+        
+</footer><!-- /.post-info -->                            <p>I'm pretty sure I mentioned a while back about my time-blindness. Well, have a great example! How the <em>hell</em> has it been almost 2 months since I last made a blog post? Just gonna make a small post to prove to myself that this blog isn't dead.</p>
+<p>Anyways, a lot …</p>
+                            <a class="readmore" href="/holy-shit-its-been-a-while.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/update.html" rel="bookmark"
+                                title="Permalink to Update">Update</a></h1>
+                        </header>
+
+                        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-06-21T00:00:00-04:00">
                 Published: Sat 21 June 2025
@@ -30,91 +119,10 @@
                 </address>
         <p>In <a href="/category/blog.html">Blog</a>.</p>
         
-</footer><!-- /.post-info --><p>Tried to write this before, failed, deleted it. Take 2.</p>
+</footer><!-- /.post-info -->                            <p>Tried to write this before, failed, deleted it. Take 2.</p>
 <h2 id="life-updates">Life Updates</h2>
-<p>Uh, life stuff happened. I defended my thesis! It went really well. The committee interrogation portion was easy and a lot of people tell me I did the presentation really well. I spent a couple of weeks dying because I got a <em>ton</em> of feedback on my thesis itself and I ended up having to re-write 30% of it, but now I've submitted all my edits for a final version and ordered some hard copies for myself, my mom, and my advisor. Can't make any changes now even if I wanted to (which I do). It came to a grand total of 90 pages.</p>
-<p>I will be flying twice in the next 3 weeks, so that's... fun. A lot of work to do, a lot of travelling to do, and it will be "?" levels of fun.</p>
-<h2 id="side-projects">Side Projects</h2>
-<p>I do some TO'ing now. The process for check-ins was irritating me because it involved exporting an excel spreadsheet from start.gg, and I don't have excel. So I then have to upload the excel spreadsheet to google drive and open it with google sheets, just to copy and paste one column into another google sheet.</p>
-<p>Turns out that start.gg does have an API, and the API is pretty in-depth but uses some odd third party API library or something called GraphQL.</p>
-<p>The workflow is as follows:</p>
-<ol>
-<li>have an auth token.</li>
-<li>get the "slug" of the tournament + event you want to pull attendees from. (e.g. <code>tournament/boston-blue-beat-online-weeklies-2025-5-19-to-5/event/5-19-bbcf-pc-bbb-online-2025-weekly</code>)</li>
-<li>get the eventID from the slug</li>
-<li>get the attendee information from the eventID</li>
-</ol>
-<p>There's a little more complexity about it I'll get into on a Tech post. But for now I have a functional script that can make a <code>.csv</code> (just a name per line) of every attendee for a given event that I can just copy and paste into google sheets. Makes the entire process approximately 75% less annoying for me.</p>
-<p>I have a few goals to work on:</p>
-<ul>
-<li>make a UI. (not again!)</li>
-<li>make it properly use GraphQL so I can populate objects rather than brute forcing through the response JSON</li>
-<li>make it possible to choose what attributes to print out, thanks to the above point</li>
-<li>make it easier to get a tournament slug; maybe make it so you paste the tournament name and then the event name and then it fills out the rest, or you provide the entire page URL it and gets the slug from that.</li>
-</ul>
-<p>Point 3 exists because people like to set their discord names different from their start.gg names, but because the tournament I'm TO'ing for requires you to have a discord account connection, start.gg has their discord usernames. I can make the script so it also shows the player's discord name so I know what to ping when they're not checking in.</p>
-<p>I could theoretically go farther and make this a whole discord bot, but then this'll be like, the 3rd bot I know of to do this same thing, and if it was actually good then it would have been more widely adopted by now.</p>
-<h2 id="blazblue">Blazblue</h2>
-<p>Minor blazblue update. Both Haz and Teru are improving. I've received a lot of compliments on my movement recently ("what was that run under super jump air grab reacharound?" was one of my favourites) so I guess my goal to focus on schoovement has really paid off.</p>
-<p>I was feeling nice on Haz but y'all know that graph of knowledge vs. skill and how they'll meet, but then knowledge will spike above skill? Yeah I had that moment and now I'm trying not to be mad at how I handle myself on Haz again. Just gotta watch more of other Hazama's gameplay and try imitating it in practice mode for a bit.</p>
-<p>Teru is weird because I feel like I get the core bits, I'm just not being nearly creative enough. I think I know small places to improve, I'm just not sure if they're worth focusing on or if I need to find bigger fish to fry. This is where I'd ping G for games and feedback, but I won't be able to actually play for at least another week because of travel. I might have like, 5 days where I'll be at my good computer and able to play.</p>
-<p>I need to ping F for a mentoring session again but I don't think I'll have time to commit to another session until after my second trip. I may ping during those 5 days I mentioned just to see if the stars align, but otherwise I'm aiming for after that second trip.</p>
-<h2 id="terumi-chibi">Terumi Chibi</h2>
-<p>Oh I completely forgot about this! I'll need to update this post because I'm running out of time today, but I finally got tired of lamenting that there were no HQ pictures of the Terumi chibis from the blazblue radio show, so I threw 8 hours to the wind and drew over some screenshots to make HQ versions. There's 4 poses and I think 11 expressions, and I've uploaded them to Google drive so people can use them if they want:</p>
-<p><a href="https://drive.google.com/file/d/1u1hf_J8mtnE25Nw_nsFG8yMFnsLHLNNu/view?usp=drive_link">Terumi Radio Show Chibi</a></p>
-<p>I specifically made it in a way to make it as easy as possible to recolor, so I made a version with my custom palette that I'm going to use as my talksprite. If you're a terumi player who makes videos or streams and is reading this, feel free to reach out to me and I can prolly make you a recolor too.</p>
-<p>I also ordered a keychain version for myself because I think it's friggen' adorable.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/oh-hai.html" rel="bookmark"
-                                title="Permalink to Oh hai">Oh hai</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-06-03T00:00:00-04:00">
-                Published: Tue 03 June 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p>Damn.</p>
-<p>It's been a while, eh.</p>
-<p>Lotta life stuff happened, will talk about that in a normal, non-bbcf post. The long and the short of it is I haven't had nearly as much time to play Blazblue as I wanted. To be fair, I <em>technically</em> had the time, the problem …</p>
-                            <a class="readmore" href="/oh-hai.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/character-crisises.html" rel="bookmark"
-                                title="Permalink to Character Crisises">Character Crisises</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-05-15T00:00:00-04:00">
-                Published: Thu 15 May 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p>So the title's a little bit of an exaggeration at this point. I was having a bit of a character crisis, where I realized I'd have better luck competitively on literally any character other than Terumi (Jin, specifically, honestly). But I had a few heart-to-hearts and came to accept that …</p>
-                            <a class="readmore" href="/character-crisises.html">read more</a>
+<p>Uh, life stuff happened. I defended my thesis! It went really well. The committee interrogation portion was easy and a lot of people tell me I did the presentation really well. I spent a couple of weeks dying …</p>
+                            <a class="readmore" href="/update.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                 <!-- first if -->
@@ -139,55 +147,6 @@
 </footer><!-- /.post-info -->                            <p>Fun fact, this posted was started on 05/05. I proceeded to fail to finish writing it 3 times over the past 10 days because I was too stressed about my thesis! So have what I'd written before the thesis, and I'll make a new, post-thesis defense post eventually.</p>
 <p>Not …</p>
                             <a class="readmore" href="/thesis-draft-is-in.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/why-do-i-gotta-keep-thinking-of-titles.html" rel="bookmark"
-                                title="Permalink to Why do I gotta keep thinking of titles?">Why do I gotta keep thinking of titles?</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-24T00:00:00-04:00">
-                Published: Thu 24 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p>Interesting series of BBCF days. I'd kind of burnt out, but then I had a vod review with Z of my Ikaruga run that I mentioned in my previous post, and that helped a <em>lot</em>. </p>
-<p>I was supposed to not be around for TMN, but then I cancelled plans because …</p>
-                            <a class="readmore" href="/why-do-i-gotta-keep-thinking-of-titles.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/vague-update.html" rel="bookmark"
-                                title="Permalink to Vague Update">Vague Update</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-21T00:00:00-04:00">
-                Published: Mon 21 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p>Putting up an update even though I don't have too much interesting to say just to make sure I stay in the habit.</p>
-<h2 id="tro">TRO</h2>
-<p>I streamed my TRO run from last week. I wasn't planning to, but a friend asked for the tournament stream when I knew I wasn't going …</p>
-                            <a class="readmore" href="/vague-update.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                 <!-- first if -->
@@ -268,31 +227,57 @@
                 <!-- else loop -->
                     <li><article class="hentry">
                         <header>
-                            <h1><a href="/updates.html" rel="bookmark"
-                                title="Permalink to Updates">Updates</a></h1>
+                            <h1><a href="/more-about-replays.html" rel="bookmark"
+                                title="Permalink to More About Replays">More About Replays</a></h1>
                         </header>
 
                         <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2025-04-11T00:00:00-04:00">
-                Published: Fri 11 April 2025
+        <abbr class="published" title="2025-04-09T00:00:00-04:00">
+                Published: Wed 09 April 2025
         </abbr>
 
                 <address class="vcard author">
                         By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
                 </address>
-        <p>In <a href="/category/bbcfnotes.html">bbcfnotes</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p><link href="/css/custom.css" rel="stylesheet"></link></p>
-<p>It's been a while since one of these, eh? There's no better way to realize just how much my ADHD affects my perception of time as going "hey it's been a few days since I made an update post" only to look and realize it's been possibly over two weeks …</p>
-                            <a class="readmore" href="/updates.html">read more</a>
+        <p>In <a href="/category/tech.html">Tech</a>.</p>
+<p>tags: <a href="/tag/replays.html">replays</a> <a href="/tag/how-to.html">how-to</a> </p>        
+</footer><!-- /.post-info -->                            <p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
+<h1 id="replays">Replays</h1>
+<p>Making good progress on reading replay files …</p>
+                            <a class="readmore" href="/more-about-replays.html">read more</a>
+                        </div><!-- /.entry-content -->
+                    </article></li>
+                <!-- first if -->
+                <!-- else loop -->
+                    <li><article class="hentry">
+                        <header>
+                            <h1><a href="/thesisssssssssss.html" rel="bookmark"
+                                title="Permalink to Thesisssssssssss">Thesisssssssssss</a></h1>
+                        </header>
+
+                        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-04-04T00:00:00-04:00">
+                Published: Fri 04 April 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
+                </address>
+        <p>In <a href="/category/blog.html">Blog</a>.</p>
+<p>tags: <a href="/tag/tech.html">tech</a> </p>        
+</footer><!-- /.post-info -->                            <p>Once again, I should be working on my thesis, so I'm dumping thoughts here so they stop taking up VRAM.</p>
+<h2 id="tech-things">Tech things</h2>
+<p>Making good progress on trying to figure out the structure of <code>replay</code> files. I bit the bullet and downloaded Ghidra, which is extremely overkill but I'm enjoying it …</p>
+                            <a class="readmore" href="/thesisssssssssss.html">read more</a>
                         </div><!-- /.entry-content -->
                     </article></li>
                         </ol><!-- /#posts-list -->
   <nav align="center">
-      &nbsp;Page 1 / 3&nbsp;
+      &nbsp;Page 1 / 2&nbsp;
         <a href="/author/systematical2.html">&rang;</a>
-        <a href="/author/systematical3.html">&Rang;</a>
+        <a href="/author/systematical2.html">&Rang;</a>
   </nav>
                         </section><!-- /#content -->
         
@@ -307,7 +292,6 @@
                                                         <li><a href="https://getpelican.com/">Pelican</a></li>
                                                         <li><a href="https://www.python.org/">Python.org</a></li>
                                                         <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-                                                        <li><a href="/category/bbcfnotes.html">BBCF Notes</a></li>
                                         </ul>
                                 </div><!-- /.blogroll -->
                                 <div class="social">

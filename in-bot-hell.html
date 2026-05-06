@@ -4,8 +4,9 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>Systematical's Ramblings - Tech</title>
+                        <title>In Bot Hell</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like..." />
         </head>
 
         <body id="index" class="home">
@@ -16,11 +17,15 @@
                                                 <li class="active"><a href="/category/tech.html">Tech</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/in-bot-hell.html" rel="bookmark"
+             title="Permalink to In Bot Hell">In Bot Hell</a></h1>
+      </header>
 
-                <!-- first if -->
-                    <aside id="featured" class="body">
-                        <article>
-                            <h1 class="entry-title"><a href="/in-bot-hell.html">In Bot Hell</a></h1>
+      <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2026-04-04T00:00:00-04:00">
                 Published: Sat 04 April 2026
@@ -31,7 +36,7 @@
                 </address>
         <p>In <a href="/category/tech.html">Tech</a>.</p>
 <p>tags: <a href="/tag/discord-bots.html">discord-bots</a> </p>        
-</footer><!-- /.post-info --><p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech stuff in this post.</p>
+</footer><!-- /.post-info -->        <p>So I accidentally got important at hobby. (This is a lie, for it to be an accident I have to not sign up and say "Yeah sure that sounds like fun!") There's a lot of streaming stuff to talk about, but for now I'm going to stick to the tech stuff in this post.</p>
 <h2 id="steamsneggy">SteamSneggy</h2>
 <p>I technically started this bot second but also I finished it first so I'll talk about it first. It's stupid simple. If you're reading this you might know about a bot called "ShuuBox" that used to exist; basically it just watches for any messages that contain a steam lobby URL and responds to that message with the same URL, but now clickable. Well, that bot went offline a few months ago and that was kinda it.</p>
 <p>So, I decided to make my own. Shouldn't be too hard, right?</p>
@@ -46,90 +51,11 @@
 <p>I specifically broke the steam lobby link into the three IDs when taking it as an input for a simple reason: I didn't want to have to deal with string safety lmao. If had the API just take whatever URL it was handed and redirect the user, that can get super sketchy super fast. If I try to do any fancy parsing, I run into problems with string parsing. So, the API just wants three integers, and the bot takes them from a discord message's content (which should be pre-sanitized by Discord to be safe.)</p>
 <h2 id="wsc-tournament-bot">WSC Tournament Bot</h2>
 <p>I got distracted watching a friend's Mewgenics run for like three hours so I don't have time to finish this post. Tomorrow, hopefully.</p>
-<p>Seeya.</p>                        </article>
-                    </aside><!-- /#featured -->
-                        <section id="content" class="body">
-                            <h1>Other articles</h1>
-                            <hr />
-                            <ol id="posts-list" class="hfeed">
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/small-updates.html" rel="bookmark"
-                                title="Permalink to Small Updates">Small Updates</a></h1>
-                        </header>
+<p>Seeya.</p>
+      </div><!-- /.entry-content -->
 
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-08-16T00:00:00-04:00">
-                Published: Sat 16 August 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-        
-</footer><!-- /.post-info -->                            <p>Small update to keep myself honest on updating this blog.</p>
-<h1 id="quick-side-bbcf-update">Quick side BBCF update</h1>
-<p>But first, a quick small BBCF update: I decided to do Haz-only in a few tournaments for a bit because I wasn't feeling swapping to Terumi only for tournaments. I went 4-2 at my locals! A …</p>
-                            <a class="readmore" href="/small-updates.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/chuggin-along.html" rel="bookmark"
-                                title="Permalink to Chuggin' along">Chuggin' along</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-11T00:00:00-04:00">
-                Published: Fri 11 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/replays.html">replays</a> </p>        
-</footer><!-- /.post-info -->                            <p>Not really much to update this with yet, but I wanted to make a post. I feel like that one meme of Ben Affleck standing there with a cigarette as I'm being brutally forced (by myself) to learn to properly follow C# programming conventions.</p>
-<p>My python-focused development experience is causing …</p>
-                            <a class="readmore" href="/chuggin-along.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                <!-- first if -->
-                <!-- else loop -->
-                    <li><article class="hentry">
-                        <header>
-                            <h1><a href="/more-about-replays.html" rel="bookmark"
-                                title="Permalink to More About Replays">More About Replays</a></h1>
-                        </header>
-
-                        <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2025-04-09T00:00:00-04:00">
-                Published: Wed 09 April 2025
-        </abbr>
-
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="/author/systematical.html">Systematical</a>
-                </address>
-        <p>In <a href="/category/tech.html">Tech</a>.</p>
-<p>tags: <a href="/tag/replays.html">replays</a> <a href="/tag/how-to.html">how-to</a> </p>        
-</footer><!-- /.post-info -->                            <p>It's gotten to the point where I think I need to actually make a new category for these posts. From now on, there's a tech category for posts that are primarily about tech-y stuff, and tags will be used to separate topics.</p>
-<h1 id="replays">Replays</h1>
-<p>Making good progress on reading replay files …</p>
-                            <a class="readmore" href="/more-about-replays.html">read more</a>
-                        </div><!-- /.entry-content -->
-                    </article></li>
-                        </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-        
-
+    </article>
+  </section>
                 <div id="flavorimg" class="body">
                         <img src="/theme/imgs/counter_anim.png" 
                                 title="I want to show off the cool gifs I make, OK?"/>
